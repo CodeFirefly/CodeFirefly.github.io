@@ -376,11 +376,6 @@
           
 
           
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-eye"></i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-            </span>
-          
 
           
 
@@ -530,6 +525,8 @@
 
           
 
+  
+     <div id="gitalk-container"></div>
   
 
 
@@ -1146,6 +1143,21 @@ if(canvas.getContext){
 
 
 
+
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '4ec898c4e3865330e292',
+          clientSecret: 'eb0ed58f30693fefd19fa1d99fa0c71f7ebd5b34',
+          repo: 'Blog-Comments',
+          owner: 'CloudMadao',
+          admin: ['CloudMadao'],
+          id: location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+    </script>
 
   
 
