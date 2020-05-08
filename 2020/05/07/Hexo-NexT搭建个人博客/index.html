@@ -1146,6 +1146,7 @@ if(canvas.getContext){
 
     <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
     <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="/js/md5.min.js"></script>
     <script type="text/javascript">
         var gitalk = new Gitalk({
           clientID: '4ec898c4e3865330e292',
@@ -1153,7 +1154,7 @@ if(canvas.getContext){
           repo: 'Blog-Comments',
           owner: 'CloudMadao',
           admin: ['CloudMadao'],
-          id: location.pathname,
+          id: decodeURI(location.pathname),
           distractionFreeMode: 'true'
         })
         gitalk.render('gitalk-container')           
