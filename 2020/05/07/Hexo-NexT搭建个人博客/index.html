@@ -1154,7 +1154,7 @@ if(canvas.getContext){
           repo: 'Blog-Comments',
           owner: 'CloudMadao',
           admin: ['CloudMadao'],
-          id: md5(location.href),
+          id: md5(location.pathname),
           distractionFreeMode: 'true'
         })
         gitalk.render('gitalk-container')           
