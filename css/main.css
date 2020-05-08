@@ -1328,9 +1328,9 @@ pre .javascript .function {
 }
 .posts-expand .post-body img {
   box-sizing: border-box;
-  margin: auto;
+  margin: 0 auto 25px;
   padding: 3px;
-  border: 1px solid #ddd;
+  border: none;
 }
 .posts-expand .post-body .fancybox img {
   margin: 0 auto 25px;
@@ -1823,7 +1823,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #cdff45;
+  background: #0fffff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3144,4 +3144,16 @@ pre .javascript .function {
 }
 canvas#canvas {
   margin-top: 20px;
+}
+.header-inner {
+  border-radius: 20px 20px 20px 20px;
+}
+.sidebar-inner {
+  border-radius: 20px;
+}
+.post-block {
+  border-radius: 20px 20px 20px 20px;
+}
+#posts > article + article .post-block {
+  border-radius: 20px 20px 20px 20px;
 }

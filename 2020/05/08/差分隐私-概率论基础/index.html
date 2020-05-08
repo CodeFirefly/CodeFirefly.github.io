@@ -108,7 +108,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="差分隐私,概率论," />
 
 
 
@@ -119,16 +119,28 @@
 
 
 
-<meta name="description" content="Constant dropping wears the stone">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="https://cloudmadao.github.io/tags/index.html">
+<meta name="description" content="离散型变量（或取值个数有限的变量）：取值可一一列举，且总数是确定的，如投骰子出现的点数（1点、2点、3点、4点、5点、6点）。 连续型变量（或取值个数无限的变量）：取值无法一一列举，且总数是不确定的，如所有的自然数（0、1、2、3……）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="差分隐私[1]-数学基础">
+<meta property="og:url" content="https://cloudmadao.github.io/2020/05/08/%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81-%E6%A6%82%E7%8E%87%E8%AE%BA%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="Madao&#39;s Personal Website">
-<meta property="og:description" content="Constant dropping wears the stone">
-<meta property="article:published_time" content="2020-05-07T13:22:27.000Z">
-<meta property="article:modified_time" content="2020-05-07T13:23:00.279Z">
+<meta property="og:description" content="离散型变量（或取值个数有限的变量）：取值可一一列举，且总数是确定的，如投骰子出现的点数（1点、2点、3点、4点、5点、6点）。 连续型变量（或取值个数无限的变量）：取值无法一一列举，且总数是不确定的，如所有的自然数（0、1、2、3……）。">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200504105532.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200504115851.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200504172618.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200504172231.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200504172403.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200505100337.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200505101346.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200504194315.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200504200527.png">
+<meta property="article:published_time" content="2020-05-08T05:41:37.000Z">
+<meta property="article:modified_time" content="2020-05-08T06:07:26.852Z">
 <meta property="article:author" content="摸鱼选手Madao">
+<meta property="article:tag" content="差分隐私">
+<meta property="article:tag" content="概率论">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200504105532.jpg">
 
 
 
@@ -158,13 +170,13 @@
 
 
 
-  <link rel="canonical" href="https://cloudmadao.github.io/tags/"/>
+  <link rel="canonical" href="https://cloudmadao.github.io/2020/05/08/差分隐私-概率论基础/"/>
 
 
 
 
 
-  <title>tags | Madao's Personal Website</title>
+  <title>差分隐私[1]-数学基础 | Madao's Personal Website</title>
   
 
 
@@ -313,40 +325,262 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cloudmadao.github.io/2020/05/08/%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81-%E6%A6%82%E7%8E%87%E8%AE%BA%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="摸鱼选手Madao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/Sakai%20Izumi2.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Madao's Personal Website">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                目前共计 4 个标签
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/Hexo/" style="font-size: 12px; color: #ccc">Hexo</a> <a href="/tags/NexT/" style="font-size: 12px; color: #ccc">NexT</a> <a href="/tags/%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81/" style="font-size: 12px; color: #ccc">差分隐私</a> <a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 12px; color: #ccc">概率论</a>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">差分隐私[1]-数学基础</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-08T13:41:37+08:00">
+                2020-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p><strong>离散型变量（或取值个数有限的变量）</strong>：取值可一一列举，且总数是确定的，如投骰子出现的点数（1点、2点、3点、4点、5点、6点）。<br> <strong>连续型变量（或取值个数无限的变量）</strong>：取值无法一一列举，且总数是不确定的，如所有的自然数（0、1、2、3……）。</p>
+<a id="more"></a>
+
+<h4 id="1-概率密度函数"><a href="#1-概率密度函数" class="headerlink" title="1.概率密度函数"></a>1.概率密度函数</h4><p><u>连续型随机变量</u>的概率密度函数(密度函数)，是描述这个随机变量的输出值在某个确定的取值点<strong>附近</strong>的可能性的函数。概率密度函数下的<strong>面积</strong>才是概率。</p>
+<h5 id="1-1常见定义"><a href="#1-1常见定义" class="headerlink" title="1.1常见定义:"></a>1.1常见定义:</h5><p>若存在非负可积函数$f(x)$,使随机变量<strong>X</strong>取值于一任意区间(a,b]的概率可以表示为$p(a&lt;x\le b)=\int_a^bf(x)dx$,则称<strong>X</strong>为连续型随机变量，$f(x)$为 <strong>X</strong>的概率密度函数。</p>
+<h5 id="1-1性质"><a href="#1-1性质" class="headerlink" title="1.1性质:"></a>1.1性质:</h5><ol>
+<li><p>$\forall -\infty&lt;a&lt;\infty,f_X(x)\ge0$</p>
+</li>
+<li><p>$f_{-\infty}^{\infty}f(x)dx=1$</p>
+</li>
+<li><p>$\forall -\infty&lt;a&lt;b&lt;\infty,P[a&lt;X\le b]=F_X(b)-F_X(a)=\int_a^bf_X(x)dx$ </p>
+</li>
+<li><p>连续型的随机变量的取值在任意一点的概率<strong>都是0</strong>，即连续型随机变量在区间上取值的概率与这个区间是开区间或者闭区间无关$P｛X&lt;a｝=P｛X\le a｝$。注意：<br>$$<br>P(X=a)=0<br>$$<br><em>但在连续型变量中：概率为0的事件是有可能发生的，概率为1的事件不一定必然发生。</em></p>
+<blockquote>
+<p>简单证明$P(X=a)=0$</p>
+<p>假设$P(X=a)\ge0$,易见$0\le P｛X=a｝\le P｛a-\Delta x&lt;X\le a｝=\int_{a-\Delta x}^{a}f(a)da$，$\Delta x\rightarrow$0时，取值为0。</p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<h4 id="2-离散型随机变量的概率-质量-函数与概率分布"><a href="#2-离散型随机变量的概率-质量-函数与概率分布" class="headerlink" title="2. 离散型随机变量的概率(质量)函数与概率分布"></a>2. 离散型随机变量的概率(质量)函数与概率分布</h4><p><strong>概率(质量)函数</strong>，就是用函数的形式来表达概率，如：$P_i=P(X=a_i) (i=1,2,3,4,5,6)$,从公式上看，概率函数一次只能表示一个取值的概率，如$P(X=1)=1/6$。离散随机变量<strong>概率质量函数</strong>的不连续性决定了其累积分布函数也不连续。</p>
+<p>概率分布：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200504105532.jpg" alt="">  </p>
+<p>   上表即为离散型随机变量的概率分布，该列表列出<strong>所有可能出现的事件</strong></p>
+<hr>
+<h4 id="3-概率分布函数-累积分布函数"><a href="#3-概率分布函数-累积分布函数" class="headerlink" title="3. 概率分布函数(累积分布函数)"></a>3. 概率分布函数(累积分布函数)</h4><p>对所有实数<strong>X</strong>,累积分布函数的定义如下：<br>$$<br>F_X(x)=P(X\le x)<br>$$<br>累计分布函数是一个普通的实函数，其为X取值不超过$x$的<strong>概率</strong>。</p>
+<h5 id="3-1-分布函数的性质："><a href="#3-1-分布函数的性质：" class="headerlink" title="3.1 分布函数的性质："></a>3.1 分布函数的性质：</h5><ol>
+<li>有界性： $0\le F(x)\le 1,x\in(-\infty,\infty)$</li>
+<li>单调性(不减)：$F_X(x_1)\le F_X(x_2),当x_1&lt;x_2时$</li>
+<li>右连续性：$\lim_{x \to {x_0{^+}}}F_X(x)=F_X(x_0)$</li>
+</ol>
+<blockquote>
+<p>$F(x)=P(X\le x)$</p>
+<p>$P{a&lt;X\le b}=F(b)-F(a)$</p>
+<p>$P{X=a}=F(a)-F(a-0)$(结合右连续的定义理解)</p>
+<p>$P{a\le X\le b}=F(b)-F(a-0)$</p>
+</blockquote>
+<p><strong>随机变量X的CDF(累积分布函数)和其PDF(概率密度函数)的关系为：</strong><br>$$<br>F_X(x)=\int_{-\infty}^xf_X(t)dt<br>$$<br><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200504115851.png" alt="">  </p>
+<hr>
+<h4 id="4-离散分布—泊松分布-Poisson-distribution"><a href="#4-离散分布—泊松分布-Poisson-distribution" class="headerlink" title="4.离散分布—泊松分布(Poisson distribution)"></a>4.离散分布—泊松分布(Poisson distribution)</h4><p>泊松分布适合于描述单位时间内随机事件发生的次数的概率分布，如某一服务设施在一定时间内受到的服务请求的次数，电话交换机接到呼叫的次数、汽车站台的候客人数等 ，其<strong>概率质量函数</strong>为：<br>$$<br>P(X=k)=\frac{\lambda^k}{k!} e^{-\lambda}<br>$$<br>泊松分布的参数$\lambda$是单位时间(单位面积内)随机事件的 <strong>平均发生率</strong>。若$X$服从参数为$\lambda$的泊松分布，记为$X\sim P(\lambda)$</p>
+<h5 id="4-1-泊松分布的性质"><a href="#4-1-泊松分布的性质" class="headerlink" title="4.1 泊松分布的性质"></a>4.1 泊松分布的性质</h5><ol>
+<li><p>服从泊松分布的随机变量，其数学期望与方差相同，皆为参数$\lambda$：$E(X)=V(X)=\lambda$</p>
+</li>
+<li><p>两个独立且服从泊松分布的随机变量，其和仍然服从泊松分布：$X\sim Poisson(\lambda_1),Y\sim Poisson(\lambda_2)$则$X+Y\sim Poisson(\lambda_1+\lambda_2)$</p>
+<img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200504172618.png" style="zoom:80%;" />
+
+</li>
+</ol>
+<h5 id="4-2-生成泊松分布的随机变量"><a href="#4-2-生成泊松分布的随机变量" class="headerlink" title="4.2 生成泊松分布的随机变量"></a>4.2 生成泊松分布的随机变量</h5><p>一个用来生成随机泊松分布的数字（伪随机数抽样）的简单算法，已经由<a href="https://zh.wikipedia.org/wiki/高德纳" target="_blank" rel="noopener">高德纳</a>给出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">algorithm poisson random number (Knuth):</span><br><span class="line">    init:</span><br><span class="line">         Let L ← e−λ, k ← 0 and p ← 1.</span><br><span class="line">    do:</span><br><span class="line">         k ← k + 1.</span><br><span class="line">         Generate uniform random number u in [0,1] and let p ← p×u.</span><br><span class="line">    while p &gt; L.</span><br><span class="line">    return k − 1.</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="5-连续分布—指数分布-Exponential-distribution"><a href="#5-连续分布—指数分布-Exponential-distribution" class="headerlink" title="5.连续分布—指数分布(Exponential distribution)"></a>5.连续分布—指数分布(Exponential distribution)</h4><p>指数分布可以用来表示独立随机事件发生的时间间隔，比如旅客进入机场的时间间隔、打进客服中心电话的时间间隔等等。</p>
+<h5 id="5-1-指数分布描述"><a href="#5-1-指数分布描述" class="headerlink" title="5.1 指数分布描述"></a>5.1 指数分布描述</h5><ul>
+<li><p><strong>概率密度函数：</strong><br>$$<br>f(x;\lambda)=<br>\begin{cases}<br>\lambda e^{-\lambda x}, &amp; x\ge0\<br>0, &amp;x&lt;0<br>\end{cases}<br>$$<br>其中$\lambda &gt;0$是分布的一个参数，即单位时间内发生该时间的次数，指数分布的区间是$[0,\infty)$,若随机变量X呈指数分布，则可以写作$X\sim Exp(\lambda)$</p>
+</li>
+<li><p><strong>累积分布函数：</strong><br>$$<br>f(x;\lambda)=<br>\begin{cases}<br>1-e^{-\lambda x}, &amp; x\ge0\<br>0, &amp;x&lt;0<br>\end{cases}<br>$$</p>
+<blockquote>
+<p>累积分布函数的简单推导过程：</p>
+<p>根据分布函数与密度函数之间的关系$F_X(x)=\int_{-\infty}^xf_X(t)dt$有:</p>
+<p>当$x&lt;0$时，其分布函数$F(x;\lambda)=\int_{-\infty}^{x}0dt=0$;</p>
+<p>当$x\ge0$时，其分布函数$F(x;\lambda)=\int_{-\infty}^00dt+\int_0^x{\lambda e^{-\lambda t}}dt=1-e^{-\lambda x}$</p>
+</blockquote>
+</li>
+<li><p>均值和方差</p>
+<p>随机变量$X$的<strong>期望值</strong>是$E[X]=\frac 1\lambda$,即如果你平均每个小时接到2次电话，那么你预期等待每一次电话的时间是半个小时</p>
+<p><strong>方差</strong>是:$D[X]=\frac 1{\lambda^2}$</p>
+</li>
+</ul>
+<h5 id="5-2指数分布的图像形状："><a href="#5-2指数分布的图像形状：" class="headerlink" title="5.2指数分布的图像形状："></a>5.2指数分布的图像形状：</h5><ol>
+<li><p><strong>概率密度函数图形</strong></p>
+<img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200504172231.png" style="zoom:37%;" /> 
+
+<p><strong>2.累积分布函数图形</strong></p>
+ <img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200504172403.png" style="zoom:40%;" />  
+
+</li>
+</ol>
+<hr>
+<h4 id="6-连续分布—拉普拉斯分布-Laplace-distribution"><a href="#6-连续分布—拉普拉斯分布-Laplace-distribution" class="headerlink" title="6.连续分布—拉普拉斯分布(Laplace distribution)"></a>6.连续分布—拉普拉斯分布(Laplace distribution)</h4><p>拉普拉斯分布可以看作是两个不同位置的指数分布背靠背拼接而成，所以也称为<strong>双指数分布</strong>。</p>
+<p>如果随机变量的<strong>概率密度函数</strong>为<br>$$<br>f(x|\mu,b)=\frac1{2b}exp(-{\frac{|x-\mu|}b})=\frac1{2b}<br>\begin{cases}<br>exp(-{\frac{\mu-x}b}), &amp; x&lt;\mu\<br>exp(-{\frac{x-\mu}b}), &amp;x\ge u<br>\end{cases}<br>$$<br>那么它就是拉普拉斯分布，其中$\mu$是位置参数，$b&gt;0$是尺度参数，如果$\mu=0,b=1$,那么正半部分恰好是1/2倍$\lambda=1$的指数分布。其期望为$\mu$，方差为$2b^2$.</p>
+<img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200505100337.png" style="zoom: 43%;" />
+
+<p>根据绝对值函数，将一个Laplace分布分成两个对称的情形，其累积分布函数为：<br>$$<br>F(x)=\int_{-\infty}^xf(u)du=<br>\begin{cases}<br>\frac12exp(-\frac{\mu-x}{b}), &amp; x&lt;\mu\<br>1-\frac12exp(-\frac{x-\mu}{b}), &amp;x\ge u<br>\end{cases}<br>=0.5[1+sgn(x-\mu)(1-exp\frac{-|x-\mu|}{b})]<br>$$<br>其累积分布函数图像为:</p>
+<img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200505101346.png" style="zoom: 50%;" />
+
+<hr>
+<h4 id="7-连续分布—正态分布-normal-distribution"><a href="#7-连续分布—正态分布-normal-distribution" class="headerlink" title="7.连续分布—正态分布(normal distribution)"></a>7.连续分布—正态分布(normal distribution)</h4><p><strong>正态分布</strong>又名<strong>高斯分布</strong>（<strong>Gaussian distribution</strong>），经常用在自然和社会科学来代表一个不明的随机变量。</p>
+<p>若随机变量$X$服从一个位置参数$\mu$,尺度参数为$\sigma$的正态分布，记为$X\sim N(\mu,\sigma^2)$,则其<strong>概率密度函数为</strong>：<br>$$<br>f(x)=\frac{1}{\sigma \sqrt{2π}}exp(-\frac{(x-u)^2}{2\sigma^2})<br>$$<br>其均值为$\mu$,方差为$\sigma^2$,是高斯分布的一个示例，其中，若$\mu=0,\sigma=1$,那么这个分布被称为<strong>标准正态分布</strong>，其密度函数能够简化为<br>$$<br>f(x)=\frac1{\sqrt{2π}}exp(-{\frac{x^2}2})<br>$$<br>正态分布密度函数图如下：</p>
+<img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200504194315.png" style="zoom: 33%;" />
+
+<p><strong>正态函数中的一些细节</strong>:</p>
+<ul>
+<li>密度函数关于均值$\mu$对称</li>
+<li>平均值与其众数和中位数为同一数值</li>
+<li>函数曲线的拐点为离平均数($\mu$)一个标准差距离($\sigma$)的位置</li>
+</ul>
+<p><strong>正态分布的累积分布函数：</strong></p>
+<p>累积分布函数是指随机变量$X$小于等于$x$的概率，用概率密度函数表示为：<br>$$<br>F(x;\mu,\sigma)=\frac1{\sigma \sqrt{2π}}\int_{-\infty}^{x}exp(-\frac{(t-u)^2}{2\sigma^2})<br>$$<br>正态分布的累积分布函数能够由<strong>误差函数</strong>表示：<br>$$<br>\Phi(z)=\frac12[1+erf(\frac{z-u}{\sigma \sqrt2}]<br>$$</p>
+<blockquote>
+<p><strong>erf</strong>为误差函数，其定义如下</p>
+<p>$erf(x)=\frac1{\sqrtπ}\int_{-x}{x}exp(-t^2)dt=\frac2{\sqrtπ}\int_0^xexp(-t^2)dt$</p>
+<p>误差函数是奇函数，即$erf(-z)=-erf(z)$</p>
+</blockquote>
+<p>正态分布的分布函数图如下:</p>
+<img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200504200527.png" style="zoom: 67%;" />
+
+<h6 id="正态分布的分布函数-Phi-x-没有解析表达式，它的值可以通过数值积分、泰勒级数、或者渐进序列近似得到。"><a href="#正态分布的分布函数-Phi-x-没有解析表达式，它的值可以通过数值积分、泰勒级数、或者渐进序列近似得到。" class="headerlink" title="正态分布的分布函数$\Phi(x)$没有解析表达式，它的值可以通过数值积分、泰勒级数、或者渐进序列近似得到。"></a>正态分布的分布函数$\Phi(x)$没有解析表达式，它的值可以通过数值积分、泰勒级数、或者渐进序列近似得到。</h6><p><strong>正态分布的性质：</strong></p>
+<ol>
+<li>如果$X\sim N(\mu,\sigma^2)$,且$a,b$为实数，那么$aX+b\sim N(a\mu+b,(a\sigma)^2)$</li>
+<li>若$X\sim N(\mu_x,\sigma_x^2)$,$Y\sim N(\mu_Y,\sigma_Y^2)$,是独立统计的正态随机变量，那么<strong>其和</strong>与<strong>其差</strong> 也满足正态分布</li>
+<li><strong>中心极限定理：</strong>在特定条件下，大量统计独立的随机变量的平均值的分布趋于正态分布，这就是中心极限定理。根据这一定理的结论，其他概率分布可以用正态分布作为近似。<ul>
+<li>泊松分布带有参数$\lambda$当取样样本数很大时将近似正态分布$\lambda$</li>
+<li>参数为$n$和$p$的二项分布，在$n$相当大，而$p$接近0.5时近似于正态分布。</li>
+</ul>
+</li>
+</ol>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81/" rel="tag"># 差分隐私</a>
+          
+            <a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" rel="tag"># 概率论</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/07/Hexo-NexT%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" rel="next" title="Hexo+NexT搭建个人博客">
+                <i class="fa fa-chevron-left"></i> Hexo+NexT搭建个人博客
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -355,6 +589,12 @@
 
 
           
+
+  
+     <div id="gitalk-container"></div>
+  
+
+
 
         </div>
         
@@ -375,8 +615,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -736,6 +985,22 @@ if(canvas.getContext){
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-概率密度函数"><span class="nav-number">1.</span> <span class="nav-text">1.概率密度函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1常见定义"><span class="nav-number">1.1.</span> <span class="nav-text">1.1常见定义:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1性质"><span class="nav-number">1.2.</span> <span class="nav-text">1.1性质:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-离散型随机变量的概率-质量-函数与概率分布"><span class="nav-number">2.</span> <span class="nav-text">2. 离散型随机变量的概率(质量)函数与概率分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-概率分布函数-累积分布函数"><span class="nav-number">3.</span> <span class="nav-text">3. 概率分布函数(累积分布函数)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-分布函数的性质："><span class="nav-number">3.1.</span> <span class="nav-text">3.1 分布函数的性质：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-离散分布—泊松分布-Poisson-distribution"><span class="nav-number">4.</span> <span class="nav-text">4.离散分布—泊松分布(Poisson distribution)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-泊松分布的性质"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 泊松分布的性质</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-生成泊松分布的随机变量"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 生成泊松分布的随机变量</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-连续分布—指数分布-Exponential-distribution"><span class="nav-number">5.</span> <span class="nav-text">5.连续分布—指数分布(Exponential distribution)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-指数分布描述"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 指数分布描述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-2指数分布的图像形状："><span class="nav-number">5.2.</span> <span class="nav-text">5.2指数分布的图像形状：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-连续分布—拉普拉斯分布-Laplace-distribution"><span class="nav-number">6.</span> <span class="nav-text">6.连续分布—拉普拉斯分布(Laplace distribution)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-连续分布—正态分布-normal-distribution"><span class="nav-number">7.</span> <span class="nav-text">7.连续分布—正态分布(normal distribution)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#正态分布的分布函数-Phi-x-没有解析表达式，它的值可以通过数值积分、泰勒级数、或者渐进序列近似得到。"><span class="nav-number">7.0.1.</span> <span class="nav-text">正态分布的分布函数$\Phi(x)$没有解析表达式，它的值可以通过数值积分、泰勒级数、或者渐进序列近似得到。</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -947,6 +1212,22 @@ if(canvas.getContext){
 
 
 
+
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="/js/md5.min.js"></script>
+    <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '4ec898c4e3865330e292',
+          clientSecret: 'eb0ed58f30693fefd19fa1d99fa0c71f7ebd5b34',
+          repo: 'Blog-Comments',
+          owner: 'CloudMadao',
+          admin: ['CloudMadao'],
+          id: decodeURI(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+    </script>
 
   
 
