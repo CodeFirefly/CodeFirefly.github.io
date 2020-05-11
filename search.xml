@@ -94,7 +94,10 @@
     <content><![CDATA[<h2 id="ArrayList的特性"><a href="#ArrayList的特性" class="headerlink" title="ArrayList的特性"></a>ArrayList的特性</h2><p><code>ArrayList</code>是基于数组形式实现的集合，存在着数组的特性：</p>
 <ul>
 <li>添加和删除元素涉及到一次元素复制，比较耗费性能(除在数组后面直接添加元素外)</li>
-<li>数组是一种随机访问模式，其中的元素获取非常快</li>
+<li>数组是一种随机访问模式，其中的元素获取非常快<a id="more"></a>
+
+
+</li>
 </ul>
 <table>
 <thead>
@@ -118,10 +121,6 @@
 <tr>
 <td align="center">ArrayList是否线程安全</td>
 <td align="center">不安全</td>
-</tr>
-<tr>
-<td align="center"><a id="more"></a></td>
-<td align="center"></td>
 </tr>
 </tbody></table>
 <h2 id="ArrayList添加元素的过程"><a href="#ArrayList添加元素的过程" class="headerlink" title="ArrayList添加元素的过程"></a>ArrayList添加元素的过程</h2><p>添加元素的代码如下：</p>
