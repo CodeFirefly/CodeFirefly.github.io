@@ -224,7 +224,7 @@
 <p>仍然以求中位数为例，其局部敏感度为$max(x_m-x_{m-1},x_{m+1}-X_m)$</p>
 </blockquote>
 <h4 id="平滑上界"><a href="#平滑上界" class="headerlink" title="平滑上界"></a>平滑上界</h4><p>给定数据集$D$及其任意相邻数据集$D’$,函数$f$的局部敏感度为$LS_f(D)$.对于$\beta&gt;0$,若函数$S:D\rightarrow D’$满足$S(D)\ge LS_f(D)$且$S(D)\le e^{\beta}S(D’)$,则称$S$是一个在查询函数$f$上的$\beta$-平滑上界。</p>
-<h4 id="平滑敏感度-Smooth-Sensitivity"><a href="#平滑敏感度-Smooth-Sensitivity" class="headerlink" title="平滑敏感度(Smooth Sensitivity)"></a>平滑敏感度(Smooth Sensitivity)</h4><p>对于$\beta&gt;0$,一个查询函数$f$的$\beta-$平滑敏感度为<br>$$<br>S_f^<em>(D)=max_{y\in D^n}(LS_f(y)</em>e^{-\beta d(D,y)})<br>$$</p>
+<h4 id="平滑敏感度-Smooth-Sensitivity"><a href="#平滑敏感度-Smooth-Sensitivity" class="headerlink" title="平滑敏感度(Smooth Sensitivity)"></a>平滑敏感度(Smooth Sensitivity)</h4><p>对于$\beta&gt;0$,一个查询函数$f$的$\beta-$平滑敏感度为<br>$$<br>S_{f}^*(D)=max_{y\in D^n}(LS_f(y)×exp({-\beta d(D,y)})<br>$$</p>
 <ul>
 <li>$y$是同给定数据集$D$维度相同的任意数据集</li>
 <li>$d$函数返回数据集$D$和$y$中不同元组的个数</li>
