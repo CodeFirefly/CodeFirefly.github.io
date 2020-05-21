@@ -125,14 +125,14 @@
 <meta property="og:url" content="https://cloudmadao.cc/2020/05/20/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B01-%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4%E5%8F%82%E6%95%B0%CE%B5%E7%9A%84%E9%80%89%E5%8F%96%E7%A0%94%E7%A9%B6/index.html">
 <meta property="og:site_name" content="Madao&#39;s Personal Website">
 <meta property="og:description" content="文章: 差分隐私保护参数ε的选取研究 . 通信学报.Vol.36 No.12 . 2015  主要工作 给出一个选取参数$\epsilon$上界的一个计算式  该计算式只需要 查询函数敏感度$\Delta f$, 查询容错区间长度$L$ 和 攻击者成功概率$\rho$。   提出一个差分隐私保护的攻击算法–根据查询语句的返回值来回答攻击对象是否在查询集合中。">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200519162302.png">
+<meta property="og:image" content="https://github.com/AsuanPic/Pic/blob/master/pic/20200519162302.png?raw=true">
 <meta property="article:published_time" content="2020-05-20T02:32:52.000Z">
-<meta property="article:modified_time" content="2020-05-20T02:23:19.206Z">
+<meta property="article:modified_time" content="2020-05-21T09:09:15.601Z">
 <meta property="article:author" content="摸鱼选手Madao">
 <meta property="article:tag" content="差分隐私">
 <meta property="article:tag" content="论文笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200519162302.png">
+<meta name="twitter:image" content="https://github.com/AsuanPic/Pic/blob/master/pic/20200519162302.png?raw=true">
 
 
 
@@ -435,7 +435,7 @@
 <h2 id="攻击模型"><a href="#攻击模型" class="headerlink" title="攻击模型"></a>攻击模型</h2><h3 id="准备知识"><a href="#准备知识" class="headerlink" title="准备知识"></a>准备知识</h3><p>攻击者针对攻击对象提出一个查询问题$q$,数据库拥有者根据问题将查询结果$q(D)$添加<code>服从Laplace分布的噪音x</code>之后返回给攻击者。</p>
 <p>因为每个噪音都是满足<code>Laplace分布</code>的，因此对于攻击者而言不可能准确的猜出这个$x$,但是考虑到一些函数的特点，攻击者只需要猜出$x$落在某个范围内即可。以<strong>count</strong>查询为例，只要噪音$x$落在$[-0.5,0.5]$之间，攻击者便很容易得知真实值$q(D)$,从而得知攻击对象是否在查询结果中的结论。</p>
 <p>将$[-0.5,0.5]$称为<strong>count</strong>查询的容错区间，区间的半长度记为$L$.</p>
-<img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200519162302.png" style="zoom:40%;" />
+<img src="https://github.com/AsuanPic/Pic/blob/master/pic/20200519162302.png?raw=true" style="zoom:40%;" />
 
 
 

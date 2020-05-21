@@ -125,17 +125,17 @@
 <meta property="og:url" content="https://cloudmadao.cc/2020/05/15/%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81-%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84/index.html">
 <meta property="og:site_name" content="Madao&#39;s Personal Website">
 <meta property="og:description" content="差分隐私是Dwork在2006年针对统计数据库的隐私泄露问题提出的一种隐私定义： 在此定义下，对数据集的计算处理结果对于具体某个记录的变化是不敏感的，单个记录在数据集中或不在数据集中，对计算结果的影响微乎其微，所以一个记录因其加入到数据集中所产生的隐私泄漏风险被控制在极小的、可接受的范围内，攻击者无法通过观察计算结果而获取准确的个体信息，因为攻击者无法从查询输出结果判断这条记录是否在数据集内。">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200513191507.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200514094749.png">
+<meta property="og:image" content="https://github.com/AsuanPic/Pic/blob/master/pic/20200513191507.png?raw=true">
+<meta property="og:image" content="https://github.com/AsuanPic/Pic/blob/master/pic/20200514094749.png?raw=true">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200514202129.png">
 <meta property="article:published_time" content="2020-05-15T13:40:05.000Z">
-<meta property="article:modified_time" content="2020-05-19T02:40:24.222Z">
+<meta property="article:modified_time" content="2020-05-21T09:02:43.059Z">
 <meta property="article:author" content="摸鱼选手Madao">
 <meta property="article:tag" content="差分隐私">
 <meta property="article:tag" content="综述">
 <meta property="article:tag" content="基础">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200513191507.png">
+<meta name="twitter:image" content="https://github.com/AsuanPic/Pic/blob/master/pic/20200513191507.png?raw=true">
 
 
 
@@ -428,7 +428,7 @@
 <h2 id="差分隐私的数学框架"><a href="#差分隐私的数学框架" class="headerlink" title="差分隐私的数学框架"></a>差分隐私的数学框架</h2><blockquote>
 <p><strong>差分隐私：</strong>设有随机机制$M$,$P_M$为$M$所有可能的输出构成的集合，对于任意两个邻近数据集$D$和$D’$及$P_M$的任意子集$S_M$,若$M$满足：<br>$$<br>Pr[M(D)\in S_M]\le exp(\epsilon)×Pr[M(D’)\in S_M]+\delta<br>$$<br>则称$M$满足$(\epsilon,\delta)$-(近似)差分隐私，当$\delta=0$时，称$M$提供$\epsilon$-差分隐私保护，其中$\epsilon$为隐私保护预算。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200513191507.png" alt=""></p>
+<p><img src="https://github.com/AsuanPic/Pic/blob/master/pic/20200513191507.png?raw=true" alt=""></p>
 <p>如图所示，机制$M$通过对输出结果的随机化来提供隐私保护，同时通过参数ε来保证在数据集中任一记录改变时，其输出统一结果的概率不发生显著变化。</p>
 <h3 id="差分隐私中的基础概念："><a href="#差分隐私中的基础概念：" class="headerlink" title="差分隐私中的基础概念："></a>差分隐私中的基础概念：</h3><h4 id="邻近数据集"><a href="#邻近数据集" class="headerlink" title="邻近数据集"></a>邻近数据集</h4><p>对于一个有限域$ Z,z∈Z$为$Z$中的元素，从$Z$中抽样所得$z$的集合组成数据集$D$，其样本量为$n$，属性的个数为<code>维度d</code>.设数据集$D$和$D’$具有相同的属性结构，两者的对称差记作$D△D’$,$|D△D’|$表示对称差数量，当 $|D△D’|=1$，则称 $D$和 $D’$为邻近数据集。简而言之，只相差一条记录的一对数据集$|D△D′|=1$，即为邻近数据集。</p>
 <h4 id="隐私保护预算-epsilon"><a href="#隐私保护预算-epsilon" class="headerlink" title="隐私保护预算$\epsilon$"></a>隐私保护预算$\epsilon$</h4><p>隐私保护预算$\epsilon$用来控制算法$M$在两个相邻数据集上获得相同输出的概率，其值体现了该算法$M$能够提供的隐私保护的水平，根据差分隐私的数学定义，不难看出，$\epsilon$越小，隐私保护水平越高。当$\epsilon=0$时，保护水平达到最高，此时对于任何相邻数据集，算法都将输出两个概率分布完全相同的结果，这些结果不能反应任何关于数据集的有用信息。</p>
@@ -480,7 +480,7 @@
 <blockquote>
 <p>以投票为例，10个人中9个人分别对1,2,3各投了3票，现加入指数机制保护A的投票结果，如图示:</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200514094749.png" alt=""></p>
+<p><img src="https://github.com/AsuanPic/Pic/blob/master/pic/20200514094749.png?raw=true" alt=""></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     *指数机制 给定一个打分数组，然后从其中按照指数机制公式输出其的索引</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> score</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sensity</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> eps</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">dpIndex</span><span class="params">(List&lt;Double&gt; score,Double sensity, Double eps)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = score.size();</span><br><span class="line">        <span class="keyword">double</span> r= Math.random();</span><br><span class="line">        List&lt;Double&gt; exponents_list = <span class="keyword">new</span> LinkedList();</span><br><span class="line">        exponents_list.add(Math.log(<span class="number">0.5</span>*(score.get(<span class="number">0</span>)*eps/sensity)));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;m;i++)&#123;</span><br><span class="line">            exponents_list.add(Math.log(<span class="number">0.5</span>*(score.get(i)*eps/sensity)));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">double</span> sum=exponents_list.stream().mapToDouble(Double::doubleValue).sum();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</span><br><span class="line">            exponents_list.set(i,exponents_list.get(i)/sum); <span class="comment">//每一个占总体的比，属于(0,1)</span></span><br><span class="line">        <span class="keyword">double</span> sum_exp=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> j=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(;;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum_exp=sum_exp+exponents_list.get(j);</span><br><span class="line">            <span class="keyword">if</span>(sum_exp&gt;r)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">       <span class="keyword">return</span> j;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="数据发布"><a href="#数据发布" class="headerlink" title="数据发布"></a>数据发布</h2><h3 id="交互式数据发布"><a href="#交互式数据发布" class="headerlink" title="交互式数据发布"></a>交互式数据发布</h3><p>给定数据集$D$和查询集合$F$， 需寻求一种数据发布机制， 使其能够在满足差分隐私保护的条件下逐个回答 $F$ 中的查询， 直到耗尽全部隐私保护预算． 交互式数据发布即是要在满足一定精确度的条件下， 以<strong>给定的隐私保护预算回答尽可能多的查询</strong>．    </p>

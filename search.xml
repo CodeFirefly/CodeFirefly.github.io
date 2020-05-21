@@ -1,6 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>[Java基础]-ArrayList结构</title>
+    <url>/2020/05/11/Java%E5%9F%BA%E7%A1%80-ArrayList%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<blockquote>
+<p>ArrayList是基于数组形式实现的集合，存在着数组的特性：</p>
+</blockquote>
+<ul>
+<li>添加和删除元素涉及到一次元素复制，比较耗费性能(除在数组后面直接添加元素外)</li>
+<li>数组是一种随机访问模式，其中的元素获取非常快<a id="more"></a>
+
+
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">问题</th>
+<th align="center">结论</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ArrayList是否允许为空</td>
+<td align="center">允许</td>
+</tr>
+<tr>
+<td align="center">ArrayList是否允许重复数据</td>
+<td align="center">允许</td>
+</tr>
+<tr>
+<td align="center">ArrayList是否有序</td>
+<td align="center">有序</td>
+</tr>
+<tr>
+<td align="center">ArrayList是否线程安全</td>
+<td align="center">不安全</td>
+</tr>
+</tbody></table>
+<h2 id="ArrayList添加元素的过程"><a href="#ArrayList添加元素的过程" class="headerlink" title="ArrayList添加元素的过程"></a>ArrayList添加元素的过程</h2><p>添加元素的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        list.add(<span class="string">"000"</span>);</span><br><span class="line">        list.add(<span class="string">"111"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>进入ArrayList的add方法，可以看到：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_CAPACITY = <span class="number">10</span>; <span class="comment">//Default initial capacity.</span></span><br><span class="line"><span class="keyword">transient</span> Object[] elementData; <span class="comment">// non-private to simplify nested class access</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">       ensureCapacityInternal(size + <span class="number">1</span>);  <span class="comment">// Increments modCount!!</span></span><br><span class="line">       elementData[size++] = e;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>发现在调用<code>add</code>方法时只是在<code>elementData</code>的某个位置添加一个元素而已。</p>
+<blockquote>
+<p>那么当ArrayList底层数组大小不够时要如何处理呢？答案是对底层数组进行扩容处理</p>
+</blockquote>
+<h2 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h2><p>查看<code>add</code>方法的<code>ensureCapacityInternal</code>方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacityInternal</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">       ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>进一步查看<code>ensureExplicitCapacity</code>方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureExplicitCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">        modCount++; <span class="comment">//在父类ArrayList中定义了modCount的值初始为0，其含义为结构的扩容次数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// overflow-conscious code</span></span><br><span class="line">        <span class="keyword">if</span> (minCapacity - elementData.length &gt; <span class="number">0</span>)  <span class="comment">//如果最小需要容量大于数组长度，将数组扩容</span></span><br><span class="line">            grow(minCapacity);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以发现，调用了<code>grow</code>方法进行了扩容操作，其源码如下:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">grow</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// overflow-conscious code</span></span><br><span class="line">      <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">      <span class="keyword">int</span> newCapacity = oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);</span><br><span class="line">      <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>)</span><br><span class="line">          newCapacity = minCapacity;</span><br><span class="line">      <span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</span><br><span class="line">          newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">      <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">      elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>看到新容器的容量为原容器容量右移一位（<code>int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</code>）即相当于原容量的<strong>1.5</strong>倍。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_ARRAY_SIZE = Integer.MAX_VALUE - <span class="number">8</span>;</span><br></pre></td></tr></table></figure>
+
+<p>根据右移运算符的性质不难发现扩容后的新容器的容量<code>newCapacity</code>可能会导致其值为负数，因此需要判断扩容后的容量是否为负<code>if（newCapacity - MAX_ARRAY_SIZE &gt; 0）</code>若是负数时抛出<code>内存溢出异常</code>，否则将内存最大值开放到<em>Integer.MAX_VALUE</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hugeCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (minCapacity &lt; <span class="number">0</span>) <span class="comment">// overflow</span></span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> OutOfMemoryError();</span><br><span class="line">       <span class="keyword">return</span> (minCapacity &gt; MAX_ARRAY_SIZE) ?</span><br><span class="line">           Integer.MAX_VALUE :</span><br><span class="line">           MAX_ARRAY_SIZE;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后<code>grow</code>调用<code>Arrays</code>工具类的<code>copyOf</code>方法将数据复制到<code>新数组</code>中,即添加元素可能会导致扩容操作，此时数组已经换成一个更大容量的数组了。</p>
+<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><p>即在ArrayList数组的指定位置插入指定元素，此时，调用了<code>add</code>带两个参数的重载方法。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</span><br><span class="line">        rangeCheckForAdd(index);</span><br><span class="line"></span><br><span class="line">        ensureCapacityInternal(size + <span class="number">1</span>);  <span class="comment">// Increments modCount!!</span></span><br><span class="line">        System.arraycopy(elementData, index, elementData, index + <span class="number">1</span>,</span><br><span class="line">                         size - index);</span><br><span class="line">        elementData[index] = element;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>rangeCheckForAdd(index)</code>函数检查了index的范围，不能大于size，也不能小于0，然后就是确认容量，然后是复制的过程，把index之后的元素都往后移一个单位，然后再index插入需要插入的元素</p>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>ArrayList删除元素有两种方式，一种是按照下标删除，一种是按照匹配的第一个元素值来删除</p>
+<h3 id="按下标删除："><a href="#按下标删除：" class="headerlink" title="按下标删除："></a>按下标删除：</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        rangeCheck(index);</span><br><span class="line"></span><br><span class="line">        modCount++;</span><br><span class="line">        E oldValue = elementData(index);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> numMoved = size - index - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (numMoved &gt; <span class="number">0</span>)</span><br><span class="line">            System.arraycopy(elementData, index+<span class="number">1</span>, elementData, index,</span><br><span class="line">                             numMoved);</span><br><span class="line">        elementData[--size] = <span class="keyword">null</span>; <span class="comment">// clear to let GC do its work</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> oldValue;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>rangeCheck(index)</code>函数检查index范围是否合法，当<em>index&gt;=size</em>时，抛出下标越界异常。</p>
+<p>然后将下标后部元素全部向前复制一位，然后把最后的一个数据设置为null，如果数组只有一个对象那就直接赋值为null.</p>
+<h2 id="ArrayList与Vector"><a href="#ArrayList与Vector" class="headerlink" title="ArrayList与Vector"></a>ArrayList与Vector</h2><p>ArrayList是线程非安全的，这很明显，因为ArrayList中所有的方法都不是同步的，在<code>并发下一定会出现线程安全问题</code>。</p>
+<p><em>Vector</em>，它是ArrayList的线程安全版本，其实现90%和ArrayList都完全一样，区别在于：</p>
+<ul>
+<li>Vector是线程安全的，ArrayList是线程非安全的</li>
+<li>Vector可以指定增长因子，如果该增长因子指定了，那么扩容的时候会每次新的数组大小会在原数组的大小基础上加上增长因子；如果不指定增长因子，那么就给原数组大小*2，源代码如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">If the capacity increment is less than or equal to zero, the capacity of the vector is doubled each time it needs to grow</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">int</span> capacityIncrement;</span><br></pre></td></tr></table></figure>
+
+<p><code>grow中:</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> newCapacity = oldCapacity + ((capacityIncrement &gt; <span class="number">0</span>) ?</span><br><span class="line">                                         capacityIncrement : oldCapacity);</span><br></pre></td></tr></table></figure>
+
+<h2 id="elementData的transient修饰符"><a href="#elementData的transient修饰符" class="headerlink" title="elementData的transient修饰符"></a>elementData的transient修饰符</h2><p>可以看到<code>elementData</code>是被<code>transient</code>修饰的</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">transient</span> Object[] elementData; <span class="comment">// non-private to simplify nested class access</span></span><br></pre></td></tr></table></figure>
+
+<p>那么<strong>为什么要使用transient修饰呢?</strong></p>
+<p>ArrayList实现了Serializable接口，这意味着ArrayList是可以被序列化的，用<em>transient</em>修饰elementData意味着我们不希望elementData数组被序列化，因为序列化ArrayList的时候，ArrayList里面的elementData未必是满的，比方说elementData有10的大小，但是我只用了其中的3个，那么是否有必要序列化整个elementData呢？显然没有这个必要，因此ArrayList中重写了writeObject方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeObject</span><span class="params">(java.io.ObjectOutputStream s)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> java.io.IOException</span>&#123;</span><br><span class="line">        <span class="comment">// Write out element count, and any hidden stuff</span></span><br><span class="line">        <span class="keyword">int</span> expectedModCount = modCount;</span><br><span class="line">        s.defaultWriteObject();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Write out size as capacity for behavioural compatibility with clone()</span></span><br><span class="line">        s.writeInt(size);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Write out all elements in the proper order.</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;size; i++) &#123;</span><br><span class="line">            s.writeObject(elementData[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (modCount != expectedModCount) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>每次序列化的时候调用这个方法，先调用defaultWriteObject()方法序列化ArrayList中的非transient元素，elementData不去序列化，然后遍历elementData，只序列化那些有的元素，这样：</p>
+<ol>
+<li>加快了序列化速度</li>
+<li>减少文件大小</li>
+</ol>
+<blockquote>
+<p><strong>如果以后开发过程中有遇到这种情况，也是值得学习、借鉴的一种思路。</strong></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>Java基础</tag>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>[差分隐私]-初窥门径</title>
     <url>/2020/05/15/%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81-%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84/</url>
     <content><![CDATA[<p>差分隐私是Dwork在2006年针对统计数据库的隐私泄露问题提出的一种<code>隐私定义</code>：</p>
@@ -10,7 +118,7 @@
 <h2 id="差分隐私的数学框架"><a href="#差分隐私的数学框架" class="headerlink" title="差分隐私的数学框架"></a>差分隐私的数学框架</h2><blockquote>
 <p><strong>差分隐私：</strong>设有随机机制$M$,$P_M$为$M$所有可能的输出构成的集合，对于任意两个邻近数据集$D$和$D’$及$P_M$的任意子集$S_M$,若$M$满足：<br>$$<br>Pr[M(D)\in S_M]\le exp(\epsilon)×Pr[M(D’)\in S_M]+\delta<br>$$<br>则称$M$满足$(\epsilon,\delta)$-(近似)差分隐私，当$\delta=0$时，称$M$提供$\epsilon$-差分隐私保护，其中$\epsilon$为隐私保护预算。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200513191507.png" alt=""></p>
+<p><img src="https://github.com/AsuanPic/Pic/blob/master/pic/20200513191507.png?raw=true" alt=""></p>
 <p>如图所示，机制$M$通过对输出结果的随机化来提供隐私保护，同时通过参数ε来保证在数据集中任一记录改变时，其输出统一结果的概率不发生显著变化。</p>
 <h3 id="差分隐私中的基础概念："><a href="#差分隐私中的基础概念：" class="headerlink" title="差分隐私中的基础概念："></a>差分隐私中的基础概念：</h3><h4 id="邻近数据集"><a href="#邻近数据集" class="headerlink" title="邻近数据集"></a>邻近数据集</h4><p>对于一个有限域$ Z,z∈Z$为$Z$中的元素，从$Z$中抽样所得$z$的集合组成数据集$D$，其样本量为$n$，属性的个数为<code>维度d</code>.设数据集$D$和$D’$具有相同的属性结构，两者的对称差记作$D△D’$,$|D△D’|$表示对称差数量，当 $|D△D’|=1$，则称 $D$和 $D’$为邻近数据集。简而言之，只相差一条记录的一对数据集$|D△D′|=1$，即为邻近数据集。</p>
 <h4 id="隐私保护预算-epsilon"><a href="#隐私保护预算-epsilon" class="headerlink" title="隐私保护预算$\epsilon$"></a>隐私保护预算$\epsilon$</h4><p>隐私保护预算$\epsilon$用来控制算法$M$在两个相邻数据集上获得相同输出的概率，其值体现了该算法$M$能够提供的隐私保护的水平，根据差分隐私的数学定义，不难看出，$\epsilon$越小，隐私保护水平越高。当$\epsilon=0$时，保护水平达到最高，此时对于任何相邻数据集，算法都将输出两个概率分布完全相同的结果，这些结果不能反应任何关于数据集的有用信息。</p>
@@ -62,7 +170,7 @@
 <blockquote>
 <p>以投票为例，10个人中9个人分别对1,2,3各投了3票，现加入指数机制保护A的投票结果，如图示:</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200514094749.png" alt=""></p>
+<p><img src="https://github.com/AsuanPic/Pic/blob/master/pic/20200514094749.png?raw=true" alt=""></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     *指数机制 给定一个打分数组，然后从其中按照指数机制公式输出其的索引</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> score</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sensity</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> eps</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">dpIndex</span><span class="params">(List&lt;Double&gt; score,Double sensity, Double eps)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = score.size();</span><br><span class="line">        <span class="keyword">double</span> r= Math.random();</span><br><span class="line">        List&lt;Double&gt; exponents_list = <span class="keyword">new</span> LinkedList();</span><br><span class="line">        exponents_list.add(Math.log(<span class="number">0.5</span>*(score.get(<span class="number">0</span>)*eps/sensity)));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;m;i++)&#123;</span><br><span class="line">            exponents_list.add(Math.log(<span class="number">0.5</span>*(score.get(i)*eps/sensity)));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">double</span> sum=exponents_list.stream().mapToDouble(Double::doubleValue).sum();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</span><br><span class="line">            exponents_list.set(i,exponents_list.get(i)/sum); <span class="comment">//每一个占总体的比，属于(0,1)</span></span><br><span class="line">        <span class="keyword">double</span> sum_exp=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> j=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(;;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum_exp=sum_exp+exponents_list.get(j);</span><br><span class="line">            <span class="keyword">if</span>(sum_exp&gt;r)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">       <span class="keyword">return</span> j;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="数据发布"><a href="#数据发布" class="headerlink" title="数据发布"></a>数据发布</h2><h3 id="交互式数据发布"><a href="#交互式数据发布" class="headerlink" title="交互式数据发布"></a>交互式数据发布</h3><p>给定数据集$D$和查询集合$F$， 需寻求一种数据发布机制， 使其能够在满足差分隐私保护的条件下逐个回答 $F$ 中的查询， 直到耗尽全部隐私保护预算． 交互式数据发布即是要在满足一定精确度的条件下， 以<strong>给定的隐私保护预算回答尽可能多的查询</strong>．    </p>
@@ -204,6 +312,70 @@
       </tags>
   </entry>
   <entry>
+    <title>[论文笔记1]--差分隐私保护参数ε的选取研究</title>
+    <url>/2020/05/20/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B01-%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4%E5%8F%82%E6%95%B0%CE%B5%E7%9A%84%E9%80%89%E5%8F%96%E7%A0%94%E7%A9%B6/</url>
+    <content><![CDATA[<blockquote>
+<p>文章: 差分隐私保护参数ε的选取研究 . 通信学报.Vol.36 No.12 . 2015</p>
+</blockquote>
+<h2 id="主要工作"><a href="#主要工作" class="headerlink" title="主要工作"></a>主要工作</h2><ol>
+<li><p>给出一个选取参数$\epsilon$<strong>上界</strong>的一个计算式</p>
+<ul>
+<li>该计算式只需要 查询函数敏感度$\Delta f$, 查询容错区间长度$L$ 和 攻击者成功概率$\rho$。</li>
+</ul>
+</li>
+<li><p>提出一个差分隐私保护的攻击算法–根据查询语句的返回值来回答攻击对象是否在查询集合中。</p>
+<a id="more"></a>
+
+</li>
+</ol>
+<h2 id="攻击模型"><a href="#攻击模型" class="headerlink" title="攻击模型"></a>攻击模型</h2><h3 id="准备知识"><a href="#准备知识" class="headerlink" title="准备知识"></a>准备知识</h3><p>攻击者针对攻击对象提出一个查询问题$q$,数据库拥有者根据问题将查询结果$q(D)$添加<code>服从Laplace分布的噪音x</code>之后返回给攻击者。</p>
+<p>因为每个噪音都是满足<code>Laplace分布</code>的，因此对于攻击者而言不可能准确的猜出这个$x$,但是考虑到一些函数的特点，攻击者只需要猜出$x$落在某个范围内即可。以<strong>count</strong>查询为例，只要噪音$x$落在$[-0.5,0.5]$之间，攻击者便很容易得知真实值$q(D)$,从而得知攻击对象是否在查询结果中的结论。</p>
+<p>将$[-0.5,0.5]$称为<strong>count</strong>查询的容错区间，区间的半长度记为$L$.</p>
+<img src="https://github.com/AsuanPic/Pic/blob/master/pic/20200519162302.png?raw=true" style="zoom:40%;" />
+
+
+
+<p>根据上图的显示的<code>Laplace概率密度函数</code>图像可以看出，位置参数$u$对于攻击者是没有影响的，而参数$b=\frac{\Delta f}{\epsilon}$直接影响了攻击的难易程度。</p>
+<p>显而易见，<strong>当参数$b$比较小时，经过$Laplace$采样的数据$x$比较靠近位置参数$u$,</strong>相反，当参数$b$足够大时，采样数据$x$相当于平均分布在$(-\infty,\infty)$上，对于攻击者来说是很困难的。</p>
+<h3 id="相关定理"><a href="#相关定理" class="headerlink" title="相关定理"></a>相关定理</h3><blockquote>
+<p><strong>定理1：</strong>若用拉普拉斯分布给$q(D)$添加噪音$x$,则$q(D)+x$落在$(-\infty,q(D)+u+L)$概率为$1-\frac12exp(-\frac{L\epsilon}{\Delta f})$</p>
+</blockquote>
+<ul>
+<li><strong>证明：</strong>$q(D)+x$落在区间$(-\infty,q(D)+u+L)$上的概率等于$x$落在区间$(-\infty,u+L)$的概率，依据$Laplace$累计分布函数，$x$落在区间$(-\infty,u+L)$的概率为$F(u+L)=0.5+0.5(1-exp(-\frac{L}{b}))=1-\frac12exp(-\frac{L}{b})$,将$b=\frac{\Delta f}{\epsilon}$代入，则可证出上述定理。</li>
+</ul>
+<blockquote>
+<p><strong>定理2：</strong>以下攻击算法对于$count$查询的成功的概率是$1-\frac12exp(-\frac{\epsilon}2)$</p>
+</blockquote>
+<blockquote>
+<p>该定理以$count$统计查询为例,其他<strong>[统计函数]</strong>也可以类似得到。攻击者可以根据返回值的大小来确定攻击对象是否在结果集中。</p>
+</blockquote>
+<ul>
+<li><p><strong>攻击算法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Attack Algorithm For Count Query</span><br><span class="line">Input: A(q(D)) &#x3D; x + q(D)</span><br><span class="line">Output: Present or Absence</span><br><span class="line">Method:</span><br><span class="line">&#x2F;* Laplace f(μ,b) distribution, and q(D) ∈ &#123;m,m+1&#125;*&#x2F;</span><br><span class="line">1) y &#x3D; x + q(D)</span><br><span class="line">2) if y∈[m+0.5,+∞)</span><br><span class="line">3) return Present</span><br><span class="line">4) else</span><br><span class="line">5) return Absence</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>证明：</strong>假设$q(D)=m$或者$m+1$，给定$q(D)+x$考虑两个区间$(-\infty,m+0.5]$和$[m+0.5,+\infty]$，根据<code>定理1</code>,若$q(D)=m$,则$q(D)+x$落在第一个区间的概率为$1-\frac12exp(-\frac{\epsilon}2)$.</p>
+<p>若$q(D)=m+1$,则$q(D)+x$落在第二个区间的概率与$q(D)=m$落入第一个区间的的可能性相同.</p>
+<blockquote>
+<p>$q(D)=m+1$时$q(D)+x$落入第一个区间的可能性求法如下：</p>
+</blockquote>
+<blockquote>
+<p>$q(D)=m+1$落入$(-\infty,m+0.5]$区间的概率即落入$(-\infty,q(D)+u+(-0.5)]$,等价于$x$落入$(-\infty,-0.5)$的概率。</p>
+<p>根据$Laplace$的累积分布函数$F(x)=0.5+0.5sgn(x-\mu)(1-exp\frac{-|x-\mu|}{b})$,可得$q(D)=m+1$落入第一个区间的概率为$\frac12exp(-\frac{\epsilon}{2})$。</p>
+</blockquote>
+<h2 id="参数-epsilon-的选取"><a href="#参数-epsilon-的选取" class="headerlink" title="参数$\epsilon$的选取"></a>参数$\epsilon$的选取</h2><p>对于一般的查询函数，由上面的攻击算法可以推导出攻击者能够成功的概率为$1-\frac12exp(-\frac{L\epsilon}{\Delta q})$.</p>
+<p>即<strong>参数</strong>$\epsilon$的选取，只要攻击者的成功概率$\rho \le(1-\frac12exp(-\frac{L\epsilon}{\Delta q}))$,解不等式，得出<strong>参数</strong>$\epsilon$选取上界满足如下条件：<br>$$<br>\epsilon\le \frac{1n2(1-\rho)\Delta q}{L}<br>$$<br>上式给出的参数$\epsilon$与<code>数据集大小无关</code>只与查询函数$(\Delta q,L)$和攻击者的成功率$\rho$有关。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>差分隐私</category>
+      </categories>
+      <tags>
+        <tag>差分隐私</tag>
+        <tag>论文笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo+NexT搭建个人博客</title>
     <url>/2020/05/07/Hexo-NexT%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>安装 Hexo 前要先安装：</p>
@@ -289,178 +461,6 @@
       <tags>
         <tag>Hexo</tag>
         <tag>NexT</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>[论文笔记1]--差分隐私保护参数ε的选取研究</title>
-    <url>/2020/05/20/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B01-%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4%E5%8F%82%E6%95%B0%CE%B5%E7%9A%84%E9%80%89%E5%8F%96%E7%A0%94%E7%A9%B6/</url>
-    <content><![CDATA[<blockquote>
-<p>文章: 差分隐私保护参数ε的选取研究 . 通信学报.Vol.36 No.12 . 2015</p>
-</blockquote>
-<h2 id="主要工作"><a href="#主要工作" class="headerlink" title="主要工作"></a>主要工作</h2><ol>
-<li><p>给出一个选取参数$\epsilon$<strong>上界</strong>的一个计算式</p>
-<ul>
-<li>该计算式只需要 查询函数敏感度$\Delta f$, 查询容错区间长度$L$ 和 攻击者成功概率$\rho$。</li>
-</ul>
-</li>
-<li><p>提出一个差分隐私保护的攻击算法–根据查询语句的返回值来回答攻击对象是否在查询集合中。</p>
-<a id="more"></a>
-
-</li>
-</ol>
-<h2 id="攻击模型"><a href="#攻击模型" class="headerlink" title="攻击模型"></a>攻击模型</h2><h3 id="准备知识"><a href="#准备知识" class="headerlink" title="准备知识"></a>准备知识</h3><p>攻击者针对攻击对象提出一个查询问题$q$,数据库拥有者根据问题将查询结果$q(D)$添加<code>服从Laplace分布的噪音x</code>之后返回给攻击者。</p>
-<p>因为每个噪音都是满足<code>Laplace分布</code>的，因此对于攻击者而言不可能准确的猜出这个$x$,但是考虑到一些函数的特点，攻击者只需要猜出$x$落在某个范围内即可。以<strong>count</strong>查询为例，只要噪音$x$落在$[-0.5,0.5]$之间，攻击者便很容易得知真实值$q(D)$,从而得知攻击对象是否在查询结果中的结论。</p>
-<p>将$[-0.5,0.5]$称为<strong>count</strong>查询的容错区间，区间的半长度记为$L$.</p>
-<img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200519162302.png" style="zoom:40%;" />
-
-
-
-<p>根据上图的显示的<code>Laplace概率密度函数</code>图像可以看出，位置参数$u$对于攻击者是没有影响的，而参数$b=\frac{\Delta f}{\epsilon}$直接影响了攻击的难易程度。</p>
-<p>显而易见，<strong>当参数$b$比较小时，经过$Laplace$采样的数据$x$比较靠近位置参数$u$,</strong>相反，当参数$b$足够大时，采样数据$x$相当于平均分布在$(-\infty,\infty)$上，对于攻击者来说是很困难的。</p>
-<h3 id="相关定理"><a href="#相关定理" class="headerlink" title="相关定理"></a>相关定理</h3><blockquote>
-<p><strong>定理1：</strong>若用拉普拉斯分布给$q(D)$添加噪音$x$,则$q(D)+x$落在$(-\infty,q(D)+u+L)$概率为$1-\frac12exp(-\frac{L\epsilon}{\Delta f})$</p>
-</blockquote>
-<ul>
-<li><strong>证明：</strong>$q(D)+x$落在区间$(-\infty,q(D)+u+L)$上的概率等于$x$落在区间$(-\infty,u+L)$的概率，依据$Laplace$累计分布函数，$x$落在区间$(-\infty,u+L)$的概率为$F(u+L)=0.5+0.5(1-exp(-\frac{L}{b}))=1-\frac12exp(-\frac{L}{b})$,将$b=\frac{\Delta f}{\epsilon}$代入，则可证出上述定理。</li>
-</ul>
-<blockquote>
-<p><strong>定理2：</strong>以下攻击算法对于$count$查询的成功的概率是$1-\frac12exp(-\frac{\epsilon}2)$</p>
-</blockquote>
-<blockquote>
-<p>该定理以$count$统计查询为例,其他<strong>[统计函数]</strong>也可以类似得到。攻击者可以根据返回值的大小来确定攻击对象是否在结果集中。</p>
-</blockquote>
-<ul>
-<li><p><strong>攻击算法：</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Attack Algorithm For Count Query</span><br><span class="line">Input: A(q(D)) &#x3D; x + q(D)</span><br><span class="line">Output: Present or Absence</span><br><span class="line">Method:</span><br><span class="line">&#x2F;* Laplace f(μ,b) distribution, and q(D) ∈ &#123;m,m+1&#125;*&#x2F;</span><br><span class="line">1) y &#x3D; x + q(D)</span><br><span class="line">2) if y∈[m+0.5,+∞)</span><br><span class="line">3) return Present</span><br><span class="line">4) else</span><br><span class="line">5) return Absence</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>证明：</strong>假设$q(D)=m$或者$m+1$，给定$q(D)+x$考虑两个区间$(-\infty,m+0.5]$和$[m+0.5,+\infty]$，根据<code>定理1</code>,若$q(D)=m$,则$q(D)+x$落在第一个区间的概率为$1-\frac12exp(-\frac{\epsilon}2)$.</p>
-<p>若$q(D)=m+1$,则$q(D)+x$落在第二个区间的概率与$q(D)=m$落入第一个区间的的可能性相同.</p>
-<blockquote>
-<p>$q(D)=m+1$时$q(D)+x$落入第一个区间的可能性求法如下：</p>
-</blockquote>
-<blockquote>
-<p>$q(D)=m+1$落入$(-\infty,m+0.5]$区间的概率即落入$(-\infty,q(D)+u+(-0.5)]$,等价于$x$落入$(-\infty,-0.5)$的概率。</p>
-<p>根据$Laplace$的累积分布函数$F(x)=0.5+0.5sgn(x-\mu)(1-exp\frac{-|x-\mu|}{b})$,可得$q(D)=m+1$落入第一个区间的概率为$\frac12exp(-\frac{\epsilon}{2})$。</p>
-</blockquote>
-<h2 id="参数-epsilon-的选取"><a href="#参数-epsilon-的选取" class="headerlink" title="参数$\epsilon$的选取"></a>参数$\epsilon$的选取</h2><p>对于一般的查询函数，由上面的攻击算法可以推导出攻击者能够成功的概率为$1-\frac12exp(-\frac{L\epsilon}{\Delta q})$.</p>
-<p>即<strong>参数</strong>$\epsilon$的选取，只要攻击者的成功概率$\rho \le(1-\frac12exp(-\frac{L\epsilon}{\Delta q}))$,解不等式，得出<strong>参数</strong>$\epsilon$选取上界满足如下条件：<br>$$<br>\epsilon\le \frac{1n2(1-\rho)\Delta q}{L}<br>$$<br>上式给出的参数$\epsilon$与<code>数据集大小无关</code>只与查询函数$(\Delta q,L)$和攻击者的成功率$\rho$有关。</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>差分隐私</category>
-      </categories>
-      <tags>
-        <tag>差分隐私</tag>
-        <tag>论文笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>[Java基础]-ArrayList结构</title>
-    <url>/2020/05/11/Java%E5%9F%BA%E7%A1%80-ArrayList%E7%BB%93%E6%9E%84/</url>
-    <content><![CDATA[<blockquote>
-<p>ArrayList是基于数组形式实现的集合，存在着数组的特性：</p>
-</blockquote>
-<ul>
-<li>添加和删除元素涉及到一次元素复制，比较耗费性能(除在数组后面直接添加元素外)</li>
-<li>数组是一种随机访问模式，其中的元素获取非常快<a id="more"></a>
-
-
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center">问题</th>
-<th align="center">结论</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">ArrayList是否允许为空</td>
-<td align="center">允许</td>
-</tr>
-<tr>
-<td align="center">ArrayList是否允许重复数据</td>
-<td align="center">允许</td>
-</tr>
-<tr>
-<td align="center">ArrayList是否有序</td>
-<td align="center">有序</td>
-</tr>
-<tr>
-<td align="center">ArrayList是否线程安全</td>
-<td align="center">不安全</td>
-</tr>
-</tbody></table>
-<h2 id="ArrayList添加元素的过程"><a href="#ArrayList添加元素的过程" class="headerlink" title="ArrayList添加元素的过程"></a>ArrayList添加元素的过程</h2><p>添加元素的代码如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        list.add(<span class="string">"000"</span>);</span><br><span class="line">        list.add(<span class="string">"111"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>进入ArrayList的add方法，可以看到：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_CAPACITY = <span class="number">10</span>; <span class="comment">//Default initial capacity.</span></span><br><span class="line"><span class="keyword">transient</span> Object[] elementData; <span class="comment">// non-private to simplify nested class access</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">       ensureCapacityInternal(size + <span class="number">1</span>);  <span class="comment">// Increments modCount!!</span></span><br><span class="line">       elementData[size++] = e;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>发现在调用<code>add</code>方法时只是在<code>elementData</code>的某个位置添加一个元素而已。</p>
-<blockquote>
-<p>那么当ArrayList底层数组大小不够时要如何处理呢？答案是对底层数组进行扩容处理</p>
-</blockquote>
-<h2 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h2><p>查看<code>add</code>方法的<code>ensureCapacityInternal</code>方法：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacityInternal</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">       ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>进一步查看<code>ensureExplicitCapacity</code>方法：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureExplicitCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">        modCount++; <span class="comment">//在父类ArrayList中定义了modCount的值初始为0，其含义为结构的扩容次数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// overflow-conscious code</span></span><br><span class="line">        <span class="keyword">if</span> (minCapacity - elementData.length &gt; <span class="number">0</span>)  <span class="comment">//如果最小需要容量大于数组长度，将数组扩容</span></span><br><span class="line">            grow(minCapacity);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以发现，调用了<code>grow</code>方法进行了扩容操作，其源码如下:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">grow</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// overflow-conscious code</span></span><br><span class="line">      <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">      <span class="keyword">int</span> newCapacity = oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);</span><br><span class="line">      <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>)</span><br><span class="line">          newCapacity = minCapacity;</span><br><span class="line">      <span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</span><br><span class="line">          newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">      <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">      elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>看到新容器的容量为原容器容量右移一位（<code>int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</code>）即相当于原容量的<strong>1.5</strong>倍。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_ARRAY_SIZE = Integer.MAX_VALUE - <span class="number">8</span>;</span><br></pre></td></tr></table></figure>
-
-<p>根据右移运算符的性质不难发现扩容后的新容器的容量<code>newCapacity</code>可能会导致其值为负数，因此需要判断扩容后的容量是否为负<code>if（newCapacity - MAX_ARRAY_SIZE &gt; 0）</code>若是负数时抛出<code>内存溢出异常</code>，否则将内存最大值开放到<em>Integer.MAX_VALUE</em></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hugeCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (minCapacity &lt; <span class="number">0</span>) <span class="comment">// overflow</span></span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> OutOfMemoryError();</span><br><span class="line">       <span class="keyword">return</span> (minCapacity &gt; MAX_ARRAY_SIZE) ?</span><br><span class="line">           Integer.MAX_VALUE :</span><br><span class="line">           MAX_ARRAY_SIZE;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>最后<code>grow</code>调用<code>Arrays</code>工具类的<code>copyOf</code>方法将数据复制到<code>新数组</code>中,即添加元素可能会导致扩容操作，此时数组已经换成一个更大容量的数组了。</p>
-<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><p>即在ArrayList数组的指定位置插入指定元素，此时，调用了<code>add</code>带两个参数的重载方法。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</span><br><span class="line">        rangeCheckForAdd(index);</span><br><span class="line"></span><br><span class="line">        ensureCapacityInternal(size + <span class="number">1</span>);  <span class="comment">// Increments modCount!!</span></span><br><span class="line">        System.arraycopy(elementData, index, elementData, index + <span class="number">1</span>,</span><br><span class="line">                         size - index);</span><br><span class="line">        elementData[index] = element;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>rangeCheckForAdd(index)</code>函数检查了index的范围，不能大于size，也不能小于0，然后就是确认容量，然后是复制的过程，把index之后的元素都往后移一个单位，然后再index插入需要插入的元素</p>
-<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>ArrayList删除元素有两种方式，一种是按照下标删除，一种是按照匹配的第一个元素值来删除</p>
-<h3 id="按下标删除："><a href="#按下标删除：" class="headerlink" title="按下标删除："></a>按下标删除：</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        rangeCheck(index);</span><br><span class="line"></span><br><span class="line">        modCount++;</span><br><span class="line">        E oldValue = elementData(index);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> numMoved = size - index - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (numMoved &gt; <span class="number">0</span>)</span><br><span class="line">            System.arraycopy(elementData, index+<span class="number">1</span>, elementData, index,</span><br><span class="line">                             numMoved);</span><br><span class="line">        elementData[--size] = <span class="keyword">null</span>; <span class="comment">// clear to let GC do its work</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> oldValue;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>rangeCheck(index)</code>函数检查index范围是否合法，当<em>index&gt;=size</em>时，抛出下标越界异常。</p>
-<p>然后将下标后部元素全部向前复制一位，然后把最后的一个数据设置为null，如果数组只有一个对象那就直接赋值为null.</p>
-<h2 id="ArrayList与Vector"><a href="#ArrayList与Vector" class="headerlink" title="ArrayList与Vector"></a>ArrayList与Vector</h2><p>ArrayList是线程非安全的，这很明显，因为ArrayList中所有的方法都不是同步的，在<code>并发下一定会出现线程安全问题</code>。</p>
-<p><em>Vector</em>，它是ArrayList的线程安全版本，其实现90%和ArrayList都完全一样，区别在于：</p>
-<ul>
-<li>Vector是线程安全的，ArrayList是线程非安全的</li>
-<li>Vector可以指定增长因子，如果该增长因子指定了，那么扩容的时候会每次新的数组大小会在原数组的大小基础上加上增长因子；如果不指定增长因子，那么就给原数组大小*2，源代码如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">If the capacity increment is less than or equal to zero, the capacity of the vector is doubled each time it needs to grow</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">int</span> capacityIncrement;</span><br></pre></td></tr></table></figure>
-
-<p><code>grow中:</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> newCapacity = oldCapacity + ((capacityIncrement &gt; <span class="number">0</span>) ?</span><br><span class="line">                                         capacityIncrement : oldCapacity);</span><br></pre></td></tr></table></figure>
-
-<h2 id="elementData的transient修饰符"><a href="#elementData的transient修饰符" class="headerlink" title="elementData的transient修饰符"></a>elementData的transient修饰符</h2><p>可以看到<code>elementData</code>是被<code>transient</code>修饰的</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">transient</span> Object[] elementData; <span class="comment">// non-private to simplify nested class access</span></span><br></pre></td></tr></table></figure>
-
-<p>那么<strong>为什么要使用transient修饰呢?</strong></p>
-<p>ArrayList实现了Serializable接口，这意味着ArrayList是可以被序列化的，用<em>transient</em>修饰elementData意味着我们不希望elementData数组被序列化，因为序列化ArrayList的时候，ArrayList里面的elementData未必是满的，比方说elementData有10的大小，但是我只用了其中的3个，那么是否有必要序列化整个elementData呢？显然没有这个必要，因此ArrayList中重写了writeObject方法：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeObject</span><span class="params">(java.io.ObjectOutputStream s)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> java.io.IOException</span>&#123;</span><br><span class="line">        <span class="comment">// Write out element count, and any hidden stuff</span></span><br><span class="line">        <span class="keyword">int</span> expectedModCount = modCount;</span><br><span class="line">        s.defaultWriteObject();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Write out size as capacity for behavioural compatibility with clone()</span></span><br><span class="line">        s.writeInt(size);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Write out all elements in the proper order.</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;size; i++) &#123;</span><br><span class="line">            s.writeObject(elementData[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (modCount != expectedModCount) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>每次序列化的时候调用这个方法，先调用defaultWriteObject()方法序列化ArrayList中的非transient元素，elementData不去序列化，然后遍历elementData，只序列化那些有的元素，这样：</p>
-<ol>
-<li>加快了序列化速度</li>
-<li>减少文件大小</li>
-</ol>
-<blockquote>
-<p><strong>如果以后开发过程中有遇到这种情况，也是值得学习、借鉴的一种思路。</strong></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>Java基础</tag>
-        <tag>数据结构</tag>
       </tags>
   </entry>
 </search>
