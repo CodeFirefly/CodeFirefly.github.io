@@ -119,12 +119,12 @@
 
 
 
-<meta name="description" content="安装环境：操作系统：CentOS 7.8Oracle： Oracle 11g   辣鸡软件，难装的一批！淦！">
+<meta name="description" content="安装环境：操作系统：CentOS 7.8Oracle： Oracle 11g   难装的一批，辣鸡软件！淦！">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记一次CentOs7上安装Oracle11g的踩坑过程">
 <meta property="og:url" content="https://cloudmadao.cc/2020/05/29/%E8%AE%B0%E4%B8%80%E6%AC%A1CentOs7%E4%B8%8A%E5%AE%89%E8%A3%85Oracle%E7%9A%84%E8%B8%A9%E5%9D%91%E8%BF%87%E7%A8%8B/index.html">
 <meta property="og:site_name" content="Madao&#39;s Personal Website">
-<meta property="og:description" content="安装环境：操作系统：CentOS 7.8Oracle： Oracle 11g   辣鸡软件，难装的一批！淦！">
+<meta property="og:description" content="安装环境：操作系统：CentOS 7.8Oracle： Oracle 11g   难装的一批，辣鸡软件！淦！">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200528094822.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200528164450.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200528100906.png">
@@ -134,7 +134,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200529084749.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200528153248.png">
 <meta property="article:published_time" content="2020-05-29T01:49:05.000Z">
-<meta property="article:modified_time" content="2020-05-29T02:09:25.205Z">
+<meta property="article:modified_time" content="2020-05-29T02:54:45.439Z">
 <meta property="article:author" content="摸鱼选手Madao">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="环境搭建">
@@ -428,7 +428,7 @@
       
         <h3 id="安装环境："><a href="#安装环境：" class="headerlink" title="安装环境："></a>安装环境：</h3><p>操作系统：CentOS 7.8<br>Oracle： Oracle 11g </p>
 <blockquote>
-<p>辣鸡软件，难装的一批！淦！</p>
+<p>难装的一批，辣鸡软件！淦！</p>
 </blockquote>
 <a id="more"></a>
 
@@ -555,11 +555,13 @@
 
 <p><code>dbshut</code>也进行同样的修改，修改后保存退出，问题解决</p>
 <h5 id="Linux启动时自动启动Oracle监听和实例"><a href="#Linux启动时自动启动Oracle监听和实例" class="headerlink" title="Linux启动时自动启动Oracle监听和实例"></a>Linux启动时自动启动Oracle监听和实例</h5><ul>
-<li><p>修改<code>/etc/oratab</code>文件</p>
+<li>修改<code>/etc/oratab</code>文件</li>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@CentOS ~]# vim &#x2F;etc&#x2F;oratab </span><br><span class="line">---------------------------------------------------------</span><br><span class="line">orcl11g:&#x2F;db&#x2F;app&#x2F;oracle&#x2F;product&#x2F;11.2.0:N</span><br><span class="line">修改为:</span><br><span class="line">orcl11g:&#x2F;db&#x2F;app&#x2F;oracle&#x2F;product&#x2F;11.2.0:Y</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><p>把lsnrctl start和dbstart添加到rc.local文件中</p>
+<li>把lsnrctl start和dbstart添加到rc.local文件中</li>
+</ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@CentOS ~]# vim /etc/rc.d/rc.local</span><br></pre></td></tr></table></figure>
 
 <p>添加：</p>
@@ -578,15 +580,10 @@
 <p>可以发现并没有执行权限，现在添加执行权限：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x /etc/rc.d/rc.local</span><br></pre></td></tr></table></figure>
 
-</li>
-</ul>
-</li>
-</ul>
 <p>至此，Oracle的开机自启就完成了，执行<code>reboot</code>重启之后查看是否自启动成功：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200529084747.png" alt=""></p>
 <p>查看Oracle服务状态</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[oracle@CentOS ~]$ ps -aux | grep oracle</span><br></pre></td></tr></table></figure>
-
 <p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200529084749.png" alt=""></p>
 <h3 id="Linux下Oracle的启动和关闭"><a href="#Linux下Oracle的启动和关闭" class="headerlink" title="Linux下Oracle的启动和关闭"></a>Linux下Oracle的启动和关闭</h3><ul>
 <li><p>启动的时候先启动oracle，然后启动监听器，即：startup-&gt;lsnrctl start；</p>
@@ -594,7 +591,7 @@
 <li><p>关闭的时候先关闭监听器，然后在关闭oracle,即：lsnrctl stop-&gt;shutdown immediate；</p>
 </li>
 </ul>
-<h2 id="错误一揽子"><a href="#错误一揽子" class="headerlink" title="错误一揽子"></a>错误一揽子</h2><h4 id="ORA-01034"><a href="#ORA-01034" class="headerlink" title="ORA-01034"></a>ORA-01034</h4><ul>
+<h3 id="错误一揽子"><a href="#错误一揽子" class="headerlink" title="错误一揽子"></a>错误一揽子</h3><h4 id="ORA-01034"><a href="#ORA-01034" class="headerlink" title="ORA-01034"></a>ORA-01034</h4><ul>
 <li>错误原因，数据库未启动，查询v$instance报错</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ERROR at line 1:</span><br><span class="line">ORA-01034: ORACLE not available</span><br><span class="line">Process ID: 0</span><br><span class="line">Session ID: 0 Serial number: 0</span><br></pre></td></tr></table></figure>
@@ -655,7 +652,8 @@
 <h4 id="ORA-00205"><a href="#ORA-00205" class="headerlink" title="ORA-00205"></a>ORA-00205</h4><blockquote>
 <p>此问题比较复杂，最后不知道是哪个方法起效了</p>
 </blockquote>
-<h5 id="可能原因1：由于数据库控制文件之一不正确"><a href="#可能原因1：由于数据库控制文件之一不正确" class="headerlink" title="可能原因1：由于数据库控制文件之一不正确"></a>可能原因1：由于数据库控制文件之一不正确</h5><ul>
+<h5 id="情况1："><a href="#情况1：" class="headerlink" title="情况1："></a>情况1：</h5><p>由于数据库控制文件之一不正确</p>
+<ul>
 <li>解决方法：</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> show parameter control_files</span></span><br><span class="line">NAME                                 TYPE        VALUE</span><br><span class="line">------------------------------------ ----------- ------------------------------</span><br><span class="line">control_files                        string      /u01/app/oracle/oradata/RTS/co</span><br><span class="line">                                                  ntrol01.ctl, /u01/app/oracle/o</span><br><span class="line">                                                  radata/RTS/control02.ctl</span><br></pre></td></tr></table></figure>
@@ -1224,7 +1222,7 @@ if(canvas.getContext){
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装环境："><span class="nav-number">1.</span> <span class="nav-text">安装环境：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Yum-安装vim软件，用于编辑配置文件（个人习惯）"><span class="nav-number">2.</span> <span class="nav-text">Yum 安装vim软件，用于编辑配置文件（个人习惯）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Oracle-11g依赖包"><span class="nav-number">3.</span> <span class="nav-text">安装Oracle 11g依赖包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭selinux"><span class="nav-number">4.</span> <span class="nav-text">关闭selinux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭防火墙"><span class="nav-number">5.</span> <span class="nav-text">关闭防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加Oracle用户组和用户"><span class="nav-number">6.</span> <span class="nav-text">添加Oracle用户组和用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置HostName"><span class="nav-number">7.</span> <span class="nav-text">配置HostName</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改内核参数"><span class="nav-number">8.</span> <span class="nav-text">修改内核参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改文件限制"><span class="nav-number">9.</span> <span class="nav-text">修改文件限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建Oracle安装目录"><span class="nav-number">10.</span> <span class="nav-text">创建Oracle安装目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Oracle用户环境变量"><span class="nav-number">11.</span> <span class="nav-text">配置Oracle用户环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解压Oracle文件"><span class="nav-number">12.</span> <span class="nav-text">解压Oracle文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置db-install-rsp响应模板文件开始静默安装"><span class="nav-number">13.</span> <span class="nav-text">配置db_install.rsp响应模板文件开始静默安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始静默安装"><span class="nav-number">14.</span> <span class="nav-text">开始静默安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置静默监听"><span class="nav-number">15.</span> <span class="nav-text">配置静默监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静默创建dbca数据库"><span class="nav-number">16.</span> <span class="nav-text">静默创建dbca数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录sqlplus-查看实例状态"><span class="nav-number">17.</span> <span class="nav-text">登录sqlplus,查看实例状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#激活scott用户"><span class="nav-number">18.</span> <span class="nav-text">激活scott用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户并授权"><span class="nav-number">19.</span> <span class="nav-text">创建用户并授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Navicat远程连接Oracle"><span class="nav-number">20.</span> <span class="nav-text">Navicat远程连接Oracle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置Oracle开机自启"><span class="nav-number">21.</span> <span class="nav-text">设置Oracle开机自启</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Linux启动时自动启动Oracle监听和实例"><span class="nav-number">21.0.1.</span> <span class="nav-text">Linux启动时自动启动Oracle监听和实例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux下Oracle的启动和关闭"><span class="nav-number">22.</span> <span class="nav-text">Linux下Oracle的启动和关闭</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误一揽子"><span class="nav-number"></span> <span class="nav-text">错误一揽子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-01034"><span class="nav-number">0.1.</span> <span class="nav-text">ORA-01034</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LRM-00109"><span class="nav-number">0.2.</span> <span class="nav-text">LRM-00109</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-00845"><span class="nav-number">0.3.</span> <span class="nav-text">ORA-00845</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-01102"><span class="nav-number">0.4.</span> <span class="nav-text">ORA-01102</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-00205"><span class="nav-number">0.5.</span> <span class="nav-text">ORA-00205</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#可能原因1：由于数据库控制文件之一不正确"><span class="nav-number">0.5.1.</span> <span class="nav-text">可能原因1：由于数据库控制文件之一不正确</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#情况2"><span class="nav-number">0.5.2.</span> <span class="nav-text">情况2:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-32001"><span class="nav-number">0.6.</span> <span class="nav-text">ORA-32001</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-01109"><span class="nav-number">0.7.</span> <span class="nav-text">ORA-01109</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装环境："><span class="nav-number">1.</span> <span class="nav-text">安装环境：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Yum-安装vim软件，用于编辑配置文件（个人习惯）"><span class="nav-number">2.</span> <span class="nav-text">Yum 安装vim软件，用于编辑配置文件（个人习惯）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Oracle-11g依赖包"><span class="nav-number">3.</span> <span class="nav-text">安装Oracle 11g依赖包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭selinux"><span class="nav-number">4.</span> <span class="nav-text">关闭selinux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭防火墙"><span class="nav-number">5.</span> <span class="nav-text">关闭防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加Oracle用户组和用户"><span class="nav-number">6.</span> <span class="nav-text">添加Oracle用户组和用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置HostName"><span class="nav-number">7.</span> <span class="nav-text">配置HostName</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改内核参数"><span class="nav-number">8.</span> <span class="nav-text">修改内核参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改文件限制"><span class="nav-number">9.</span> <span class="nav-text">修改文件限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建Oracle安装目录"><span class="nav-number">10.</span> <span class="nav-text">创建Oracle安装目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Oracle用户环境变量"><span class="nav-number">11.</span> <span class="nav-text">配置Oracle用户环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解压Oracle文件"><span class="nav-number">12.</span> <span class="nav-text">解压Oracle文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置db-install-rsp响应模板文件开始静默安装"><span class="nav-number">13.</span> <span class="nav-text">配置db_install.rsp响应模板文件开始静默安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始静默安装"><span class="nav-number">14.</span> <span class="nav-text">开始静默安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置静默监听"><span class="nav-number">15.</span> <span class="nav-text">配置静默监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静默创建dbca数据库"><span class="nav-number">16.</span> <span class="nav-text">静默创建dbca数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录sqlplus-查看实例状态"><span class="nav-number">17.</span> <span class="nav-text">登录sqlplus,查看实例状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#激活scott用户"><span class="nav-number">18.</span> <span class="nav-text">激活scott用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户并授权"><span class="nav-number">19.</span> <span class="nav-text">创建用户并授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Navicat远程连接Oracle"><span class="nav-number">20.</span> <span class="nav-text">Navicat远程连接Oracle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置Oracle开机自启"><span class="nav-number">21.</span> <span class="nav-text">设置Oracle开机自启</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Linux启动时自动启动Oracle监听和实例"><span class="nav-number">21.0.1.</span> <span class="nav-text">Linux启动时自动启动Oracle监听和实例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux下Oracle的启动和关闭"><span class="nav-number">22.</span> <span class="nav-text">Linux下Oracle的启动和关闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误一揽子"><span class="nav-number">23.</span> <span class="nav-text">错误一揽子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-01034"><span class="nav-number">23.1.</span> <span class="nav-text">ORA-01034</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LRM-00109"><span class="nav-number">23.2.</span> <span class="nav-text">LRM-00109</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-00845"><span class="nav-number">23.3.</span> <span class="nav-text">ORA-00845</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-01102"><span class="nav-number">23.4.</span> <span class="nav-text">ORA-01102</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-00205"><span class="nav-number">23.5.</span> <span class="nav-text">ORA-00205</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#情况1："><span class="nav-number">23.5.1.</span> <span class="nav-text">情况1：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#情况2"><span class="nav-number">23.5.2.</span> <span class="nav-text">情况2:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-32001"><span class="nav-number">23.6.</span> <span class="nav-text">ORA-32001</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-01109"><span class="nav-number">23.7.</span> <span class="nav-text">ORA-01109</span></a></li></ol></li></ol></div>
             
 
           </div>
