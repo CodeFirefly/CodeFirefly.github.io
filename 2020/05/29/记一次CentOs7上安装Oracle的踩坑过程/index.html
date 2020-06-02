@@ -119,12 +119,12 @@
 
 
 
-<meta name="description" content="安装环境：操作系统：CentOS 7.8Oracle： Oracle 11g   难装的一批，辣鸡软件！淦！">
+<meta name="description" content="安装环境：操作系统：CentOS 7.8Oracle： Oracle 11g   难装的一批，辣鸡软件！爬！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记一次CentOs7上安装Oracle11g的踩坑过程">
+<meta property="og:title" content="记一次CentOs7上安装Oracle的踩坑过程">
 <meta property="og:url" content="https://cloudmadao.cc/2020/05/29/%E8%AE%B0%E4%B8%80%E6%AC%A1CentOs7%E4%B8%8A%E5%AE%89%E8%A3%85Oracle%E7%9A%84%E8%B8%A9%E5%9D%91%E8%BF%87%E7%A8%8B/index.html">
 <meta property="og:site_name" content="Madao&#39;s Personal Website">
-<meta property="og:description" content="安装环境：操作系统：CentOS 7.8Oracle： Oracle 11g   难装的一批，辣鸡软件！淦！">
+<meta property="og:description" content="安装环境：操作系统：CentOS 7.8Oracle： Oracle 11g   难装的一批，辣鸡软件！爬！">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200528094822.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200528164450.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200528100906.png">
@@ -134,7 +134,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200529084749.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200528153248.png">
 <meta property="article:published_time" content="2020-05-29T01:49:05.000Z">
-<meta property="article:modified_time" content="2020-05-29T02:54:45.439Z">
+<meta property="article:modified_time" content="2020-06-02T01:41:50.260Z">
 <meta property="article:author" content="摸鱼选手Madao">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="环境搭建">
@@ -176,7 +176,7 @@
 
 
 
-  <title>记一次CentOs7上安装Oracle11g的踩坑过程 | Madao's Personal Website</title>
+  <title>记一次CentOs7上安装Oracle的踩坑过程 | Madao's Personal Website</title>
   
 
 
@@ -354,7 +354,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">记一次CentOs7上安装Oracle11g的踩坑过程</h2>
+          <h2 class="post-title" itemprop="name headline">记一次CentOs7上安装Oracle的踩坑过程</h2>
         
 
         <div class="post-meta">
@@ -428,7 +428,7 @@
       
         <h3 id="安装环境："><a href="#安装环境：" class="headerlink" title="安装环境："></a>安装环境：</h3><p>操作系统：CentOS 7.8<br>Oracle： Oracle 11g </p>
 <blockquote>
-<p>难装的一批，辣鸡软件！淦！</p>
+<p>难装的一批，辣鸡软件！爬！</p>
 </blockquote>
 <a id="more"></a>
 
@@ -493,7 +493,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost db]# unzip linux.x64_11gR2_database_1of2.zip &amp;&amp; unzip linux.x64_11gR2_database_2of2.zip</span><br></pre></td></tr></table></figure>
 
 <p>解压完成后执行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost db]# cp -R database/response/ /db/app/</span><br><span class="line">[root@localhost app]# chmod -R 755 response/</span><br><span class="line">[root@localhost app]# chown -R oracle:oinstall /db/app/</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost db]# cp -R database/response/ /db/app/</span><br><span class="line">[root@localhost app]#  </span><br><span class="line">[root@localhost app]# chown -R oracle:oinstall /db/app/</span><br></pre></td></tr></table></figure>
 
 <h3 id="配置db-install-rsp响应模板文件开始静默安装"><a href="#配置db-install-rsp响应模板文件开始静默安装" class="headerlink" title="配置db_install.rsp响应模板文件开始静默安装"></a>配置<code>db_install.rsp</code>响应模板文件开始静默安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[oracle@localhost app]$ vim response/db_install.rsp </span><br><span class="line"></span><br><span class="line">oracle.install.option=INSTALL_DB_SWONLY</span><br><span class="line">DECLINE_SECURITY_UPDATES=true</span><br><span class="line">UNIX_GROUP_NAME=oinstall</span><br><span class="line">INVENTORY_LOCATION=/db/app/oracle/inventory</span><br><span class="line">SELECTED_LANGUAGES=en,zh_CN</span><br><span class="line">ORACLE_HOSTNAME=centos-orcl</span><br><span class="line">ORACLE_HOME=/db/app/oracle/product/11.2.0</span><br><span class="line">ORACLE_BASE=/db/app/oracle</span><br><span class="line">oracle.install.db.InstallEdition=EE</span><br><span class="line">oracle.install.db.isCustomInstall=true</span><br><span class="line">oracle.install.db.DBA_GROUP=dba</span><br><span class="line">oracle.install.db.OPER_GROUP=dba</span><br></pre></td></tr></table></figure>
 
@@ -585,6 +585,9 @@
 <p>查看Oracle服务状态</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[oracle@CentOS ~]$ ps -aux | grep oracle</span><br></pre></td></tr></table></figure>
 <p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200529084749.png" alt=""></p>
+<blockquote>
+<p>注：设置Oracle开机自启之后虽然可以监听到实例，但是不能通过Navicat远程连接，需要执行oracle的关闭和开启操作之后才能正常远程连接，原因可能是启动了阻塞实例？</p>
+</blockquote>
 <h3 id="Linux下Oracle的启动和关闭"><a href="#Linux下Oracle的启动和关闭" class="headerlink" title="Linux下Oracle的启动和关闭"></a>Linux下Oracle的启动和关闭</h3><ul>
 <li><p>启动的时候先启动oracle，然后启动监听器，即：startup-&gt;lsnrctl start；</p>
 </li>
@@ -724,8 +727,33 @@
 <p>使用如下命令打开数据库即可:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter database open;</span><br></pre></td></tr></table></figure>
 
+<h4 id="The-listener-supports-no-services"><a href="#The-listener-supports-no-services" class="headerlink" title="The listener supports no services"></a>The listener supports no services</h4><p>使用<code>lsnrctl status</code>命令时可能会出现<code>The listener supports no services</code></p>
+<p>问题原因：数据库实例没有注册到<code>listner</code></p>
+<ul>
+<li><p>解决方法一：</p>
+<p>登录数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[oracle@CentOS ~]$ sqlplus /nolog</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> conn / as sysdba</span></span><br></pre></td></tr></table></figure>
 
+<p>强制注册服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash">alter system register;</span></span><br></pre></td></tr></table></figure>
+
+<p>查看监听状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[oracle@CentOS ~]$ lsnrctl status</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解决方法二：</p>
+<p>在<code>listener.ora</code>中添加如下代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SID_LIST_LISTENER =  </span><br><span class="line">(SID_LIST =  </span><br><span class="line">  (SID_DESC =  </span><br><span class="line">  (GLOBAL_DBNAME = orcl)</span><br><span class="line">  (SID_NAME = orcl)</span><br><span class="line">  )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注1：里面的orcl根据安装的数据库实例名确定</p>
+</blockquote>
+<blockquote>
+<p>注2：此方法我并没有使用，不确定是否有效</p>
+</blockquote>
+</li>
+</ul>
 
       
     </div>
@@ -919,7 +947,7 @@
      
      
        <li>
-         <a href="/2020/05/29/%E8%AE%B0%E4%B8%80%E6%AC%A1CentOs7%E4%B8%8A%E5%AE%89%E8%A3%85Oracle%E7%9A%84%E8%B8%A9%E5%9D%91%E8%BF%87%E7%A8%8B/" title="记一次CentOs7上安装Oracle11g的踩坑过程" target="_blank">记一次CentOs7上安装Oracle11g的踩坑过程</a>
+         <a href="/2020/05/29/%E8%AE%B0%E4%B8%80%E6%AC%A1CentOs7%E4%B8%8A%E5%AE%89%E8%A3%85Oracle%E7%9A%84%E8%B8%A9%E5%9D%91%E8%BF%87%E7%A8%8B/" title="记一次CentOs7上安装Oracle的踩坑过程" target="_blank">记一次CentOs7上安装Oracle的踩坑过程</a>
        </li>
      
        <li>
@@ -1222,7 +1250,7 @@ if(canvas.getContext){
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装环境："><span class="nav-number">1.</span> <span class="nav-text">安装环境：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Yum-安装vim软件，用于编辑配置文件（个人习惯）"><span class="nav-number">2.</span> <span class="nav-text">Yum 安装vim软件，用于编辑配置文件（个人习惯）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Oracle-11g依赖包"><span class="nav-number">3.</span> <span class="nav-text">安装Oracle 11g依赖包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭selinux"><span class="nav-number">4.</span> <span class="nav-text">关闭selinux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭防火墙"><span class="nav-number">5.</span> <span class="nav-text">关闭防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加Oracle用户组和用户"><span class="nav-number">6.</span> <span class="nav-text">添加Oracle用户组和用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置HostName"><span class="nav-number">7.</span> <span class="nav-text">配置HostName</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改内核参数"><span class="nav-number">8.</span> <span class="nav-text">修改内核参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改文件限制"><span class="nav-number">9.</span> <span class="nav-text">修改文件限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建Oracle安装目录"><span class="nav-number">10.</span> <span class="nav-text">创建Oracle安装目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Oracle用户环境变量"><span class="nav-number">11.</span> <span class="nav-text">配置Oracle用户环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解压Oracle文件"><span class="nav-number">12.</span> <span class="nav-text">解压Oracle文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置db-install-rsp响应模板文件开始静默安装"><span class="nav-number">13.</span> <span class="nav-text">配置db_install.rsp响应模板文件开始静默安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始静默安装"><span class="nav-number">14.</span> <span class="nav-text">开始静默安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置静默监听"><span class="nav-number">15.</span> <span class="nav-text">配置静默监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静默创建dbca数据库"><span class="nav-number">16.</span> <span class="nav-text">静默创建dbca数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录sqlplus-查看实例状态"><span class="nav-number">17.</span> <span class="nav-text">登录sqlplus,查看实例状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#激活scott用户"><span class="nav-number">18.</span> <span class="nav-text">激活scott用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户并授权"><span class="nav-number">19.</span> <span class="nav-text">创建用户并授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Navicat远程连接Oracle"><span class="nav-number">20.</span> <span class="nav-text">Navicat远程连接Oracle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置Oracle开机自启"><span class="nav-number">21.</span> <span class="nav-text">设置Oracle开机自启</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Linux启动时自动启动Oracle监听和实例"><span class="nav-number">21.0.1.</span> <span class="nav-text">Linux启动时自动启动Oracle监听和实例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux下Oracle的启动和关闭"><span class="nav-number">22.</span> <span class="nav-text">Linux下Oracle的启动和关闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误一揽子"><span class="nav-number">23.</span> <span class="nav-text">错误一揽子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-01034"><span class="nav-number">23.1.</span> <span class="nav-text">ORA-01034</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LRM-00109"><span class="nav-number">23.2.</span> <span class="nav-text">LRM-00109</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-00845"><span class="nav-number">23.3.</span> <span class="nav-text">ORA-00845</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-01102"><span class="nav-number">23.4.</span> <span class="nav-text">ORA-01102</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-00205"><span class="nav-number">23.5.</span> <span class="nav-text">ORA-00205</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#情况1："><span class="nav-number">23.5.1.</span> <span class="nav-text">情况1：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#情况2"><span class="nav-number">23.5.2.</span> <span class="nav-text">情况2:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-32001"><span class="nav-number">23.6.</span> <span class="nav-text">ORA-32001</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-01109"><span class="nav-number">23.7.</span> <span class="nav-text">ORA-01109</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装环境："><span class="nav-number">1.</span> <span class="nav-text">安装环境：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Yum-安装vim软件，用于编辑配置文件（个人习惯）"><span class="nav-number">2.</span> <span class="nav-text">Yum 安装vim软件，用于编辑配置文件（个人习惯）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Oracle-11g依赖包"><span class="nav-number">3.</span> <span class="nav-text">安装Oracle 11g依赖包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭selinux"><span class="nav-number">4.</span> <span class="nav-text">关闭selinux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭防火墙"><span class="nav-number">5.</span> <span class="nav-text">关闭防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加Oracle用户组和用户"><span class="nav-number">6.</span> <span class="nav-text">添加Oracle用户组和用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置HostName"><span class="nav-number">7.</span> <span class="nav-text">配置HostName</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改内核参数"><span class="nav-number">8.</span> <span class="nav-text">修改内核参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改文件限制"><span class="nav-number">9.</span> <span class="nav-text">修改文件限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建Oracle安装目录"><span class="nav-number">10.</span> <span class="nav-text">创建Oracle安装目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Oracle用户环境变量"><span class="nav-number">11.</span> <span class="nav-text">配置Oracle用户环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解压Oracle文件"><span class="nav-number">12.</span> <span class="nav-text">解压Oracle文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置db-install-rsp响应模板文件开始静默安装"><span class="nav-number">13.</span> <span class="nav-text">配置db_install.rsp响应模板文件开始静默安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始静默安装"><span class="nav-number">14.</span> <span class="nav-text">开始静默安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置静默监听"><span class="nav-number">15.</span> <span class="nav-text">配置静默监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静默创建dbca数据库"><span class="nav-number">16.</span> <span class="nav-text">静默创建dbca数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录sqlplus-查看实例状态"><span class="nav-number">17.</span> <span class="nav-text">登录sqlplus,查看实例状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#激活scott用户"><span class="nav-number">18.</span> <span class="nav-text">激活scott用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户并授权"><span class="nav-number">19.</span> <span class="nav-text">创建用户并授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Navicat远程连接Oracle"><span class="nav-number">20.</span> <span class="nav-text">Navicat远程连接Oracle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置Oracle开机自启"><span class="nav-number">21.</span> <span class="nav-text">设置Oracle开机自启</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Linux启动时自动启动Oracle监听和实例"><span class="nav-number">21.0.1.</span> <span class="nav-text">Linux启动时自动启动Oracle监听和实例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux下Oracle的启动和关闭"><span class="nav-number">22.</span> <span class="nav-text">Linux下Oracle的启动和关闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误一揽子"><span class="nav-number">23.</span> <span class="nav-text">错误一揽子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-01034"><span class="nav-number">23.1.</span> <span class="nav-text">ORA-01034</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LRM-00109"><span class="nav-number">23.2.</span> <span class="nav-text">LRM-00109</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-00845"><span class="nav-number">23.3.</span> <span class="nav-text">ORA-00845</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-01102"><span class="nav-number">23.4.</span> <span class="nav-text">ORA-01102</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-00205"><span class="nav-number">23.5.</span> <span class="nav-text">ORA-00205</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#情况1："><span class="nav-number">23.5.1.</span> <span class="nav-text">情况1：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#情况2"><span class="nav-number">23.5.2.</span> <span class="nav-text">情况2:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-32001"><span class="nav-number">23.6.</span> <span class="nav-text">ORA-32001</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORA-01109"><span class="nav-number">23.7.</span> <span class="nav-text">ORA-01109</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#The-listener-supports-no-services"><span class="nav-number">23.8.</span> <span class="nav-text">The listener supports no services</span></a></li></ol></li></ol></div>
             
 
           </div>
