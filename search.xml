@@ -197,156 +197,6 @@
       </tags>
   </entry>
   <entry>
-    <title>[差分隐私]-初窥门径</title>
-    <url>/2020/05/15/%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81-%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84/</url>
-    <content><![CDATA[<p>差分隐私是Dwork在2006年针对统计数据库的隐私泄露问题提出的一种隐私定义：</p>
-<p>在此定义下，对数据集的计算处理结果对于具体某个记录的变化是不敏感的，<strong>单个记录在数据集中或不在数据集中，对计算结果的影响微乎其微</strong>，所以一个记录因其加入到数据集中所产生的隐私泄漏风险被控制在极小的、可接受的范围内，攻击者无法通过观察计算结果而获取准确的个体信息<strong>,因为攻击者无法从查询输出结果判断这条记录是否在数据集内</strong>。</p>
-<blockquote>
-<p>差分隐私并不是要求保护数据集的整体性的隐私，而是对数据集中每个个体的隐私提供保护</p>
-<p>差分隐私不适用于返回原始数据的查询，因为此类查询本质上就违反了隐私的概念</p>
-</blockquote>
-<a id="more"></a>
-
-<h3 id="差分隐私的数学定义"><a href="#差分隐私的数学定义" class="headerlink" title="差分隐私的数学定义"></a>差分隐私的数学定义</h3><p>对于一个随机算法$M$,$P_m$为$M$所有可能的输出构成的集合，对于任意一对邻近数据集$D$和$D’$及$P_m$的任意子 集$S_m$,若$M$满足：<br>$$<br>Pr[M(D)\in S_m]\le exp(\epsilon)×Pr[M(D’)\in S_m]+\delta<br>$$</p>
-<p>则称$M$满足$(\epsilon,\delta)$-(近似)差分隐私，当$\delta=0$时，称$M$提供$\epsilon$-差分隐私保护，其中$\epsilon$为隐私保护预算。</p>
-<h4 id="隐私保护预算："><a href="#隐私保护预算：" class="headerlink" title="隐私保护预算："></a>隐私保护预算：</h4><p>根据差分隐私的定义可以看出，隐私保护预算$\epsilon$用来<strong>控制算法$M$在两个相邻数据集上获得相同输出的概率比值</strong>，其值体现了该算法$M$能够提供的隐私保护的水平，当参数$\epsilon$越小时，作用在一对相邻数据集上的差分隐私算法返回的查询结果的概率分布越相似，攻击者越难区分这一对邻近数据集。</p>
-<h4 id="全局敏感度"><a href="#全局敏感度" class="headerlink" title="全局敏感度"></a>全局敏感度</h4><p>设有函数:  $f: D\rightarrow R$,输入为数据集$D$，$R$是查询函数的返回结果，对任意邻近数据集$D$和$D’$,函数$f$的全局敏感度为：<br>$$<br>GS_f=max_{D,D’}||f(D)-f(D’)||_1<br>$$<br>其中$||f(D)-f(D’)||_1$为$f(D)$与$f(D’)$的曼哈顿距离，函数的全局敏感度只由函数本身决定</p>
-<blockquote>
-<p>敏感度指改变数据中一条的记录对于查询结果的改变</p>
-</blockquote>
-<h4 id="局部敏感度"><a href="#局部敏感度" class="headerlink" title="局部敏感度"></a>局部敏感度</h4><p>当全局敏感度较大时需要在输出中添加足够大的噪声才能提供隐私保护，导致数据可用性较差，为此提出了 <strong>局部敏感度</strong>概念：</p>
-<p>设有查询函数$f: D\rightarrow R$,输入为数据集$D$，$R$是查询函数的返回结果,在<code>一给定的数据集D</code>和<code>其任意相邻数据集D&#39;</code>上，局部敏感度为：<br>$$<br>LS_f(D)=max_{D’}||f(D)-f(D’)||_1<br>$$<br>因为局部敏感度<strong>只是对于一个数据集做变化</strong>，所以局部敏感度由查询函数和给定的数据集共同决定。</p>
-<blockquote>
-<p>因为局部敏感度限制了全局敏感度条件中任意一对邻近数据集中的一个数据集，因此，<code>若给定的数据集</code>和全局敏感度中使</p>
-<p>$||f(D)-f(D’)||_1$达到最大的数据集相同时，<strong>$GS_f=LS_f$</strong></p>
-</blockquote>
-<h4 id="平滑敏感度"><a href="#平滑敏感度" class="headerlink" title="平滑敏感度"></a>平滑敏感度</h4><p>直接使用局部敏感度生成噪声会泄露数据集信息，为此提出了根据平滑敏感度生成噪声的方案：</p>
-<p>对于一个$\beta&gt;0$，查询$f$的$\beta-$平滑敏感度为：<br>$$<br>S_{f}^*(D)=max_{y\in D^n}(LS_f(y)×exp({-\beta d(D,y)})<br>$$</p>
-<ul>
-<li>$y$是同给定数据集$D$维度相同的任意数据集</li>
-<li>$d$函数返回数据集$D$和$y$中不同元组的个数</li>
-</ul>
-<blockquote>
-<p>平滑敏感度是满足平滑上界的最小函数</p>
-</blockquote>
-<h3 id="差分隐私保护算法的性质"><a href="#差分隐私保护算法的性质" class="headerlink" title="差分隐私保护算法的性质"></a>差分隐私保护算法的性质</h3><p>在需要多次应用差分隐私保护算法的情况下，为了保证整个过程的隐私保护水平控制在给定的保护预算  $\epsilon$ 之内，需要合理的将全部预算分配到整个算法的各个步骤中，此时可以利用隐私保护算法的性质</p>
-<h4 id="序列组合性"><a href="#序列组合性" class="headerlink" title="序列组合性"></a>序列组合性</h4><p>设有随机算法M1,M2,…Mn，其隐私保护预算分别为ε1, ε2,…,εn,则当这些算法<code>作用于同一个数据集D时</code>，由这n个算法构成的组合算法M(M1,M2,…Mn)提供($\sum_{i=1}^{n}$)-差分隐私保护。</p>
-<blockquote>
-<p>即当一个算法序列作用于同一数据集时，最终的差分隐私预算等价于算法序列所有算法预算的和</p>
-</blockquote>
-<h4 id="并行组合性"><a href="#并行组合性" class="headerlink" title="并行组合性"></a>并行组合性</h4><p>设随机算法M1,M2,…Mn隐私保护预算分别为ε1, ε2,…,εn，对于数据集D的互不相交的子集D1,D2,…Dn，由这n个算法构成的组合算法M(M1,M2,…Mn)提供max(εi)-差分隐私保护。</p>
-<blockquote>
-<p>即当有多个算法序列分别作用在一个数据集上多个不同子集上时, 最终的差分隐私预算等价于算法序列中所有算法预算的最大值</p>
-</blockquote>
-<h4 id="变换不变性"><a href="#变换不变性" class="headerlink" title="变换不变性"></a>变换不变性</h4><p>差分隐私对于后处理算法具有免疫性, 如果一个算法的结果满足 $\epsilon-$ 差分隐私, 那么在这个结果上进行的任何处理都不会对隐私保护有所影响。</p>
-<h4 id="中凸性"><a href="#中凸性" class="headerlink" title="中凸性"></a>中凸性</h4><p>如果有2 个不同的差分隐私算法, 都提供了足够的不确定性来保护隐私, 那么可以通过选择任意的算法来应用到数据上实现对数据的隐私保护, 只要选择的算法和数据是独立的</p>
-<h3 id="差分隐私的实现机制"><a href="#差分隐私的实现机制" class="headerlink" title="差分隐私的实现机制"></a>差分隐私的实现机制</h3><p>在实践中，通常使用拉普拉斯机制(<em>Laplace Machainism</em>)与指数机制(<em>Exponential Mechanism</em>)来实现差分隐私保护，其中拉普拉斯机制适用于<code>数值型结果的保护</code>，指数机制则适用<code>离散型结果的保护</code>。</p>
-<h4 id="拉普拉斯机制"><a href="#拉普拉斯机制" class="headerlink" title="拉普拉斯机制"></a>拉普拉斯机制</h4><p>给定数据集D，设有函数$f:D\rightarrow R^d$，其敏感度为$\Delta f$,  那么随机算法$M(D)=f(D)+Y$提供$\epsilon-$差分隐私保护,其中$Y$~$Laplace(u,b)$为随机噪声($u=0,b=\frac{\Delta f}{\epsilon} $),服从尺度参数为$\frac{\Delta f}{\epsilon}$的拉普拉斯分布。</p>
-<blockquote>
-<p>需要加入的Laplace噪声均值应该为0，此时输出的$M(D)$才是$f(D)$的无偏估计</p>
-</blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200709200717.png" alt=""></p>
-<p>根据上图可以看出$\epsilon$越小，所加入的Laplace噪声概率密度越平均所加入的噪声为0的概率就越小, 对输出的混淆程度就越大, 保护程度就越高。</p>
-<h3 id="指数机制"><a href="#指数机制" class="headerlink" title="指数机制"></a>指数机制</h3><p>对于任意一个可用性函数$q$和隐私保护预算$\epsilon$，若随机算法$M$正比于$exp(\frac{\epsilon*q(D,o)}{2\Delta q})$的概率输出一个$o\in O$作为结果，则随机算法$M$满足$\epsilon-$差分隐私。</p>
-<ul>
-<li>$q(D,o)\rightarrow R$为可用性函数，用来衡量每一个输出项的价值，值越大，该项价值越大，被输出的概率越高。<ul>
-<li>$D$为输入的数据集</li>
-<li>$o$为可能输出集合中的项</li>
-</ul>
-</li>
-<li>$\Delta q$为可用性函数$q$的全局敏感度</li>
-<li>指数机制的目的是使得输出结果满足一定的概率分布，当$\epsilon$越小时，每一项输出的概率就越接近</li>
-</ul>
-<blockquote>
-<p>以投票为例，10个人中9个人分别对1,2,3各投了3票，现加入指数机制保护A的投票结果，如图示:</p>
-</blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200710103346.png" alt=""></p>
-<h3 id="隐私保护数据发布"><a href="#隐私保护数据发布" class="headerlink" title="隐私保护数据发布"></a>隐私保护数据发布</h3><h4 id="交互式数据发布"><a href="#交互式数据发布" class="headerlink" title="交互式数据发布"></a>交互式数据发布</h4><p><code>交互式数据发布问题可表述为：</code>给定数据集Ｄ和查询集合Ｆ，需寻求一种数据发布机制，使其能够在满足差分隐私保护的条件下`逐个回答Ｆ 中的查询，直到耗尽全部隐私保护预算．发布机制的性能通常由精确度来衡量．交互式数据发布即是要在满足一定精确度的条件下，<strong>以给定的隐私保护预算回答尽可能多的查询</strong></p>
-<h5 id="交互式发布机制"><a href="#交互式发布机制" class="headerlink" title="交互式发布机制"></a>交互式发布机制</h5><p>交互式发布机制直接对数据集进行操作来响应查询</p>
-<ul>
-<li><p><code>Laplace机制：</code>通过向每个查询结果添加服从Laplace分布的噪声来实现保护</p>
-<ul>
-<li>缺点：查询的数量有限,与数据集记录数成线性关系；在干扰针对连续属性的查询结果时会产生较大的噪声</li>
-</ul>
-</li>
-<li><p><code>中位数机制：</code>将查询分为<strong>难查询</strong>和<strong>易查询</strong>两类，易查询可以通过难查询的结果来确定，无需消耗任何预算，难查询的结果通过Laplace噪声进行干扰，其查询的数量级为指数级</p>
-<ul>
-<li>缺点：算法的时间复杂度会随着数据集容量的增长呈现指示增长。</li>
-</ul>
-</li>
-<li><p><code>PMW机制：</code>把数据集在数据域上的分布视作一个直方图，将每个频数视作相同然后等待查询，每个查询的结果加上Laplace噪声之后与上一次查询进行比较，<strong>小于阈值时发布上一次查询结果的值</strong>，此过程不消耗隐私保护预算，只有当差异大于此阈值时，才会发布新的查询结果，并调整直方图中相应频数的值</p>
-<ul>
-<li>缺点：只能处理计数类型的查询，可以回答指数级的查询。</li>
-</ul>
-</li>
-</ul>
-<h5 id="基于直方图的发布"><a href="#基于直方图的发布" class="headerlink" title="基于直方图的发布"></a>基于直方图的发布</h5><p>在形成直方图时，需要根据<code>属性或属性组合</code>的$w$个不同等级将数据集划分为$w$个数据格，然后分别统计每个数据格的频数，根据直方图存在<strong>宽度</strong>可以分为三种基本类型：<code>等宽直方图</code>、<code>v-优化直方图</code>、<code>压缩直方图</code></p>
-<p>Dwork采用给等宽直方图$w$个数据格频数分别添加Laplace噪声的方法实现差分隐私保护</p>
-<blockquote>
-<p>对多维直方图而言，该机制会使长区间查询的结果因累积噪声过大而失效</p>
-</blockquote>
-<ul>
-<li><p><code>聚类技术优化直方图长区间:</code>如NoiseFirst方法采用了聚类技术，<strong>动态合并邻近相似等宽区间</strong>，每个区间的频数为其中全部频数的均值，然后为每个分区频数添加噪声，由于存在合并方式或子集数不同，添加的噪声也可能不同。</p>
-<blockquote>
-<p>这种方法解决了长区间查询计数误差，但是因为合并方式不同存在<code>重构误差</code>和<code>噪声误差</code></p>
-</blockquote>
-</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200709214852.png" alt=""></p>
-<blockquote>
-<p>直方图结构实质上是降低了查询的敏感度</p>
-</blockquote>
-<h4 id="非交互式数据发布"><a href="#非交互式数据发布" class="headerlink" title="非交互式数据发布"></a>非交互式数据发布</h4><p><code>非交互式数据发布问题可表述为：</code>给定数据集Ｄ 和查询集合Ｆ，需寻求一个数据发布机制，使其能够在满足差分隐私保护的条件下一次性回答Ｆ 中所有的查询．</p>
-<h5 id="批查询"><a href="#批查询" class="headerlink" title="批查询"></a>批查询</h5><p>数据管理者针对所有可能的查询，一次性对外发布所有查询的结果</p>
-<p>在批查询模式下，由于各个查询之间彼此相关，修改数据集中记录可能导致多个查询结果的改变，因此具有比单一查询高得多的敏感度。</p>
-<blockquote>
-<p>批查询通过映射和变换查询集合来降低总敏感度，从而降低噪声量</p>
-<ul>
-<li><p>Laplace机制1：为每个范围查询加入独立的噪声，敏感度O($n^2$)</p>
-</li>
-<li><p>Laplace机制2：先为每个单一查询加入噪声，再根据干扰后的单一查询计算其他范围查询结果</p>
-</li>
-<li><p>小波变换法</p>
-</li>
-<li><p>层次查询法</p>
-</li>
-</ul>
-</blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200710102144.png" alt=""></p>
-<h5 id="列联表发布"><a href="#列联表发布" class="headerlink" title="列联表发布"></a>列联表发布</h5><h5 id="基于分组的数据发布"><a href="#基于分组的数据发布" class="headerlink" title="基于分组的数据发布"></a>基于分组的数据发布</h5><h5 id="数据发布方案总结"><a href="#数据发布方案总结" class="headerlink" title="数据发布方案总结"></a>数据发布方案总结</h5><p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200710094219.png" alt=""></p>
-<h3 id="差分隐私保护下的数据挖掘"><a href="#差分隐私保护下的数据挖掘" class="headerlink" title="差分隐私保护下的数据挖掘"></a>差分隐私保护下的数据挖掘</h3><p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200710094442.png" alt=""></p>
-<ul>
-<li><p><code>Sample-Aggregate</code>：</p>
-<p>Sample&amp;Aggregate框架中的噪声与数据集和查询函数都相关，该框架将查询函数f转换为平滑敏感度较低的相关函数$\hat f$</p>
-<p>Sample-Aggregate 框架首先将一个数据集随机取样划分为m 个子集, m 是框架中设定好的参数</p>
-<p>然后对每个子集上执行查询函数$f$来生成一个在 $f$ 的输出空间上的值 $Z_k$ , 最后通过聚合函数生成 $\hat f$ 来替代原始查询函数f , 加入校正至平滑敏感度的噪声来得到查询结果。</p>
-<p><code>Sample&amp;Aggregate框架不支持连接</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200628094721.jpg" alt=""></p>
-</li>
-</ul>
-<hr/>
-
-<blockquote>
-<ol>
-<li><p>熊平, 朱天清, 王晓峰. 差分隐私保护及其应用[J]. 计算机学报, 2014, 37(1): 101-122.</p>
-</li>
-<li><p>李效光, 李晖, 李凤华, 等. 差分隐私综述[J]. 信息安全学报, 2018, 3(5): 92-104.</p>
-</li>
-<li><p>王红, 葛丽娜, 王丽颖, 等. 面向数据直方图发布的差分隐私保护综述[J]. 计算机应用研究, 2017, 34(6): 1609-1612.</p>
-</li>
-</ol>
-</blockquote>
-]]></content>
-      <categories>
-        <category>差分隐私</category>
-      </categories>
-      <tags>
-        <tag>差分隐私</tag>
-        <tag>综述</tag>
-        <tag>基础</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>记一次CentOs7上安装Oracle的踩坑过程</title>
     <url>/2020/05/29/%E8%AE%B0%E4%B8%80%E6%AC%A1CentOs7%E4%B8%8A%E5%AE%89%E8%A3%85Oracle%E7%9A%84%E8%B8%A9%E5%9D%91%E8%BF%87%E7%A8%8B/</url>
     <content><![CDATA[<h3 id="安装环境："><a href="#安装环境：" class="headerlink" title="安装环境："></a>安装环境：</h3><p>操作系统：CentOS 7.8<br>Oracle： Oracle 11g </p>
@@ -763,6 +613,156 @@
       <tags>
         <tag>差分隐私</tag>
         <tag>论文笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[差分隐私]-初窥门径</title>
+    <url>/2020/05/15/%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81-%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84/</url>
+    <content><![CDATA[<p>差分隐私是Dwork在2006年针对统计数据库的隐私泄露问题提出的一种隐私定义：</p>
+<p>在此定义下，对数据集的计算处理结果对于具体某个记录的变化是不敏感的，<strong>单个记录在数据集中或不在数据集中，对计算结果的影响微乎其微</strong>，所以一个记录因其加入到数据集中所产生的隐私泄漏风险被控制在极小的、可接受的范围内，攻击者无法通过观察计算结果而获取准确的个体信息<strong>,因为攻击者无法从查询输出结果判断这条记录是否在数据集内</strong>。</p>
+<blockquote>
+<p>差分隐私并不是要求保护数据集的整体性的隐私，而是对数据集中每个个体的隐私提供保护</p>
+<p>差分隐私不适用于返回原始数据的查询，因为此类查询本质上就违反了隐私的概念</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="差分隐私的数学定义"><a href="#差分隐私的数学定义" class="headerlink" title="差分隐私的数学定义"></a>差分隐私的数学定义</h3><p>对于一个随机算法$M$,$P_m$为$M$所有可能的输出构成的集合，对于任意一对邻近数据集$D$和$D’$及$P_m$的任意子 集$S_m$,若$M$满足：<br>$$<br>Pr[M(D)\in S_m]\le exp(\epsilon)×Pr[M(D’)\in S_m]+\delta<br>$$</p>
+<p>则称$M$满足$(\epsilon,\delta)$-(近似)差分隐私，当$\delta=0$时，称$M$提供$\epsilon$-差分隐私保护，其中$\epsilon$为隐私保护预算。</p>
+<h4 id="隐私保护预算："><a href="#隐私保护预算：" class="headerlink" title="隐私保护预算："></a>隐私保护预算：</h4><p>根据差分隐私的定义可以看出，隐私保护预算$\epsilon$用来<strong>控制算法$M$在两个相邻数据集上获得相同输出的概率比值</strong>，其值体现了该算法$M$能够提供的隐私保护的水平，当参数$\epsilon$越小时，作用在一对相邻数据集上的差分隐私算法返回的查询结果的概率分布越相似，攻击者越难区分这一对邻近数据集。</p>
+<h4 id="全局敏感度"><a href="#全局敏感度" class="headerlink" title="全局敏感度"></a>全局敏感度</h4><p>设有函数:  $f: D\rightarrow R$,输入为数据集$D$，$R$是查询函数的返回结果，对任意邻近数据集$D$和$D’$,函数$f$的全局敏感度为：<br>$$<br>GS_f=max_{D,D’}||f(D)-f(D’)||_1<br>$$<br>其中$||f(D)-f(D’)||_1$为$f(D)$与$f(D’)$的曼哈顿距离，函数的全局敏感度只由函数本身决定</p>
+<blockquote>
+<p>敏感度指改变数据中一条的记录对于查询结果的改变</p>
+</blockquote>
+<h4 id="局部敏感度"><a href="#局部敏感度" class="headerlink" title="局部敏感度"></a>局部敏感度</h4><p>当全局敏感度较大时需要在输出中添加足够大的噪声才能提供隐私保护，导致数据可用性较差，为此提出了 <strong>局部敏感度</strong>概念：</p>
+<p>设有查询函数$f: D\rightarrow R$,输入为数据集$D$，$R$是查询函数的返回结果,在<code>一给定的数据集D</code>和<code>其任意相邻数据集D&#39;</code>上，局部敏感度为：<br>$$<br>LS_f(D)=max_{D’}||f(D)-f(D’)||_1<br>$$<br>因为局部敏感度<strong>只是对于一个数据集做变化</strong>，所以局部敏感度由查询函数和给定的数据集共同决定。</p>
+<blockquote>
+<p>因为局部敏感度限制了全局敏感度条件中任意一对邻近数据集中的一个数据集，因此，<code>若给定的数据集</code>和全局敏感度中使</p>
+<p>$||f(D)-f(D’)||_1$达到最大的数据集相同时，<strong>$GS_f=LS_f$</strong></p>
+</blockquote>
+<h4 id="平滑敏感度"><a href="#平滑敏感度" class="headerlink" title="平滑敏感度"></a>平滑敏感度</h4><p>直接使用局部敏感度生成噪声会泄露数据集信息，为此提出了根据平滑敏感度生成噪声的方案：</p>
+<p>对于一个$\beta&gt;0$，查询$f$的$\beta-$平滑敏感度为：<br>$$<br>S_{f}^*(D)=max_{y\in D^n}(LS_f(y)×exp({-\beta d(D,y)})<br>$$</p>
+<ul>
+<li>$y$是同给定数据集$D$维度相同的任意数据集</li>
+<li>$d$函数返回数据集$D$和$y$中不同元组的个数</li>
+</ul>
+<blockquote>
+<p>平滑敏感度是满足平滑上界的最小函数</p>
+</blockquote>
+<h3 id="差分隐私保护算法的性质"><a href="#差分隐私保护算法的性质" class="headerlink" title="差分隐私保护算法的性质"></a>差分隐私保护算法的性质</h3><p>在需要多次应用差分隐私保护算法的情况下，为了保证整个过程的隐私保护水平控制在给定的保护预算  $\epsilon$ 之内，需要合理的将全部预算分配到整个算法的各个步骤中，此时可以利用隐私保护算法的性质</p>
+<h4 id="序列组合性"><a href="#序列组合性" class="headerlink" title="序列组合性"></a>序列组合性</h4><p>设有随机算法M1,M2,…Mn，其隐私保护预算分别为ε1, ε2,…,εn,则当这些算法<code>作用于同一个数据集D时</code>，由这n个算法构成的组合算法M(M1,M2,…Mn)提供($\sum_{i=1}^{n}$)-差分隐私保护。</p>
+<blockquote>
+<p>即当一个算法序列作用于同一数据集时，最终的差分隐私预算等价于算法序列所有算法预算的和</p>
+</blockquote>
+<h4 id="并行组合性"><a href="#并行组合性" class="headerlink" title="并行组合性"></a>并行组合性</h4><p>设随机算法M1,M2,…Mn隐私保护预算分别为ε1, ε2,…,εn，对于数据集D的互不相交的子集D1,D2,…Dn，由这n个算法构成的组合算法M(M1,M2,…Mn)提供max(εi)-差分隐私保护。</p>
+<blockquote>
+<p>即当有多个算法序列分别作用在一个数据集上多个不同子集上时, 最终的差分隐私预算等价于算法序列中所有算法预算的最大值</p>
+</blockquote>
+<h4 id="变换不变性"><a href="#变换不变性" class="headerlink" title="变换不变性"></a>变换不变性</h4><p>差分隐私对于后处理算法具有免疫性, 如果一个算法的结果满足 $\epsilon-$ 差分隐私, 那么在这个结果上进行的任何处理都不会对隐私保护有所影响。</p>
+<h4 id="中凸性"><a href="#中凸性" class="headerlink" title="中凸性"></a>中凸性</h4><p>如果有2 个不同的差分隐私算法, 都提供了足够的不确定性来保护隐私, 那么可以通过选择任意的算法来应用到数据上实现对数据的隐私保护, 只要选择的算法和数据是独立的</p>
+<h3 id="差分隐私的实现机制"><a href="#差分隐私的实现机制" class="headerlink" title="差分隐私的实现机制"></a>差分隐私的实现机制</h3><p>在实践中，通常使用拉普拉斯机制(<em>Laplace Machainism</em>)与指数机制(<em>Exponential Mechanism</em>)来实现差分隐私保护，其中拉普拉斯机制适用于<code>数值型结果的保护</code>，指数机制则适用<code>离散型结果的保护</code>。</p>
+<h4 id="拉普拉斯机制"><a href="#拉普拉斯机制" class="headerlink" title="拉普拉斯机制"></a>拉普拉斯机制</h4><p>给定数据集D，设有函数$f:D\rightarrow R^d$，其敏感度为$\Delta f$,  那么随机算法$M(D)=f(D)+Y$提供$\epsilon-$差分隐私保护,其中$Y$~$Laplace(u,b)$为随机噪声($u=0,b=\frac{\Delta f}{\epsilon} $),服从尺度参数为$\frac{\Delta f}{\epsilon}$的拉普拉斯分布。</p>
+<blockquote>
+<p>需要加入的Laplace噪声均值应该为0，此时输出的$M(D)$才是$f(D)$的无偏估计</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200709200717.png" alt=""></p>
+<p>根据上图可以看出$\epsilon$越小，所加入的Laplace噪声概率密度越平均所加入的噪声为0的概率就越小, 对输出的混淆程度就越大, 保护程度就越高。</p>
+<h4 id="指数机制"><a href="#指数机制" class="headerlink" title="指数机制"></a>指数机制</h4><p>对于任意一个可用性函数$q$和隐私保护预算$\epsilon$，若随机算法$M$正比于$exp(\frac{\epsilon*q(D,o)}{2\Delta q})$的概率输出一个$o\in O$作为结果，则随机算法$M$满足$\epsilon-$差分隐私。</p>
+<ul>
+<li>$q(D,o)\rightarrow R$为可用性函数，用来衡量每一个输出项的价值，值越大，该项价值越大，被输出的概率越高。<ul>
+<li>$D$为输入的数据集</li>
+<li>$o$为可能输出集合中的项</li>
+</ul>
+</li>
+<li>$\Delta q$为可用性函数$q$的全局敏感度</li>
+<li>指数机制的目的是使得输出结果满足一定的概率分布，当$\epsilon$越小时，每一项输出的概率就越接近</li>
+</ul>
+<blockquote>
+<p>以投票为例，10个人中9个人分别对1,2,3各投了3票，现加入指数机制保护A的投票结果，如图示:</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200710103346.png" alt=""></p>
+<h3 id="隐私保护数据发布"><a href="#隐私保护数据发布" class="headerlink" title="隐私保护数据发布"></a>隐私保护数据发布</h3><h4 id="交互式数据发布"><a href="#交互式数据发布" class="headerlink" title="交互式数据发布"></a>交互式数据发布</h4><p><code>交互式数据发布问题可表述为：</code>给定数据集Ｄ和查询集合Ｆ，需寻求一种数据发布机制，使其能够在满足差分隐私保护的条件下`逐个回答Ｆ 中的查询，直到耗尽全部隐私保护预算．发布机制的性能通常由精确度来衡量．交互式数据发布即是要在满足一定精确度的条件下，<strong>以给定的隐私保护预算回答尽可能多的查询</strong></p>
+<h5 id="交互式发布机制"><a href="#交互式发布机制" class="headerlink" title="交互式发布机制"></a>交互式发布机制</h5><p>交互式发布机制直接对数据集进行操作来响应查询</p>
+<ul>
+<li><p><code>Laplace机制：</code>通过向每个查询结果添加服从Laplace分布的噪声来实现保护</p>
+<ul>
+<li>缺点：查询的数量有限,与数据集记录数成线性关系；在干扰针对连续属性的查询结果时会产生较大的噪声</li>
+</ul>
+</li>
+<li><p><code>中位数机制：</code>将查询分为<strong>难查询</strong>和<strong>易查询</strong>两类，易查询可以通过难查询的结果来确定，无需消耗任何预算，难查询的结果通过Laplace噪声进行干扰，其查询的数量级为指数级</p>
+<ul>
+<li>缺点：算法的时间复杂度会随着数据集容量的增长呈现指示增长。</li>
+</ul>
+</li>
+<li><p><code>PMW机制：</code>把数据集在数据域上的分布视作一个直方图，将每个频数视作相同然后等待查询，每个查询的结果加上Laplace噪声之后与上一次查询进行比较，<strong>小于阈值时发布上一次查询结果的值</strong>，此过程不消耗隐私保护预算，只有当差异大于此阈值时，才会发布新的查询结果，并调整直方图中相应频数的值</p>
+<ul>
+<li>缺点：只能处理计数类型的查询，可以回答指数级的查询。</li>
+</ul>
+</li>
+</ul>
+<h5 id="基于直方图的发布"><a href="#基于直方图的发布" class="headerlink" title="基于直方图的发布"></a>基于直方图的发布</h5><p>在形成直方图时，需要根据<code>属性或属性组合</code>的$w$个不同等级将数据集划分为$w$个数据格，然后分别统计每个数据格的频数，根据直方图存在<strong>宽度</strong>可以分为三种基本类型：<code>等宽直方图</code>、<code>v-优化直方图</code>、<code>压缩直方图</code></p>
+<p>Dwork采用给等宽直方图$w$个数据格频数分别添加Laplace噪声的方法实现差分隐私保护</p>
+<blockquote>
+<p>对多维直方图而言，该机制会使长区间查询的结果因累积噪声过大而失效</p>
+</blockquote>
+<ul>
+<li><p><code>聚类技术优化直方图长区间:</code>如NoiseFirst方法采用了聚类技术，<strong>动态合并邻近相似等宽区间</strong>，每个区间的频数为其中全部频数的均值，然后为每个分区频数添加噪声，由于存在合并方式或子集数不同，添加的噪声也可能不同。</p>
+<blockquote>
+<p>这种方法解决了长区间查询计数误差，但是因为合并方式不同存在<code>重构误差</code>和<code>噪声误差</code></p>
+</blockquote>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200709214852.png" alt=""></p>
+<blockquote>
+<p>直方图结构实质上是降低了查询的敏感度</p>
+</blockquote>
+<h4 id="非交互式数据发布"><a href="#非交互式数据发布" class="headerlink" title="非交互式数据发布"></a>非交互式数据发布</h4><p><code>非交互式数据发布问题可表述为：</code>给定数据集Ｄ 和查询集合Ｆ，需寻求一个数据发布机制，使其能够在满足差分隐私保护的条件下一次性回答Ｆ 中所有的查询．</p>
+<h5 id="批查询"><a href="#批查询" class="headerlink" title="批查询"></a>批查询</h5><p>数据管理者针对所有可能的查询，一次性对外发布所有查询的结果</p>
+<p>在批查询模式下，由于各个查询之间彼此相关，修改数据集中记录可能导致多个查询结果的改变，因此具有比单一查询高得多的敏感度。</p>
+<blockquote>
+<p>批查询通过映射和变换查询集合来降低总敏感度，从而降低噪声量</p>
+<ul>
+<li><p>Laplace机制1：为每个范围查询加入独立的噪声，敏感度O($n^2$)</p>
+</li>
+<li><p>Laplace机制2：先为每个单一查询加入噪声，再根据干扰后的单一查询计算其他范围查询结果</p>
+</li>
+<li><p>小波变换法</p>
+</li>
+<li><p>层次查询法</p>
+</li>
+</ul>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200710102144.png" alt=""></p>
+<h5 id="列联表发布"><a href="#列联表发布" class="headerlink" title="列联表发布"></a>列联表发布</h5><h5 id="基于分组的数据发布"><a href="#基于分组的数据发布" class="headerlink" title="基于分组的数据发布"></a>基于分组的数据发布</h5><h5 id="数据发布方案总结"><a href="#数据发布方案总结" class="headerlink" title="数据发布方案总结"></a>数据发布方案总结</h5><p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200710094219.png" alt=""></p>
+<h3 id="差分隐私保护下的数据挖掘"><a href="#差分隐私保护下的数据挖掘" class="headerlink" title="差分隐私保护下的数据挖掘"></a>差分隐私保护下的数据挖掘</h3><p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200710094442.png" alt=""></p>
+<ul>
+<li><p><code>Sample-Aggregate</code>：</p>
+<p>Sample&amp;Aggregate框架中的噪声与数据集和查询函数都相关，该框架将查询函数f转换为平滑敏感度较低的相关函数$\hat f$</p>
+<p>Sample-Aggregate 框架首先将一个数据集随机取样划分为m 个子集, m 是框架中设定好的参数</p>
+<p>然后对每个子集上执行查询函数$f$来生成一个在 $f$ 的输出空间上的值 $Z_k$ , 最后通过聚合函数生成 $\hat f$ 来替代原始查询函数f , 加入校正至平滑敏感度的噪声来得到查询结果。</p>
+<p><code>Sample&amp;Aggregate框架不支持连接</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200628094721.jpg" alt=""></p>
+</li>
+</ul>
+<hr/>
+
+<blockquote>
+<ol>
+<li><p>熊平, 朱天清, 王晓峰. 差分隐私保护及其应用[J]. 计算机学报, 2014, 37(1): 101-122.</p>
+</li>
+<li><p>李效光, 李晖, 李凤华, 等. 差分隐私综述[J]. 信息安全学报, 2018, 3(5): 92-104.</p>
+</li>
+<li><p>王红, 葛丽娜, 王丽颖, 等. 面向数据直方图发布的差分隐私保护综述[J]. 计算机应用研究, 2017, 34(6): 1609-1612.</p>
+</li>
+</ol>
+</blockquote>
+]]></content>
+      <categories>
+        <category>差分隐私</category>
+      </categories>
+      <tags>
+        <tag>差分隐私</tag>
+        <tag>综述</tag>
+        <tag>基础</tag>
       </tags>
   </entry>
 </search>
