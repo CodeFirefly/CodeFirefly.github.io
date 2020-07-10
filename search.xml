@@ -1,6 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hexo+NexT搭建个人博客</title>
+    <url>/2020/05/07/Hexo-NexT%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>安装 Hexo 前要先安装：</p>
+<ul>
+<li>Node.js</li>
+<li>Git<a id="more"></a>
+
+
+</li>
+</ul>
+<h2 id="在GitHub-上搭建个人博客"><a href="#在GitHub-上搭建个人博客" class="headerlink" title="在GitHub 上搭建个人博客"></a>在GitHub 上搭建个人博客</h2><h3 id="GitHub创建仓库"><a href="#GitHub创建仓库" class="headerlink" title="GitHub创建仓库"></a>GitHub创建仓库</h3><p>新建一个名为<code>用户名.github.io</code>的仓库，如<code>CloudMadao.github.io</code>,以后可以通过<a href="https://CloudMadao.github.io" target="_blank" rel="noopener">https://CloudMadao.github.io</a> 访问自己的个人博客。</p>
+<p>注意：仓库中的用户名对大小写敏感</p>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure>
+
+<h3 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h3><p>进入博客文件夹(CloudMadao)，执行如下命令进行初始化：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd D:/CloudMadao</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+<p>执行初始化命令之后Hexo会下载一些文件到这个文件夹下</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-rw-r--r-- 1 admin 197121  2468  5月  7 13:59 _config.yml</span><br><span class="line">drwxr-xr-x 1 admin 197121     0  5月  7 14:01 node_modules/</span><br><span class="line">-rw-r--r-- 1 admin 197121   602  5月  7 13:59 package.json</span><br><span class="line">-rw-r--r-- 1 admin 197121 75419  5月  7 14:01 package-lock.json</span><br><span class="line">drwxr-xr-x 1 admin 197121     0  5月  7 13:59 scaffolds/</span><br><span class="line">drwxr-xr-x 1 admin 197121     0  5月  7 13:59 source/</span><br><span class="line">drwxr-xr-x 1 admin 197121     0  5月  7 13:59 themes/</span><br></pre></td></tr></table></figure>
+
+<p>注意：hexo中存在两个<code>_config.yml</code>文件，一个存在于根目录CloudMadao下，称为<code>站点配置文件</code>，另一个存在于theme下，称为<code>主题配置文件</code></p>
+<p>初始化Hexo之后即可以生成博客和预览博客</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo g #生成</span><br><span class="line">hexo s #启动Hexo服务</span><br></pre></td></tr></table></figure>
+
+<p>在本地启动Hexo服务之后，访问<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 可以看到初始化的博客内容。</p>
+<h3 id="将博客部署到GitHub"><a href="#将博客部署到GitHub" class="headerlink" title="将博客部署到GitHub"></a>将博客部署到GitHub</h3><p>在站点配置文件<code>_config.yml</code>,中修改deploy部分：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">'git'</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">https://github.com/CloudMadao/CloudMadao.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：配置文件为yaml格式，需要注意缩进</p>
+<p>执行 <code>hexo d</code>将博客部署到GitHub，若是出现如下错误：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Deployer not found: git</span><br></pre></td></tr></table></figure>
+
+<p>需要安装相关插件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>将博客部署到GitHub上之后，访问<a href="https://cloudmadao.github.io/即可访问" target="_blank" rel="noopener">https://cloudmadao.github.io/即可访问</a></p>
+<hr>
+<h2 id="NexT主题配置"><a href="#NexT主题配置" class="headerlink" title="NexT主题配置"></a>NexT主题配置</h2><h3 id="设置hexo的next主题"><a href="#设置hexo的next主题" class="headerlink" title="设置hexo的next主题"></a>设置hexo的next主题</h3><p>将站点配置文件_config.xml中的theme: landscape改为theme: NexT</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">NexT</span> <span class="comment">#NexT为下载的next主题位置</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="配置网站相关信息"><a href="#配置网站相关信息" class="headerlink" title="配置网站相关信息"></a>配置网站相关信息</h3><p>修改站点配置文件<code>_config.yml</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Madao's</span> <span class="string">Personal</span> <span class="string">Website</span>       <span class="comment"># 网站标题</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">'今天 &lt;s&gt;摸鱼&lt;/s&gt; 学习了吗'</span>  <span class="comment"># 网站副标题</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">'Constant dropping wears the stone'</span>  <span class="comment"># 描述，介绍网站的</span></span><br><span class="line"><span class="attr">keywords:</span>       <span class="comment"># 网站的关键字</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">摸鱼选手Madao</span>  <span class="comment"># 博主姓名</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-Hans</span> <span class="comment"># 语言：zh-CN 是简体中文</span></span><br><span class="line"><span class="attr">timezone:</span>   <span class="comment"># 时区</span></span><br></pre></td></tr></table></figure>
+
+<p>修改主题配置文件<code>_config.yml</code>,使用nexT的Pisces主题</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">scheme: Gemini</span><br></pre></td></tr></table></figure>
+
+<h3 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a>主题配置</h3><h4 id="开启标签和分类页面："><a href="#开启标签和分类页面：" class="headerlink" title="开启标签和分类页面："></a>开启标签和分类页面：</h4><p>标签：</p>
+<p>创建tags和页面</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+
+<p>修改tags中的<code>index.md</code>文件(categories类似)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2020-05-07 16:00:51</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置hexo本地搜索"><a href="#配置hexo本地搜索" class="headerlink" title="配置hexo本地搜索"></a>配置hexo本地搜索</h4><p>安装<code>hexo-generator-searchdb</code>插件</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-generator</span><span class="literal">-searchdb</span> -<span class="literal">-save</span></span><br></pre></td></tr></table></figure>
+
+<p>修改站点配置文件<code>_config.yml</code>,添加如下内容</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 本地搜索</span></span><br><span class="line"><span class="attr">search:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line">  <span class="attr">field:</span> <span class="string">post</span></span><br><span class="line">  <span class="attr">format:</span> <span class="string">html</span></span><br><span class="line">  <span class="attr">limit:</span> <span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<p>修改主题配置文件<code>_config.yml</code>,开启<code>local_search</code></p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Local Search</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span> <span class="comment">#开启本地搜索</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="配置头像"><a href="#配置头像" class="headerlink" title="配置头像"></a>配置头像</h4><p>编辑主题配置文件<code>_config.yml</code>,修改其中的<code>avatar</code>字段</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将头像文件 Sakai Izumi2.png 放置在主题目录的source/images目录下</span></span><br><span class="line"><span class="attr">avatar:</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">/images/Sakai</span> <span class="string">Izumi2.png</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="配置社交链接"><a href="#配置社交链接" class="headerlink" title="配置社交链接"></a>配置社交链接</h4><p>修改主题配置文件中的Social字段，显示相关社交账号</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">social:</span></span><br><span class="line">  <span class="attr">GitHub:</span> <span class="string">https://github.com/example</span> <span class="string">||</span> <span class="string">fab</span> <span class="string">fa-github</span></span><br><span class="line">  <span class="attr">E-Mail:</span> <span class="string">mailto:example@hotmail.com</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-envelope</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="首页博客显示摘要"><a href="#首页博客显示摘要" class="headerlink" title="首页博客显示摘要"></a>首页博客显示摘要</h4><p>NexT7.6之后移除了截断文章作为的摘要功能，现在我们可以通过<code>&lt;!--more--&gt;</code>来精确控制摘要的内容:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 2020.5.4 奇怪的知识增加了</span><br><span class="line">&lt;!-- more --&gt;</span><br></pre></td></tr></table></figure>
+
+<p>添加<!--more-->之后，将会以该标签之前的文本作为摘要内容。</p>
+<h4 id="页面阅读统计"><a href="#页面阅读统计" class="headerlink" title="页面阅读统计"></a>页面阅读统计</h4><p>修改主题配置文件<code>_config.yml</code>中的<code>busuanzi_count</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">busuanzi_count:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span>              <span class="comment"># 设true 开启</span></span><br><span class="line">  <span class="attr">total_visitors:</span> <span class="literal">true</span>       <span class="comment"># 总阅读人数（uv数）</span></span><br><span class="line">  <span class="attr">total_visitors_icon:</span> <span class="string">user</span>  <span class="comment"># 阅读总人数的图标</span></span><br><span class="line">  <span class="attr">total_views:</span> <span class="literal">true</span>          <span class="comment"># 总阅读次数（pv数）</span></span><br><span class="line">  <span class="attr">total_views_icon:</span> <span class="string">eye</span>      <span class="comment"># 阅读总次数的图标</span></span><br><span class="line">  <span class="attr">post_views:</span> <span class="literal">true</span>           <span class="comment"># 开启内容阅读次数</span></span><br><span class="line">  <span class="attr">post_views_icon:</span> <span class="string">eye</span>       <span class="comment"># 内容页阅读数的图标</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="背景动画设置"><a href="#背景动画设置" class="headerlink" title="背景动画设置"></a>背景动画设置</h4><p><strong>Canvas-nest</strong></p>
+<p>在站点目录下CloudMadao/source/_data创建一个<code>footer.swig</code>文件,若是<code>_data</code>目录不存在先创建目录.</p>
+<p>在<code>footer.swig</code>文件下添加如下内容</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;script color=<span class="string">"0,0,255"</span> opacity=<span class="string">"0.5"</span> zIndex=<span class="string">"-1"</span> count=<span class="string">"99"</span> </span><br><span class="line">        src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在主题配置文件中启用该文件：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">custom_file_path:</span></span><br><span class="line">  <span class="attr">footer:</span> <span class="string">source/_data/footer.swig</span></span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>[Java基础]-ArrayList结构</title>
     <url>/2020/05/11/Java%E5%9F%BA%E7%A1%80-ArrayList%E7%BB%93%E6%9E%84/</url>
     <content><![CDATA[<blockquote>
@@ -109,91 +197,153 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo+NexT搭建个人博客</title>
-    <url>/2020/05/07/Hexo-NexT%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>安装 Hexo 前要先安装：</p>
+    <title>[差分隐私]-初窥门径</title>
+    <url>/2020/05/15/%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81-%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84/</url>
+    <content><![CDATA[<p>差分隐私是Dwork在2006年针对统计数据库的隐私泄露问题提出的一种隐私定义：</p>
+<p>在此定义下，对数据集的计算处理结果对于具体某个记录的变化是不敏感的，<strong>单个记录在数据集中或不在数据集中，对计算结果的影响微乎其微</strong>，所以一个记录因其加入到数据集中所产生的隐私泄漏风险被控制在极小的、可接受的范围内，攻击者无法通过观察计算结果而获取准确的个体信息<strong>,因为攻击者无法从查询输出结果判断这条记录是否在数据集内</strong>。</p>
+<blockquote>
+<p>差分隐私并不是要求保护数据集的整体性的隐私，而是对数据集中每个个体的隐私提供保护</p>
+<p>差分隐私不适用于返回原始数据的查询，因为此类查询本质上就违反了隐私的概念</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="差分隐私的数学定义"><a href="#差分隐私的数学定义" class="headerlink" title="差分隐私的数学定义"></a>差分隐私的数学定义</h3><p>对于一个随机算法$M$,$P_m$为$M$所有可能的输出构成的集合，对于任意一对邻近数据集$D$和$D’$及$P_m$的任意子 集$S_m$,若$M$满足：<br>$$<br>Pr[M(D)\in S_m]\le exp(\epsilon)×Pr[M(D’)\in S_m]+\delta<br>$$</p>
+<p>则称$M$满足$(\epsilon,\delta)$-(近似)差分隐私，当$\delta=0$时，称$M$提供$\epsilon$-差分隐私保护，其中$\epsilon$为隐私保护预算。</p>
+<h4 id="隐私保护预算："><a href="#隐私保护预算：" class="headerlink" title="隐私保护预算："></a>隐私保护预算：</h4><p>根据差分隐私的定义可以看出，隐私保护预算$\epsilon$用来<strong>控制算法$M$在两个相邻数据集上获得相同输出的概率比值</strong>，其值体现了该算法$M$能够提供的隐私保护的水平，当参数$\epsilon$越小时，作用在一对相邻数据集上的差分隐私算法返回的查询结果的概率分布越相似，攻击者越难区分这一对邻近数据集。</p>
+<h4 id="全局敏感度"><a href="#全局敏感度" class="headerlink" title="全局敏感度"></a>全局敏感度</h4><p>设有函数:  $f: D\rightarrow R$,输入为数据集$D$，$R$是查询函数的返回结果，对任意邻近数据集$D$和$D’$,函数$f$的全局敏感度为：<br>$$<br>GS_f=max_{D,D’}||f(D)-f(D’)||_1<br>$$<br>其中$||f(D)-f(D’)||_1$为$f(D)$与$f(D’)$的曼哈顿距离，函数的全局敏感度只由函数本身决定</p>
+<blockquote>
+<p>敏感度指改变数据中一条的记录对于查询结果的改变</p>
+</blockquote>
+<h4 id="局部敏感度"><a href="#局部敏感度" class="headerlink" title="局部敏感度"></a>局部敏感度</h4><p>当全局敏感度较大时需要在输出中添加足够大的噪声才能提供隐私保护，导致数据可用性较差，为此提出了 <strong>局部敏感度</strong>概念：</p>
+<p>设有查询函数$f: D\rightarrow R$,输入为数据集$D$，$R$是查询函数的返回结果,在<code>一给定的数据集D</code>和<code>其任意相邻数据集D&#39;</code>上，局部敏感度为：<br>$$<br>LS_f(D)=max_{D’}||f(D)-f(D’)||_1<br>$$<br>因为局部敏感度<strong>只是对于一个数据集做变化</strong>，所以局部敏感度由查询函数和给定的数据集共同决定。</p>
+<blockquote>
+<p>因为局部敏感度限制了全局敏感度条件中任意一对邻近数据集中的一个数据集，因此，<code>若给定的数据集</code>和全局敏感度中使</p>
+<p>$||f(D)-f(D’)||_1$达到最大的数据集相同时，<strong>$GS_f=LS_f$</strong></p>
+</blockquote>
+<h4 id="平滑敏感度"><a href="#平滑敏感度" class="headerlink" title="平滑敏感度"></a>平滑敏感度</h4><p>直接使用局部敏感度生成噪声会泄露数据集信息，为此提出了根据平滑敏感度生成噪声的方案：</p>
+<p>对于一个$\beta&gt;0$，查询$f$的$\beta-$平滑敏感度为：<br>$$<br>S_{f}^*(D)=max_{y\in D^n}(LS_f(y)×exp({-\beta d(D,y)})<br>$$</p>
 <ul>
-<li>Node.js</li>
-<li>Git<a id="more"></a>
-
-
+<li>$y$是同给定数据集$D$维度相同的任意数据集</li>
+<li>$d$函数返回数据集$D$和$y$中不同元组的个数</li>
+</ul>
+<blockquote>
+<p>平滑敏感度是满足平滑上界的最小函数</p>
+</blockquote>
+<h3 id="差分隐私保护算法的性质"><a href="#差分隐私保护算法的性质" class="headerlink" title="差分隐私保护算法的性质"></a>差分隐私保护算法的性质</h3><p>在需要多次应用差分隐私保护算法的情况下，为了保证整个过程的隐私保护水平控制在给定的保护预算  $\epsilon$ 之内，需要合理的将全部预算分配到整个算法的各个步骤中，此时可以利用隐私保护算法的性质</p>
+<h4 id="序列组合性"><a href="#序列组合性" class="headerlink" title="序列组合性"></a>序列组合性</h4><p>设有随机算法M1,M2,…Mn，其隐私保护预算分别为ε1, ε2,…,εn,则当这些算法<code>作用于同一个数据集D时</code>，由这n个算法构成的组合算法M(M1,M2,…Mn)提供($\sum_{i=1}^{n}$)-差分隐私保护。</p>
+<blockquote>
+<p>即当一个算法序列作用于同一数据集时，最终的差分隐私预算等价于算法序列所有算法预算的和</p>
+</blockquote>
+<h4 id="并行组合性"><a href="#并行组合性" class="headerlink" title="并行组合性"></a>并行组合性</h4><p>设随机算法M1,M2,…Mn隐私保护预算分别为ε1, ε2,…,εn，对于数据集D的互不相交的子集D1,D2,…Dn，由这n个算法构成的组合算法M(M1,M2,…Mn)提供max(εi)-差分隐私保护。</p>
+<blockquote>
+<p>即当有多个算法序列分别作用在一个数据集上多个不同子集上时, 最终的差分隐私预算等价于算法序列中所有算法预算的最大值</p>
+</blockquote>
+<h4 id="变换不变性"><a href="#变换不变性" class="headerlink" title="变换不变性"></a>变换不变性</h4><p>差分隐私对于后处理算法具有免疫性, 如果一个算法的结果满足 $\epsilon-$ 差分隐私, 那么在这个结果上进行的任何处理都不会对隐私保护有所影响。</p>
+<h4 id="中凸性"><a href="#中凸性" class="headerlink" title="中凸性"></a>中凸性</h4><p>如果有2 个不同的差分隐私算法, 都提供了足够的不确定性来保护隐私, 那么可以通过选择任意的算法来应用到数据上实现对数据的隐私保护, 只要选择的算法和数据是独立的</p>
+<h3 id="差分隐私的实现机制"><a href="#差分隐私的实现机制" class="headerlink" title="差分隐私的实现机制"></a>差分隐私的实现机制</h3><p>在实践中，通常使用拉普拉斯机制(<em>Laplace Machainism</em>)与指数机制(<em>Exponential Mechanism</em>)来实现差分隐私保护，其中拉普拉斯机制适用于<code>数值型结果的保护</code>，指数机制则适用<code>离散型结果的保护</code>。</p>
+<h4 id="拉普拉斯机制"><a href="#拉普拉斯机制" class="headerlink" title="拉普拉斯机制"></a>拉普拉斯机制</h4><p>给定数据集D，设有函数$f:D\rightarrow R^d$，其敏感度为$\Delta f$,  那么随机算法$M(D)=f(D)+Y$提供$\epsilon-$差分隐私保护,其中$Y$~$Laplace(u,b)$为随机噪声($u=0,b=\frac{\Delta f}{\epsilon} $),服从尺度参数为$\frac{\Delta f}{\epsilon}$的拉普拉斯分布。</p>
+<blockquote>
+<p>需要加入的Laplace噪声均值应该为0，此时输出的$M(D)$才是$f(D)$的无偏估计</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200709200717.png" alt=""></p>
+<p>根据上图可以看出$\epsilon$越小，所加入的Laplace噪声概率密度越平均所加入的噪声为0的概率就越小, 对输出的混淆程度就越大, 保护程度就越高。</p>
+<h3 id="指数机制"><a href="#指数机制" class="headerlink" title="指数机制"></a>指数机制</h3><p>对于任意一个可用性函数$q$和隐私保护预算$\epsilon$，若随机算法$M$正比于$exp(\frac{\epsilon*q(D,o)}{2\Delta q})$的概率输出一个$o\in O$作为结果，则随机算法$M$满足$\epsilon-$差分隐私。</p>
+<ul>
+<li>$q(D,o)\rightarrow R$为可用性函数，用来衡量每一个输出项的价值，值越大，该项价值越大，被输出的概率越高。<ul>
+<li>$D$为输入的数据集</li>
+<li>$o$为可能输出集合中的项</li>
+</ul>
+</li>
+<li>$\Delta q$为可用性函数$q$的全局敏感度</li>
+<li>指数机制的目的是使得输出结果满足一定的概率分布，当$\epsilon$越小时，每一项输出的概率就越接近</li>
+</ul>
+<blockquote>
+<p>以投票为例，10个人中9个人分别对1,2,3各投了3票，现加入指数机制保护A的投票结果，如图示:</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200710103346.png" alt=""></p>
+<h3 id="隐私保护数据发布"><a href="#隐私保护数据发布" class="headerlink" title="隐私保护数据发布"></a>隐私保护数据发布</h3><h4 id="交互式数据发布"><a href="#交互式数据发布" class="headerlink" title="交互式数据发布"></a>交互式数据发布</h4><p><code>交互式数据发布问题可表述为：</code>给定数据集Ｄ和查询集合Ｆ，需寻求一种数据发布机制，使其能够在满足差分隐私保护的条件下`逐个回答Ｆ 中的查询，直到耗尽全部隐私保护预算．发布机制的性能通常由精确度来衡量．交互式数据发布即是要在满足一定精确度的条件下，<strong>以给定的隐私保护预算回答尽可能多的查询</strong></p>
+<h5 id="交互式发布机制"><a href="#交互式发布机制" class="headerlink" title="交互式发布机制"></a>交互式发布机制</h5><p>交互式发布机制直接对数据集进行操作来响应查询</p>
+<ul>
+<li><p><code>Laplace机制：</code>通过向每个查询结果添加服从Laplace分布的噪声来实现保护</p>
+<ul>
+<li>缺点：查询的数量有限,与数据集记录数成线性关系；在干扰针对连续属性的查询结果时会产生较大的噪声</li>
+</ul>
+</li>
+<li><p><code>中位数机制：</code>将查询分为<strong>难查询</strong>和<strong>易查询</strong>两类，易查询可以通过难查询的结果来确定，无需消耗任何预算，难查询的结果通过Laplace噪声进行干扰，其查询的数量级为指数级</p>
+<ul>
+<li>缺点：算法的时间复杂度会随着数据集容量的增长呈现指示增长。</li>
+</ul>
+</li>
+<li><p><code>PMW机制：</code>把数据集在数据域上的分布视作一个直方图，将每个频数视作相同然后等待查询，每个查询的结果加上Laplace噪声之后与上一次查询进行比较，<strong>小于阈值时发布上一次查询结果的值</strong>，此过程不消耗隐私保护预算，只有当差异大于此阈值时，才会发布新的查询结果，并调整直方图中相应频数的值</p>
+<ul>
+<li>缺点：只能处理计数类型的查询，可以回答指数级的查询。</li>
+</ul>
 </li>
 </ul>
-<h2 id="在GitHub-上搭建个人博客"><a href="#在GitHub-上搭建个人博客" class="headerlink" title="在GitHub 上搭建个人博客"></a>在GitHub 上搭建个人博客</h2><h3 id="GitHub创建仓库"><a href="#GitHub创建仓库" class="headerlink" title="GitHub创建仓库"></a>GitHub创建仓库</h3><p>新建一个名为<code>用户名.github.io</code>的仓库，如<code>CloudMadao.github.io</code>,以后可以通过<a href="https://CloudMadao.github.io" target="_blank" rel="noopener">https://CloudMadao.github.io</a> 访问自己的个人博客。</p>
-<p>注意：仓库中的用户名对大小写敏感</p>
-<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure>
+<h5 id="基于直方图的发布"><a href="#基于直方图的发布" class="headerlink" title="基于直方图的发布"></a>基于直方图的发布</h5><p>在形成直方图时，需要根据<code>属性或属性组合</code>的$w$个不同等级将数据集划分为$w$个数据格，然后分别统计每个数据格的频数，根据直方图存在<strong>宽度</strong>可以分为三种基本类型：<code>等宽直方图</code>、<code>v-优化直方图</code>、<code>压缩直方图</code></p>
+<p>Dwork采用给等宽直方图$w$个数据格频数分别添加Laplace噪声的方法实现差分隐私保护</p>
+<blockquote>
+<p>对多维直方图而言，该机制会使长区间查询的结果因累积噪声过大而失效</p>
+</blockquote>
+<ul>
+<li><p><code>聚类技术优化直方图长区间:</code>如NoiseFirst方法采用了聚类技术，<strong>动态合并邻近相似等宽区间</strong>，每个区间的频数为其中全部频数的均值，然后为每个分区频数添加噪声，由于存在合并方式或子集数不同，添加的噪声也可能不同。</p>
+<blockquote>
+<p>这种方法解决了长区间查询计数误差，但是因为合并方式不同存在<code>重构误差</code>和<code>噪声误差</code></p>
+</blockquote>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200709214852.png" alt=""></p>
+<blockquote>
+<p>直方图结构实质上是降低了查询的敏感度</p>
+</blockquote>
+<h4 id="非交互式数据发布"><a href="#非交互式数据发布" class="headerlink" title="非交互式数据发布"></a>非交互式数据发布</h4><p><code>非交互式数据发布问题可表述为：</code>给定数据集Ｄ 和查询集合Ｆ，需寻求一个数据发布机制，使其能够在满足差分隐私保护的条件下一次性回答Ｆ 中所有的查询．</p>
+<h5 id="批查询"><a href="#批查询" class="headerlink" title="批查询"></a>批查询</h5><p>数据管理者针对所有可能的查询，一次性对外发布所有查询的结果</p>
+<p>在批查询模式下，由于各个查询之间彼此相关，修改数据集中记录可能导致多个查询结果的改变，因此具有比单一查询高得多的敏感度。</p>
+<blockquote>
+<p>批查询通过映射和变换查询集合来降低总敏感度，从而降低噪声量</p>
+<ul>
+<li><p>Laplace机制1：为每个范围查询加入独立的噪声，敏感度O($n^2$)</p>
+</li>
+<li><p>Laplace机制2：先为每个单一查询加入噪声，再根据干扰后的单一查询计算其他范围查询结果</p>
+</li>
+<li><p>小波变换法</p>
+</li>
+<li><p>层次查询法</p>
+</li>
+</ul>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200710102144.png" alt=""></p>
+<h5 id="列联表发布"><a href="#列联表发布" class="headerlink" title="列联表发布"></a>列联表发布</h5><h5 id="基于分组的数据发布"><a href="#基于分组的数据发布" class="headerlink" title="基于分组的数据发布"></a>基于分组的数据发布</h5><h5 id="数据发布方案总结"><a href="#数据发布方案总结" class="headerlink" title="数据发布方案总结"></a>数据发布方案总结</h5><p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200710094219.png" alt=""></p>
+<h3 id="差分隐私保护下的数据挖掘"><a href="#差分隐私保护下的数据挖掘" class="headerlink" title="差分隐私保护下的数据挖掘"></a>差分隐私保护下的数据挖掘</h3><p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200710094442.png" alt=""></p>
+<ul>
+<li><p><code>Sample-Aggregate</code>：</p>
+<p>Sample&amp;Aggregate框架中的噪声与数据集和查询函数都相关，该框架将查询函数f转换为平滑敏感度较低的相关函数$\hat f$</p>
+<p>Sample-Aggregate 框架首先将一个数据集随机取样划分为m 个子集, m 是框架中设定好的参数</p>
+<p>然后对每个子集上执行查询函数$f$来生成一个在 $f$ 的输出空间上的值 $Z_k$ , 最后通过聚合函数生成 $\hat f$ 来替代原始查询函数f , 加入校正至平滑敏感度的噪声来得到查询结果。</p>
+<p><code>Sample&amp;Aggregate框架不支持连接</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200628094721.jpg" alt=""></p>
+</li>
+</ul>
+<hr/>
 
-<h3 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h3><p>进入博客文件夹(CloudMadao)，执行如下命令进行初始化：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd D:/CloudMadao</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-
-<p>执行初始化命令之后Hexo会下载一些文件到这个文件夹下</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-rw-r--r-- 1 admin 197121  2468  5月  7 13:59 _config.yml</span><br><span class="line">drwxr-xr-x 1 admin 197121     0  5月  7 14:01 node_modules/</span><br><span class="line">-rw-r--r-- 1 admin 197121   602  5月  7 13:59 package.json</span><br><span class="line">-rw-r--r-- 1 admin 197121 75419  5月  7 14:01 package-lock.json</span><br><span class="line">drwxr-xr-x 1 admin 197121     0  5月  7 13:59 scaffolds/</span><br><span class="line">drwxr-xr-x 1 admin 197121     0  5月  7 13:59 source/</span><br><span class="line">drwxr-xr-x 1 admin 197121     0  5月  7 13:59 themes/</span><br></pre></td></tr></table></figure>
-
-<p>注意：hexo中存在两个<code>_config.yml</code>文件，一个存在于根目录CloudMadao下，称为<code>站点配置文件</code>，另一个存在于theme下，称为<code>主题配置文件</code></p>
-<p>初始化Hexo之后即可以生成博客和预览博客</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo g #生成</span><br><span class="line">hexo s #启动Hexo服务</span><br></pre></td></tr></table></figure>
-
-<p>在本地启动Hexo服务之后，访问<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 可以看到初始化的博客内容。</p>
-<h3 id="将博客部署到GitHub"><a href="#将博客部署到GitHub" class="headerlink" title="将博客部署到GitHub"></a>将博客部署到GitHub</h3><p>在站点配置文件<code>_config.yml</code>,中修改deploy部分：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">'git'</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">https://github.com/CloudMadao/CloudMadao.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
-
-<p>注意：配置文件为yaml格式，需要注意缩进</p>
-<p>执行 <code>hexo d</code>将博客部署到GitHub，若是出现如下错误：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Deployer not found: git</span><br></pre></td></tr></table></figure>
-
-<p>需要安装相关插件：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<p>将博客部署到GitHub上之后，访问<a href="https://cloudmadao.github.io/即可访问" target="_blank" rel="noopener">https://cloudmadao.github.io/即可访问</a></p>
-<hr>
-<h2 id="NexT主题配置"><a href="#NexT主题配置" class="headerlink" title="NexT主题配置"></a>NexT主题配置</h2><h3 id="设置hexo的next主题"><a href="#设置hexo的next主题" class="headerlink" title="设置hexo的next主题"></a>设置hexo的next主题</h3><p>将站点配置文件_config.xml中的theme: landscape改为theme: NexT</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">NexT</span> <span class="comment">#NexT为下载的next主题位置</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="配置网站相关信息"><a href="#配置网站相关信息" class="headerlink" title="配置网站相关信息"></a>配置网站相关信息</h3><p>修改站点配置文件<code>_config.yml</code>：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Madao's</span> <span class="string">Personal</span> <span class="string">Website</span>       <span class="comment"># 网站标题</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">'今天 &lt;s&gt;摸鱼&lt;/s&gt; 学习了吗'</span>  <span class="comment"># 网站副标题</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">'Constant dropping wears the stone'</span>  <span class="comment"># 描述，介绍网站的</span></span><br><span class="line"><span class="attr">keywords:</span>       <span class="comment"># 网站的关键字</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">摸鱼选手Madao</span>  <span class="comment"># 博主姓名</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-Hans</span> <span class="comment"># 语言：zh-CN 是简体中文</span></span><br><span class="line"><span class="attr">timezone:</span>   <span class="comment"># 时区</span></span><br></pre></td></tr></table></figure>
-
-<p>修改主题配置文件<code>_config.yml</code>,使用nexT的Pisces主题</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">scheme: Gemini</span><br></pre></td></tr></table></figure>
-
-<h3 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a>主题配置</h3><h4 id="开启标签和分类页面："><a href="#开启标签和分类页面：" class="headerlink" title="开启标签和分类页面："></a>开启标签和分类页面：</h4><p>标签：</p>
-<p>创建tags和页面</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
-
-<p>修改tags中的<code>index.md</code>文件(categories类似)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2020-05-07 16:00:51</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<h4 id="配置hexo本地搜索"><a href="#配置hexo本地搜索" class="headerlink" title="配置hexo本地搜索"></a>配置hexo本地搜索</h4><p>安装<code>hexo-generator-searchdb</code>插件</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-generator</span><span class="literal">-searchdb</span> -<span class="literal">-save</span></span><br></pre></td></tr></table></figure>
-
-<p>修改站点配置文件<code>_config.yml</code>,添加如下内容</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 本地搜索</span></span><br><span class="line"><span class="attr">search:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line">  <span class="attr">field:</span> <span class="string">post</span></span><br><span class="line">  <span class="attr">format:</span> <span class="string">html</span></span><br><span class="line">  <span class="attr">limit:</span> <span class="number">100</span></span><br></pre></td></tr></table></figure>
-
-<p>修改主题配置文件<code>_config.yml</code>,开启<code>local_search</code></p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Local Search</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span> <span class="comment">#开启本地搜索</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="配置头像"><a href="#配置头像" class="headerlink" title="配置头像"></a>配置头像</h4><p>编辑主题配置文件<code>_config.yml</code>,修改其中的<code>avatar</code>字段</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将头像文件 Sakai Izumi2.png 放置在主题目录的source/images目录下</span></span><br><span class="line"><span class="attr">avatar:</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">/images/Sakai</span> <span class="string">Izumi2.png</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="配置社交链接"><a href="#配置社交链接" class="headerlink" title="配置社交链接"></a>配置社交链接</h4><p>修改主题配置文件中的Social字段，显示相关社交账号</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">social:</span></span><br><span class="line">  <span class="attr">GitHub:</span> <span class="string">https://github.com/example</span> <span class="string">||</span> <span class="string">fab</span> <span class="string">fa-github</span></span><br><span class="line">  <span class="attr">E-Mail:</span> <span class="string">mailto:example@hotmail.com</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-envelope</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="首页博客显示摘要"><a href="#首页博客显示摘要" class="headerlink" title="首页博客显示摘要"></a>首页博客显示摘要</h4><p>NexT7.6之后移除了截断文章作为的摘要功能，现在我们可以通过<code>&lt;!--more--&gt;</code>来精确控制摘要的内容:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 2020.5.4 奇怪的知识增加了</span><br><span class="line">&lt;!-- more --&gt;</span><br></pre></td></tr></table></figure>
-
-<p>添加<!--more-->之后，将会以该标签之前的文本作为摘要内容。</p>
-<h4 id="页面阅读统计"><a href="#页面阅读统计" class="headerlink" title="页面阅读统计"></a>页面阅读统计</h4><p>修改主题配置文件<code>_config.yml</code>中的<code>busuanzi_count</code>：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">busuanzi_count:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span>              <span class="comment"># 设true 开启</span></span><br><span class="line">  <span class="attr">total_visitors:</span> <span class="literal">true</span>       <span class="comment"># 总阅读人数（uv数）</span></span><br><span class="line">  <span class="attr">total_visitors_icon:</span> <span class="string">user</span>  <span class="comment"># 阅读总人数的图标</span></span><br><span class="line">  <span class="attr">total_views:</span> <span class="literal">true</span>          <span class="comment"># 总阅读次数（pv数）</span></span><br><span class="line">  <span class="attr">total_views_icon:</span> <span class="string">eye</span>      <span class="comment"># 阅读总次数的图标</span></span><br><span class="line">  <span class="attr">post_views:</span> <span class="literal">true</span>           <span class="comment"># 开启内容阅读次数</span></span><br><span class="line">  <span class="attr">post_views_icon:</span> <span class="string">eye</span>       <span class="comment"># 内容页阅读数的图标</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="背景动画设置"><a href="#背景动画设置" class="headerlink" title="背景动画设置"></a>背景动画设置</h4><p><strong>Canvas-nest</strong></p>
-<p>在站点目录下CloudMadao/source/_data创建一个<code>footer.swig</code>文件,若是<code>_data</code>目录不存在先创建目录.</p>
-<p>在<code>footer.swig</code>文件下添加如下内容</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;script color=<span class="string">"0,0,255"</span> opacity=<span class="string">"0.5"</span> zIndex=<span class="string">"-1"</span> count=<span class="string">"99"</span> </span><br><span class="line">        src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>在主题配置文件中启用该文件：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">custom_file_path:</span></span><br><span class="line">  <span class="attr">footer:</span> <span class="string">source/_data/footer.swig</span></span><br></pre></td></tr></table></figure>]]></content>
+<blockquote>
+<ol>
+<li><p>熊平, 朱天清, 王晓峰. 差分隐私保护及其应用[J]. 计算机学报, 2014, 37(1): 101-122.</p>
+</li>
+<li><p>李效光, 李晖, 李凤华, 等. 差分隐私综述[J]. 信息安全学报, 2018, 3(5): 92-104.</p>
+</li>
+<li><p>王红, 葛丽娜, 王丽颖, 等. 面向数据直方图发布的差分隐私保护综述[J]. 计算机应用研究, 2017, 34(6): 1609-1612.</p>
+</li>
+</ol>
+</blockquote>
+]]></content>
+      <categories>
+        <category>差分隐私</category>
+      </categories>
       <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
+        <tag>差分隐私</tag>
+        <tag>综述</tag>
+        <tag>基础</tag>
       </tags>
   </entry>
   <entry>
@@ -613,209 +763,6 @@
       <tags>
         <tag>差分隐私</tag>
         <tag>论文笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>[差分隐私]-初窥门径</title>
-    <url>/2020/05/15/%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81-%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84/</url>
-    <content><![CDATA[<p>差分隐私是Dwork在2006年针对统计数据库的隐私泄露问题提出的一种<code>隐私定义</code>：</p>
-<p>在此定义下，对数据集的计算处理结果对于具体某个记录的变化是不敏感的，<strong>单个记录在数据集中或不在数据集中，对计算结果的影响微乎其微</strong>，所以一个记录因其加入到数据集中所产生的隐私泄漏风险被控制在极小的、可接受的范围内，攻击者无法通过观察计算结果而获取准确的个体信息,因为攻击者无法从查询输出结果判断这条记录是否在数据集内。</p>
-<a id="more"></a>
-
-<h2 id="差分隐私的数学框架"><a href="#差分隐私的数学框架" class="headerlink" title="差分隐私的数学框架"></a>差分隐私的数学框架</h2><blockquote>
-<p><strong>差分隐私：</strong>设有随机机制$M$,$P_M$为$M$所有可能的输出构成的集合，对于任意两个邻近数据集$D$和$D’$及$P_M$的任意子集$S_M$,若$M$满足：<br>$$<br>Pr[M(D)\in S_M]\le exp(\epsilon)×Pr[M(D’)\in S_M]+\delta<br>$$<br>则称$M$满足$(\epsilon,\delta)$-(近似)差分隐私，当$\delta=0$时，称$M$提供$\epsilon$-差分隐私保护，其中$\epsilon$为隐私保护预算。</p>
-</blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200513191507.png" alt=""></p>
-<p>如图所示，机制$M$通过对输出结果的随机化来提供隐私保护，同时通过参数ε来保证在数据集中任一记录改变时，其输出统一结果的概率不发生显著变化。</p>
-<h3 id="差分隐私中的基础概念："><a href="#差分隐私中的基础概念：" class="headerlink" title="差分隐私中的基础概念："></a>差分隐私中的基础概念：</h3><h4 id="邻近数据集"><a href="#邻近数据集" class="headerlink" title="邻近数据集"></a>邻近数据集</h4><p>对于一个有限域$ Z,z∈Z$为$Z$中的元素，从$Z$中抽样所得$z$的集合组成数据集$D$，其样本量为$n$，属性的个数为<code>维度d</code>.设数据集$D$和$D’$具有相同的属性结构，两者的对称差记作$D△D’$,$|D△D’|$表示对称差数量，当 $|D△D’|=1$，则称 $D$和 $D’$为邻近数据集。简而言之，只相差一条记录的一对数据集$|D△D′|=1$，即为邻近数据集。</p>
-<h4 id="隐私保护预算-epsilon"><a href="#隐私保护预算-epsilon" class="headerlink" title="隐私保护预算$\epsilon$"></a>隐私保护预算$\epsilon$</h4><p>隐私保护预算$\epsilon$用来控制算法$M$在两个相邻数据集上获得相同输出的概率，其值体现了该算法$M$能够提供的隐私保护的水平，根据差分隐私的数学定义，不难看出，$\epsilon$越小，隐私保护水平越高。当$\epsilon=0$时，保护水平达到最高，此时对于任何相邻数据集，算法都将输出两个概率分布完全相同的结果，这些结果不能反应任何关于数据集的有用信息。</p>
-<h4 id="全局敏感度-Global-Sensitivity"><a href="#全局敏感度-Global-Sensitivity" class="headerlink" title="全局敏感度(Global Sensitivity)"></a>全局敏感度(Global Sensitivity)</h4><p>设有函数:  $f: D\rightarrow R^d$,输入为数据集$D$，输出为一$d$维实数向量，对任意邻近数据集$D$和$D’$,$GS_f=max_{D,D’}||f(D)-f(D’)||_1$称为函数$f$的全局敏感度。不同的函数会有不同的全局敏感度，当全局敏感度很大时，必须在函数中加入足够大的噪声才能保证隐私安全，导致数据可用性较差,针对此问题提出了<code>局部敏感度</code>概念.</p>
-<blockquote>
-<p>以求中位数函数为例，</p>
-<p>设函数为$f(D)=median(x_1,x_2…,x_n)$，其中$x_i(i=1,…,n)$是区间［ａ，ｂ］中的一个实数．</p>
-<p>不妨设ｎ为奇数，且 数 据 已 被 排 序，那 么 函 数 的 返 回 值 即 为 第$m=(n+1)/2$个数．</p>
-<p>在 某种极端的情况下，设$X_1=x_2=…=Xm=a$且$X_m+1=x_m+2=…=x_n=b$那 么从中删除一 个 数 就 可 能 使 函 数 的 返 回 值 由ａ 变 为ｂ，因此函数的全局敏感度为ｂ－ａ，这可能是一个很大的值．</p>
-</blockquote>
-<h4 id="局部敏感度-Local-Sensitivity"><a href="#局部敏感度-Local-Sensitivity" class="headerlink" title="局部敏感度(Local Sensitivity)"></a>局部敏感度(Local Sensitivity)</h4><p>设有函数:  $f: D\rightarrow R^d$,输入为数据集$D$，输出为一$d$维实数向量，对于给定数据集$D$和他的任意邻近数据集$D’$，</p>
-<p>$LS_f(D)=max_{D’}||f(D)-f(D’)||_1$称为函数$f$在$D$上的局部敏感度。</p>
-<p>局部敏感度<strong>由函数$f$及给定数据集$D$中的数据共同决定</strong>,局部敏感度和全局敏感度之间的关系可以表示为$GS_f=max_D(LS_f(D))$。由于根据局部敏感度所产生的噪声和数据集本身相关,，直接应用局部敏感度计算噪声会泄露数据集中的敏感信息，因此使用局部敏感度的<code>平滑上界(Smooth Bound)</code>与局部敏感度<em>共同确定噪声大小</em>。</p>
-<blockquote>
-<p>仍然以求中位数为例，其局部敏感度为$max(x_m-x_{m-1},x_{m+1}-X_m)$</p>
-</blockquote>
-<h4 id="平滑上界"><a href="#平滑上界" class="headerlink" title="平滑上界"></a>平滑上界</h4><p>给定数据集$D$及其任意相邻数据集$D’$,函数$f$的局部敏感度为$LS_f(D)$.对于$\beta&gt;0$,若函数$S:D\rightarrow D’$满足$S(D)\ge LS_f(D)$且$S(D)\le e^{\beta}S(D’)$,则称$S$是一个在查询函数$f$上的$\beta$-平滑上界。</p>
-<h4 id="平滑敏感度-Smooth-Sensitivity"><a href="#平滑敏感度-Smooth-Sensitivity" class="headerlink" title="平滑敏感度(Smooth Sensitivity)"></a>平滑敏感度(Smooth Sensitivity)</h4><p>对于$\beta&gt;0$,一个查询函数$f$的$\beta-$平滑敏感度为<br>$$<br>S_{f}^*(D)=max_{y\in D^n}(LS_f(y)×exp({-\beta d(D,y)})<br>$$</p>
-<ul>
-<li>$y$是同给定数据集$D$维度相同的任意数据集</li>
-<li>$d$函数返回数据集$D$和$y$中不同元组的个数</li>
-</ul>
-<blockquote>
-<p>平滑敏感度就是可以满足平滑上界条件的最小函数。</p>
-</blockquote>
-<h2 id="差分隐私保护算法的性质"><a href="#差分隐私保护算法的性质" class="headerlink" title="差分隐私保护算法的性质"></a>差分隐私保护算法的性质</h2><p>在需要多次应用差分隐私保护算法的情况下，为了保证整个过程的隐私保护水平控制在给定的保护预算  $\epsilon$ 之内，需要合理的将全部预算分配到整个算法的各个步骤中，此时可以利用隐私保护算法的两个组合性质</p>
-<ul>
-<li><strong>性质1：</strong><code>“序列组合性”</code>–设随机算法M1,M2,…Mn隐私保护预算分别为ε1, ε2,…,εn,则当这些算法作用于<code>同一个数据集D</code>，时由这n个算法构成的组合算法M(M1,M2,…Mn)提供(ε1+ ε2+…+εn)-差分隐私保护。</li>
-<li><strong>性质2：</strong> <code>“并行组合性”</code>–设随机算法M1,M2,…Mn隐私保护预算分别为ε1, ε2,…,εn，对于数据集D的互不相交的子集D1,D2,…Dn，由这n个算法构成的组合算法M(M1,M2,…Mn)提供max(εi)-差分隐私保护。</li>
-<li><strong>性质3：</strong> <code>变换不变性</code>– 差分隐私对于后处理算法具有免疫性，如果一个算法的结果满足$\epsilon$ -差分隐私, 那么在这个结果上进行的任何处理都不会对隐私保护有所影响。</li>
-</ul>
-<h2 id="差分隐私的实现机制"><a href="#差分隐私的实现机制" class="headerlink" title="差分隐私的实现机制"></a>差分隐私的实现机制</h2><p>在实践中，通常使用拉普拉斯机制(<em>Laplace Machainism</em>)与指数机制(<em>Exponential Mechanism</em>)来实现差分隐私保护，其中拉普拉斯机制适用于<code>数值型结果的保护</code>，指数机制则适用<code>离散型结果的保护</code>。</p>
-<h3 id="拉普拉斯机制"><a href="#拉普拉斯机制" class="headerlink" title="拉普拉斯机制"></a>拉普拉斯机制</h3><p><code>Laplace机制</code>通过向确切的查询结果中加入服从 <em>Laplcae<em>分布的随机噪声来实现*</em>ε*<em>-差分隐私保护，记位置参数为0，尺度参数为b的</em>Laplace分布为</em> <code>Lap(b)</code>,那么其概率密度函数为:$p(x)=\frac 1{2b}exp(-\frac{|x|}b)$.</p>
-<p>:bird: 对于<em>Laplace</em>机制，有以下定义：</p>
-<p>给定数据集D，设有函数$f:D\rightarrow R^d$，其敏感度为$\Delta f$,  随机算法$M(D)=f(D)+Y$,其中$Y~Laplace(u,b)$为随机噪声($u=0,b=\frac{\Delta f}{\epsilon} $),服从尺度参数为$\frac{\Delta f}{\epsilon}$的拉普拉斯分布。</p>
-<p>用代码看<code>Laplace</code>机制</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> sensity 全局敏感度</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> eps  隐私保护预算</span></span><br><span class="line"><span class="comment">* <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">dpLaplace</span><span class="params">(<span class="keyword">double</span> sensity,<span class="keyword">double</span> eps)</span></span>&#123;</span><br><span class="line">        <span class="keyword">double</span> beta = sensity/eps;</span><br><span class="line">        <span class="keyword">double</span> u1 =Math.random();</span><br><span class="line">        <span class="keyword">double</span> u2 =Math.random();</span><br><span class="line">        <span class="keyword">if</span>(u1&lt; <span class="number">0.5</span>)</span><br><span class="line">            <span class="keyword">return</span> (-<span class="number">1</span> * beta * Math.log(<span class="number">1.0</span> - u2));</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> (-<span class="number">1</span>*beta*Math.log(u2));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="指数机制"><a href="#指数机制" class="headerlink" title="指数机制"></a>指数机制</h3><p>对于任意一个可用性函数$q$和隐私保护预算$\epsilon$，若随机算法$M$正比于$exp(\frac{\epsilon*q(D,o)}{2\Delta q})$的概率输出一个$o\in O$作为结果，则随机算法$M$满足$\epsilon-$差分隐私。</p>
-<ul>
-<li>$q(D,o)\rightarrow R$为可用性函数，用来衡量每一个输出项的价值，值越大，该项价值越大，被输出的概率越高。<ul>
-<li>$D$为输入的数据集</li>
-<li>$o$为可能输出集合中的项</li>
-</ul>
-</li>
-<li>$\Delta q$为可用性函数$q$的全局敏感度</li>
-<li>指数机制的目的是使得输出结果满足一定的概率分布，当$\epsilon$越小时，每一项输出的概率就越接近</li>
-</ul>
-<blockquote>
-<p>以投票为例，10个人中9个人分别对1,2,3各投了3票，现加入指数机制保护A的投票结果，如图示:</p>
-</blockquote>
-<p><img src="https://github.com/AsuanPic/Pic/blob/master/pic/20200514094749.png?raw=true" alt=""></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     *指数机制 给定一个打分数组，然后从其中按照指数机制公式输出其的索引</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> score</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sensity</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> eps</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">dpIndex</span><span class="params">(List&lt;Double&gt; score,Double sensity, Double eps)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = score.size();</span><br><span class="line">        <span class="keyword">double</span> r= Math.random();</span><br><span class="line">        List&lt;Double&gt; exponents_list = <span class="keyword">new</span> LinkedList();</span><br><span class="line">        exponents_list.add(Math.log(<span class="number">0.5</span>*(score.get(<span class="number">0</span>)*eps/sensity)));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;m;i++)&#123;</span><br><span class="line">            exponents_list.add(Math.log(<span class="number">0.5</span>*(score.get(i)*eps/sensity)));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">double</span> sum=exponents_list.stream().mapToDouble(Double::doubleValue).sum();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</span><br><span class="line">            exponents_list.set(i,exponents_list.get(i)/sum); <span class="comment">//每一个占总体的比，属于(0,1)</span></span><br><span class="line">        <span class="keyword">double</span> sum_exp=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> j=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(;;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum_exp=sum_exp+exponents_list.get(j);</span><br><span class="line">            <span class="keyword">if</span>(sum_exp&gt;r)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">       <span class="keyword">return</span> j;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="数据发布"><a href="#数据发布" class="headerlink" title="数据发布"></a>数据发布</h2><h3 id="交互式数据发布"><a href="#交互式数据发布" class="headerlink" title="交互式数据发布"></a>交互式数据发布</h3><p>给定数据集$D$和查询集合$F$， 需寻求一种数据发布机制， 使其能够在满足差分隐私保护的条件下逐个回答 $F$ 中的查询， 直到耗尽全部隐私保护预算． 交互式数据发布即是要在满足一定精确度的条件下， 以<strong>给定的隐私保护预算回答尽可能多的查询</strong>．    </p>
-<p>交互式数据发布采用精确度和相应的样本复杂度来<em>评估发布机制的性能</em>：</p>
-<p> 对于查询集合$F$中任意查询$f$,设定一个足够小的实数$\delta&lt;1$，查询结果的精确度$a$应满足<br>$$<br>Pr_{f\in F}[|f(D)-M(f(D))|\le a]\ge1-\delta<br>$$<br>其中$f(D)$为查询$f$在$D$上的结果，$M(f(D))$为随机算法$M$对$f(D)$的干扰结果，$a$越小，精确度越高。</p>
-<ul>
-<li><h4 id="发布机制-直接对数据集进行操作来响应查询"><a href="#发布机制-直接对数据集进行操作来响应查询" class="headerlink" title="发布机制-直接对数据集进行操作来响应查询"></a>发布机制-<strong>直接</strong>对数据集进行操作来响应查询</h4><ul>
-<li>Laplace机制<ul>
-<li>查询的数量有限,与数据集记录数成线性关系</li>
-<li>针对连续属性的查询结果会产生较大的噪声</li>
-</ul>
-</li>
-<li>中位数(Median)机制<ul>
-<li>将查询分为难易查询两类，<code>易查询</code>结果可以根据<code>难查询</code>结果确定，<code>易查询</code>无需消耗任何预算。</li>
-<li><code>困难查询</code>的数量级为$O((log_2k)(log_2|Z|))$，故能回答指数级别个问题。其中$Z$为指定域，$k$为查询个数</li>
-<li><code>困难查询</code>通过Laplace噪声进行干扰，<code>简单查询</code>结果使用之前查询结果的中位数决定。</li>
-<li>算法的时间复杂度会随着数据集容量的增长呈指数增长</li>
-</ul>
-</li>
-<li>K-norm</li>
-<li>时间复杂度高</li>
-</ul>
-</li>
-<li><p>PMW(Private Multiplicative Weights)</p>
-<ul>
-<li><p>将数据域上的分布视作每个频数都相同的<code>直方图</code>，然后等待查询，每个查询结果添加Laplace噪声之后和上一次查询结果比较，若差异小于设定的阈值，则发布上一次查询结果的值，此<code>步骤不耗费隐私保护预算</code>．只有当差异大于此阈值时，才会发布新的查询结果，并调整直方图中相应频数的值</p>
-</li>
-<li><p>对于$k$个查询，每个结果的误差为$O(\sqrt{(logk)/n})$</p>
-</li>
-<li><p>只能处理计数类型的查询</p>
-</li>
-</ul>
-</li>
-<li><p>迭代数据集生成架构(IDC Framework)</p>
-<ul>
-<li><p>在定于域空间中任意选择一个数据集作为<code>初始数据集假设</code>，然后使用此数据集来回答所有查询，若发现有某个查询结果和真实结果之间的差别大于<code>预定义的阈值</code>时，则根据此查询结果来<strong>更新数据集假设</strong>，使更新后的数据集能在阈值范围内回答此查询．这个迭代过程循环进行，直到所有的查询结果和真实结果的差异不再大于阈值</p>
-</li>
-<li><p>Median机制和PMW机制都是IDC Framework的特例</p>
-</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200514202129.png" alt=""></p>
-<ul>
-<li><h4 id="直方图发布-先根据数据集建立直方图分布，然后根据直方图分布来响应查询。"><a href="#直方图发布-先根据数据集建立直方图分布，然后根据直方图分布来响应查询。" class="headerlink" title="直方图发布-先根据数据集建立直方图分布，然后根据直方图分布来响应查询。"></a>直方图发布-先根据数据集建立直方图分布，然后根据直方图分布来响应查询。</h4><p>在形成直方图时，需根据属性的$w$个不同等级将数据划分为$w$个数据格，然后统计各个数据格的频数</p>
-<ul>
-<li><p>提供差分隐私保护</p>
-<ul>
-<li><p>Laplace机制：向$w$个数据格的频数分别添加独立的Laplace噪声</p>
-<ul>
-<li>频数统计函数的敏感度仅为1，适用于$w$较小时</li>
-<li>格子过多时会因累积噪声过大而失效</li>
-</ul>
-</li>
-<li><p>降低噪声：</p>
-<ul>
-<li><p>将数据格进行分区处理，每个分区的频数为其中全部频数的平均值，然后为每个分区加入噪声，以此达到降低噪声的目的。</p>
-</li>
-<li><p>$k-d$树：采用$k-d$树算法对空间进行递归划分，在每次迭代中，首先计算当前分区$P_0$中频数分布的紧密程度为:<br>$$<br>L(P_0)=\sum_{cell_i\in D_0}|count(cell_i)-a_0|<br>$$<br>$cell_i$为当前分区$P_0$中的一个数据格，$count(cell_i)$为其频数，$a_0$为$P_0$中所有数据格频数的平均值。</p>
-<p>若$L(P_0)$大于预定义的阈值，则将该分区划分为两个子分区，如此迭代…</p>
-</li>
-<li><p>分区方案优劣评估–可以采用<code>平方误差和(SSE)</code>衡量分区方案优劣程度<br>$$<br>SSE(P)=\sum_{j=1}^{l}\sum_{cell_i\in P_j}(b_j-count(cell_i))^2<br>$$<br>$P={P_1,P_2…P_l}$表示一种分区方案，由$l$个分区构成；$b_j$为$P_j$的估计频数；$cell_i$为$P_j$中任一数据格，$count(cell_i)$为$cell_i$的频数。</p>
-<p>显然，$SSE$越小，查询的精确度越高。</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>会面临一致性的问题：可能不能维持原先的大小关系</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="非交互式数据发布"><a href="#非交互式数据发布" class="headerlink" title="非交互式数据发布"></a>非交互式数据发布</h3><p>给定数据集$D$和查询集合$F$，需寻求一个数据发布机制，使其能在满足差分隐私保护的条件下一次性回答$F$中所有的查询。</p>
-<h4 id="批查询-Batch-Query"><a href="#批查询-Batch-Query" class="headerlink" title="批查询(Batch Query)"></a>批查询(Batch Query)</h4><blockquote>
-<p>批查询(Batch Query)一次性对外发布所有查询的结果</p>
-</blockquote>
-<ul>
-<li>问题：查询之间的相关性会导致敏感度升高，导致噪声过大</li>
-<li>方案：通过映射和变换查询集合来降低总敏感度，从而降低噪声<ul>
-<li>小波变换法(Privelet)</li>
-<li>层次查询法</li>
-</ul>
-</li>
-</ul>
-<h4 id="列联表发布"><a href="#列联表发布" class="headerlink" title="列联表发布"></a>列联表发布</h4><blockquote>
-<p>列联表是对数据集中的记录按照变量进行分类时所列出的频数表</p>
-</blockquote>
-<ul>
-<li>直接向每个格子添加Laplace噪声，再求边缘频数<ul>
-<li>累积噪声较大</li>
-<li>能够维持所有边缘频数之间的一致性、</li>
-</ul>
-</li>
-<li>先计算拟发布的边缘频数，然后加入噪声后再发布<ul>
-<li>每个边缘频数只添加了一次噪声，数据可用性更高</li>
-<li>各边缘频数之间可能会违背数据上的一致性</li>
-</ul>
-</li>
-<li>先对列联表属性进行傅里叶变换再添加噪声<ul>
-<li>因为任一组傅里叶系数都对应一个一致性列联表，故而不会破坏一致性，也能减小噪声</li>
-<li>不适用于稀疏 数据集和非布尔变量构成的数据集</li>
-</ul>
-</li>
-</ul>
-<h4 id="基于分组的数据发布"><a href="#基于分组的数据发布" class="headerlink" title="基于分组的数据发布"></a>基于分组的数据发布</h4><blockquote>
-<p>延续了$k-anonymity$模型思想，并用差分隐私的要求来控制分组及匿名处理的整个过程。</p>
-</blockquote>
-<ul>
-<li><p>安全$k-anonymity$模型</p>
-<p>将$k-anonymity$模型和差分隐私保护模型结合起来其增加了数据集的不确定性，相当于减少了差分隐私保护中对攻击者所掌握的知识假定。</p>
-<ul>
-<li>只提供了理论框架，未给出具体方案 </li>
-</ul>
-</li>
-<li><p>DiffGen算法–针对决策树分析的差分隐私保护数据发布算法</p>
-<ul>
-<li>没有充分利用给定的预算，导致加入了不必要的冗余噪声</li>
-</ul>
-</li>
-<li><p>改进的DiffGen算法</p>
-<p>在每次细分迭代中，将所有连续属性细分方案乘以相应的权重之后和离散属性细分方案一起构成候选方案集，然后调用指数机制来选择细分方案。</p>
-</li>
-</ul>
-<hr>
-<p><strong>作者水平有限且落笔仓促，如有错误之处，恳请指正.</strong></p>
-<hr>
-<ol>
-<li>差分隐私保护及其应用 -熊平 朱天清 王晓峰 -计算机学报 37.1 (2014).  </li>
-<li>差分隐私综述 -李效光,李晖 等 -信息安全学报Vol3 No.5(2018)</li>
-</ol>
-]]></content>
-      <categories>
-        <category>差分隐私</category>
-      </categories>
-      <tags>
-        <tag>差分隐私</tag>
-        <tag>综述</tag>
-        <tag>基础</tag>
       </tags>
   </entry>
 </search>
