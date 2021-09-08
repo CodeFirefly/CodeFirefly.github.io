@@ -450,8 +450,8 @@
       </tags>
   </entry>
   <entry>
-    <title>Java面试笔记整理</title>
-    <url>/2021/09/07/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86/</url>
+    <title>Java面试笔记整理 </title>
+    <url>/2021/09/07/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86%20/</url>
     <content><![CDATA[<h3 id="Java面试笔记"><a href="#Java面试笔记" class="headerlink" title="Java面试笔记"></a>Java面试笔记</h3><blockquote>
 <p>来个公司收了我吧</p>
 </blockquote>
@@ -552,9 +552,13 @@
 </ol>
 <h3 id="二叉查找树，AVL树，B树，红黑树"><a href="#二叉查找树，AVL树，B树，红黑树" class="headerlink" title="二叉查找树，AVL树，B树，红黑树"></a>二叉查找树，AVL树，B树，红黑树</h3><p><strong>二叉查找树(BST)：</strong>左节点小于根节点，右节点大于根节点(O(logN)),在极端情况下会变成线性链表结构O(N)，为解决这个出现了AVL树</p>
 <p><strong>平衡二叉树(AVL)：</strong>是一种自平衡的树，除了二叉树的特征外，规定左子树和右子树高度差不超过1（保证不会成为线性链表），但是由于要维持自身平衡，所以插入删除节点的时候需要对节点进行频繁旋转。</p>
-<p><strong>B树(也叫B-树)：</strong>是一种多路平衡数，其所有的叶子节点处于同一层，每个节点中的元素从小到大排序，可以看成矮胖版的AVL树，相对减少磁盘IO(Mongodb索引就是通过B树实现)</p>
+<p><strong>B树(也叫B-树)：</strong>是一种多路平衡查找树</p>
+<ol>
+<li>其所有的叶子节点处于同一层，每个节点中的元素从小到大排序，可以看成矮胖版的AVL树</li>
+</ol>
+<p><strong>B+树：</strong>B+树每个非叶子结点存放的元素只用于索引作用，所有数据保存在叶子结点。</p>
 <p><strong>红黑树：</strong>一种自平衡的二叉查找树</p>
-<img src="https://images0.cnblogs.com/i/497634/201403/251730074203156.jpg" alt="img" style="zoom:80%;" />
+<img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210907203427.jpg" style="zoom:80%;" />
 
 <ol>
 <li>每个节点或是黑色或是红色</li>
@@ -564,12 +568,11 @@
 <li>从一个节点到该节点的子孙节点所有路径上包含相同数目的黑节点</li>
 </ol>
 <blockquote>
-<p>红黑树相较于AVL树牺牲了严格的高度平衡的条件，只要求部分达到平衡要求，由于红黑树的设计，任何不平衡都会在3次旋转内解决，相较于BST，红黑树可以确保树的最长路径不大于两倍最短路径的长度，即查找效果室友最低保证的，即O(logN)</p>
+<p>红黑树相较于AVL树牺牲了严格的高度平衡的条件，只要求部分达到平衡要求，由于红黑树的设计，任何不平衡都会在3次旋转内解决，相较于BST，红黑树可以确保树的最长路径不大于两倍最短路径的长度，即查找效果是有最低保证的，即O(logN)</p>
 </blockquote>
 <p><strong>红黑树旋转(左旋右旋)：</strong></p>
 <p>对x进行左旋，意味着，将“x的右孩子”设为“x的父亲节点”；即，将 x变成了一个左节点(x成了为z的左孩子)！。 因此，<strong>左旋中的“左”，意味着“被旋转的节点将变成一个左节点”</strong>。</p>
-<img src="https://images0.cnblogs.com/i/497634/201403/251734577643655.jpg" alt="img"  />
-
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210907203502.jpg" alt=""></p>
 <p><strong>红黑树插入：</strong></p>
 <p>将红黑树当作一颗二叉查找树，插入节点</p>
 <p>将节点着色为红色（将插入的节点着色为红色，不会违背”特性(5)”！少违背一条特性，就意味着我们需要处理的情况越少。）</p>
@@ -664,6 +667,82 @@
 </blockquote>
 <p><strong>栈OOM：</strong> 若线程请求的栈深度大于虚拟机所允许的深度，将抛出StackOverFlowerError，如果JVM栈可以动态扩展，当扩展无法申请到足够的内存时，会出现OOM</p>
 <p><strong>方法区OOM</strong>：方法区主要存放类型信息，如类名，访问修饰符，常量值，方法描述等，只要在运行是不断产生大量的类，方法区就会溢出。<strong>如使用JDK反射或这CGLib直接操作字节码在运行时生成大量的类</strong>。</p>
+<h3 id="Spring-中Ioc的工厂模式"><a href="#Spring-中Ioc的工厂模式" class="headerlink" title="Spring 中Ioc的工厂模式"></a>Spring 中Ioc的工厂模式</h3><p>IOC指在程序开发过程中，对象实例的创建不再由调用者管理，而是由Spring容器创建，Spring容器会负责控制程序之间的关系，因此，控制权由程序代码转移到了Spring容器，控制权发生了反转，即控制反转。</p>
+<blockquote>
+<p>在没有使用Spring的时候，对象需要通过<code>new object()</code>来创建，这个对象是主动创建的，创建对象的主动权由自己把控，这样就会使得对象之间的耦合度高，A对象需要使用合作对象B来共同完成一件事，A要使用B，那么A就对B产生了依赖，也就是A和B之间存在一种耦合关系，并且是紧密耦合在一起，而使用了Spring之后就不一样了，创建合作对象B的工作是由Spring来做的，Spring创建好B对象，然后存储到一个容器里面，当A对象需要使用B对象时，Spring就从存放对象的那个容器里面取出A要使用的那个B对象，然后交给A对象使用，至于Spring是如何创建那个对象，以及什么时候创建好对象的，A对象不需要关心这些细节问题。</p>
+</blockquote>
+<p>IOC最基本的技术就是反射，通过给出的类名来动态的生成对象，可以让对象在生成时才被决定是哪一种对象，降低耦合。</p>
+<p>IOC是工厂模式+反射机制，IOC中的工厂模式内部使用反射来创建对象，对象的实例化都交给工厂完成，通过工厂来获取对象。</p>
+<h3 id="Spring中Bean的生命周期"><a href="#Spring中Bean的生命周期" class="headerlink" title="Spring中Bean的生命周期"></a>Spring中Bean的生命周期</h3><ol>
+<li>实例化一个Bean</li>
+<li>按照Spring上下文对实例化的Bean进行配置 （IOC注入）</li>
+<li>如果Bean实现了BeanNameAware接口，则调用setBeanName(String)方法，传递的是配置文件中Bean的id</li>
+<li>如果实现了BeanFactoryAware接口，则调用setBeanFactory(BeanFactory)</li>
+<li>如果这个Bean关联了BeanPostProcessor接口，将会调用<code>postProcessBeforeInitialization(Object obj, String s)</code>方法，BeanPostProcessor经常被用作是Bean内容的更改，并且由于这个是在Bean初始化结束时调用那个的方法，也可以被应用于内存或缓存技术；</li>
+<li>如果Bean在Spring配置文件中配置了init-method属性会自动调用其配置的初始化方法。</li>
+<li>如果这个Bean关联了BeanPostProcessor接口，将会调用<code>postProcessAfterInitialization(Object obj, String s)</code>方法；</li>
+<li>当Bean不再需要时，会经过清理阶段，如果Bean实现了DisposableBean这个接口，会调用那个其实现的destroy()方法；</li>
+<li>最后，如果这个Bean的Spring配置中配置了destroy-method属性，会自动调用其配置的销毁方法。</li>
+</ol>
+<h3 id="SpringBoot的自动装配"><a href="#SpringBoot的自动装配" class="headerlink" title="SpringBoot的自动装配"></a>SpringBoot的自动装配</h3><p>在SpringBoot启动时加载入口类，通过$@EnableAutoConfiguration$开启自动装配功能，自动装配时会扫描所有jar包类路径下$META-INF/spring.factories$ 中的所有自动配置类，如果符合相应的条件，则使用相应的自动配置类实现自动装配。</p>
+<p>自动配置类实现自动装配时，配置类会给容器中添加各种组件，这些组件的属性从对应的$properties$类中获取，而对应的$properties$中的属性和配置文件进行相互绑定。</p>
+<blockquote>
+<p>SpringBoot中的自动装配技术用到了：</p>
+<ol>
+<li>Spring 模式注解装配</li>
+<li>Spring @Enable 模块装配</li>
+<li>Spring 条件装配</li>
+<li>Spring 工厂加载机制</li>
+</ol>
+</blockquote>
+<h3 id="Java中的异常体系"><a href="#Java中的异常体系" class="headerlink" title="Java中的异常体系"></a>Java中的异常体系</h3><p>Java标准裤内建了一些通用的异常，这些类以Throwable为顶层父类，Throwable又派生出Error类和Exception类。</p>
+<p><strong>Error</strong>：Error类以及他的子类的实例，代表了JVM本身的错误。错误不能被程序员通过代码处理。</p>
+<p><strong>Exception</strong>：Exception以及他的子类，代表程序运行时发送的各种不期望发生的事件。可以被Java异常处理机制使用</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210908191952.png" alt=""></p>
+<p><strong>根据Javac对异常的处理要求，将异常类分为2类</strong></p>
+<p><strong>非检查异常</strong>（unckecked exception）：Error 和 RuntimeException 以及他们的子类。javac在编译时，不会提示和发现这样的异常，不要求在程序处理这些异常。所以如果愿意，我们可以编写代码处理（使用try…catch…finally）这样的异常，也可以不处理。对于这些异常，我们应该修正代码，而不是去通过异常处理器处理 。这样的异常发生的原因多半是代码写的有问题。如除0错误ArithmeticException，错误的强制类型转换错误ClassCastException，数组索引越界ArrayIndexOutOfBoundsException，使用了空对象NullPointerException等等。 </p>
+<p><strong>检查异常</strong>（checked exception）：除了Error 和 RuntimeException的其它异常。javac强制要求程序员为这样的异常做预备处理工作（使用try…catch…finally或者throws）。在方法中要么用try-catch语句捕获它并处理，要么用throws子句声明抛出它，否则编译不会通过。这样的异常一般是由程序的运行环境导致的。因为程序可能被运行在各种未知的环境下，而程序员无法干预用户如何使用他编写的程序，于是程序员就应该为这样的异常时刻准备着。如SQLException , IOException,ClassNotFoundException 等。</p>
+<p>需要明确的是：检查和非检查是对于javac来说的，这样就很好理解和区分了</p>
+<p><strong>多个异常的捕获顺序</strong></p>
+<p>对于try..catch捕获异常的形式来说，对于异常的捕获，可以有多个catch。对于try里面发生的异常，他会根据发生的异常和catch里面的进行从上往下匹配，当它匹配某一个catch块的时候，他就直接进入到这个catch块里面去了，后面在再有catch块的话，它不做任何处理，直接跳过去，全部忽略掉。如果有finally的话进入到finally里面继续执行。换句话说，如果有匹配的catch，它就会忽略掉这个catch后面所有的catch。</p>
+<p><strong>在写异常处理的时候，一定要把异常范围小的放在前面，范围大的放在后面</strong>，Exception这个异常的根类一定要放在最后一个catch里面，如果放在前面或者中间，任何异常都会和Exception匹配的，就会报已捕获到…异常的错误。 </p>
+<p><strong>throws和throw</strong></p>
+<p><strong>Throw</strong>：<strong>作用在方法内</strong>，表示抛出具体异常，由方法体内的语句处理。具体向外抛出的动作，所以它抛出的是一个异常实体类。若执行了throw一定是抛出了某种异常。</p>
+<p><strong>throws</strong>：作用在<strong>方法的声明上</strong>，表示如果抛出异常，则由该方法的调用者来进行异常处理。（自身不处理异常）</p>
+<p>主要的声明这个方法会抛出会抛出某种类型的异常，让它的使用者知道捕获异常的类型。出现异常是一种可能性，但不一定会发生异常。</p>
+<h3 id="BIO，NIO，AIO"><a href="#BIO，NIO，AIO" class="headerlink" title="BIO，NIO，AIO"></a>BIO，NIO，AIO</h3><p><strong>同步与异步</strong></p>
+<ul>
+<li><strong>同步：</strong> 同步就是发起一个调用后，被调用者未处理完请求之前，调用不返回。</li>
+<li><strong>异步：</strong> 异步就是发起一个调用后，立刻得到被调用者的回应表示已接收到请求，但是被调用者并没有返回结果，此时我们可以处理其他的请求，被调用者通常依靠事件，回调等机制来通知调用者其返回结果。</li>
+</ul>
+<p>同步和异步的区别最大在于异步的话调用者不需要等待处理结果，被调用者会通过回调等机制来通知调用者其返回结果。</p>
+<p><strong>阻塞和非阻塞</strong></p>
+<ul>
+<li><strong>阻塞：</strong> 阻塞就是发起一个请求，调用者一直等待请求结果返回，也就是当前线程会被挂起，无法从事其他任务，只有当条件就绪才能继续。</li>
+<li><strong>非阻塞：</strong> 非阻塞就是发起一个请求，调用者不用一直等着结果返回，可以先去干其他事情。</li>
+</ul>
+<p><strong>BIO:</strong><code>同步阻塞</code>，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不作任何事情会造成不必要的线程开销。</p>
+<p><strong>NIO</strong>：<code>同步非阻塞</code>，服务器实现模式为一个线程处理多个请求(连接)，即客户端发送的连接请求会被注册到多路复用器（selector）上，多路复用器轮询到有 I/O 请求就会进行处理,通过轮询代替了始终保持一个连接。</p>
+<blockquote>
+<p>客户端发送一个请求，并建立一个连接，服务端接收到了。如果服务端没有数据，就告知客户端“没有数据”；如果有数据，则返回数据。客户端接到了服务端回复的“没有数据”就断开连接，过了一段时间后，客户端重新问服务端是否有数据。服务器重复以上步骤。</p>
+</blockquote>
+<blockquote>
+<p>Selector： 多路复用器，轮询检查多个Channel 的状态，判断注册事件是否发生，即判断Channel 是否处于可读或可写状态。使用前需要将Channel 注册到Selector，注册后会得到一个SelectionKey，通过SelectionKey 获取Channel 和Selector 相关信息。<br>Channel： 双向通道，替换了BIO 中的Stream 流，不能直接访问数据，要通过Buffer 来读写数据，也可以和其他Channel 交互。<br>Buffer： 缓冲区，本质是一块可读写数据的内存，用来简化数据读写</p>
+</blockquote>
+<p><strong>AIO：</strong><code>异步非阻塞</code>，AIO 引入了异步通道的概念，采用了 Proactor 模式，简化了程序编写，有效的请求才启动线程，它的特点是先由操作系统完成后才通知服务端程序启动线程去处理，一般适用于连接数较多且连接时间较长的应用。</p>
+<blockquote>
+<p>客户端向服务端请求数据。服务端若有，则返回数据；若无，则告诉客户端“没有数据”。客户端收到“没有数据”的回复后，就做自己的其他事情。服务端有了数据之后，就主动通知客户端，并把数据返回去</p>
+</blockquote>
+<blockquote>
+<p>BIO 方式适用于<code>连接数比较小且固定</code>的架构</p>
+<p>NIO 方式适用于<code>连接数目多且连接比较短</code>的架构，比如聊天服务器，弹幕系统</p>
+<p>AIO 方式适用于<code>连接数目多且连接比较长</code>的架构，比如相册服务器</p>
+</blockquote>
+<h3 id="NIO-和-BIO-对比"><a href="#NIO-和-BIO-对比" class="headerlink" title="NIO 和 BIO 对比"></a>NIO 和 BIO 对比</h3><ol>
+<li>BIO 以流的方式处理数据，而 NIO 以块的方式处理数据，块 I/O 的效率比流 I/O 高很多。</li>
+<li>BIO 是阻塞的，而 NIO 是非阻塞的。</li>
+<li>BIO 基于字节流和字符流进行操作，而 NIO 基于 Channel（通道）和 Buffer（缓冲区）进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。Selector（选择器）用于监听多个通道事件（比如连接请求，数据到达等），因此<code>使用单个线程就可以监听多个客户端通道</code>。</li>
+</ol>
 ]]></content>
       <categories>
         <category>面试</category>
