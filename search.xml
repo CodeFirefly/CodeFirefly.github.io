@@ -1,3 +1,1106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
+  <entry>
+    <title>Hexo+NexT搭建个人博客</title>
+    <url>/2020/05/07/Hexo-NexT%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>安装 Hexo 前要先安装：</p>
+<ul>
+<li>Node.js</li>
+<li>Git<a id="more"></a>
+
+
+</li>
+</ul>
+<h2 id="在GitHub-上搭建个人博客"><a href="#在GitHub-上搭建个人博客" class="headerlink" title="在GitHub 上搭建个人博客"></a>在GitHub 上搭建个人博客</h2><h3 id="GitHub创建仓库"><a href="#GitHub创建仓库" class="headerlink" title="GitHub创建仓库"></a>GitHub创建仓库</h3><p>新建一个名为<code>用户名.github.io</code>的仓库，如<code>CloudMadao.github.io</code>,以后可以通过<a href="https://CloudMadao.github.io">https://CloudMadao.github.io</a> 访问自己的个人博客。</p>
+<p>注意：仓库中的用户名对大小写敏感</p>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure>
+
+<h3 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h3><p>进入博客文件夹(CloudMadao)，执行如下命令进行初始化：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd D:/CloudMadao</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+<p>执行初始化命令之后Hexo会下载一些文件到这个文件夹下</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-rw-r--r-- 1 admin 197121  2468  5月  7 13:59 _config.yml</span><br><span class="line">drwxr-xr-x 1 admin 197121     0  5月  7 14:01 node_modules/</span><br><span class="line">-rw-r--r-- 1 admin 197121   602  5月  7 13:59 package.json</span><br><span class="line">-rw-r--r-- 1 admin 197121 75419  5月  7 14:01 package-lock.json</span><br><span class="line">drwxr-xr-x 1 admin 197121     0  5月  7 13:59 scaffolds/</span><br><span class="line">drwxr-xr-x 1 admin 197121     0  5月  7 13:59 source/</span><br><span class="line">drwxr-xr-x 1 admin 197121     0  5月  7 13:59 themes/</span><br></pre></td></tr></table></figure>
+
+<p>注意：hexo中存在两个<code>_config.yml</code>文件，一个存在于根目录CloudMadao下，称为<code>站点配置文件</code>，另一个存在于theme下，称为<code>主题配置文件</code></p>
+<p>初始化Hexo之后即可以生成博客和预览博客</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo g #生成</span><br><span class="line">hexo s #启动Hexo服务</span><br></pre></td></tr></table></figure>
+
+<p>在本地启动Hexo服务之后，访问<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 可以看到初始化的博客内容。</p>
+<h3 id="将博客部署到GitHub"><a href="#将博客部署到GitHub" class="headerlink" title="将博客部署到GitHub"></a>将博客部署到GitHub</h3><p>在站点配置文件<code>_config.yml</code>,中修改deploy部分：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">'git'</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">https://github.com/CloudMadao/CloudMadao.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：配置文件为yaml格式，需要注意缩进</p>
+<p>执行 <code>hexo d</code>将博客部署到GitHub，若是出现如下错误：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Deployer not found: git</span><br></pre></td></tr></table></figure>
+
+<p>需要安装相关插件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>将博客部署到GitHub上之后，访问<a href="https://cloudmadao.github.io/即可访问">https://cloudmadao.github.io/即可访问</a></p>
+<hr>
+<h2 id="NexT主题配置"><a href="#NexT主题配置" class="headerlink" title="NexT主题配置"></a>NexT主题配置</h2><h3 id="设置hexo的next主题"><a href="#设置hexo的next主题" class="headerlink" title="设置hexo的next主题"></a>设置hexo的next主题</h3><p>将站点配置文件_config.xml中的theme: landscape改为theme: NexT</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">NexT</span> <span class="comment">#NexT为下载的next主题位置</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="配置网站相关信息"><a href="#配置网站相关信息" class="headerlink" title="配置网站相关信息"></a>配置网站相关信息</h3><p>修改站点配置文件<code>_config.yml</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Madao's</span> <span class="string">Personal</span> <span class="string">Website</span>       <span class="comment"># 网站标题</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">'今天 &lt;s&gt;摸鱼&lt;/s&gt; 学习了吗'</span>  <span class="comment"># 网站副标题</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">'Constant dropping wears the stone'</span>  <span class="comment"># 描述，介绍网站的</span></span><br><span class="line"><span class="attr">keywords:</span>       <span class="comment"># 网站的关键字</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">摸鱼选手Madao</span>  <span class="comment"># 博主姓名</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-Hans</span> <span class="comment"># 语言：zh-CN 是简体中文</span></span><br><span class="line"><span class="attr">timezone:</span>   <span class="comment"># 时区</span></span><br></pre></td></tr></table></figure>
+
+<p>修改主题配置文件<code>_config.yml</code>,使用nexT的Pisces主题</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">scheme: Gemini</span><br></pre></td></tr></table></figure>
+
+<h3 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a>主题配置</h3><h4 id="开启标签和分类页面："><a href="#开启标签和分类页面：" class="headerlink" title="开启标签和分类页面："></a>开启标签和分类页面：</h4><p>标签：</p>
+<p>创建tags和页面</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+
+<p>修改tags中的<code>index.md</code>文件(categories类似)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2020-05-07 16:00:51</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置hexo本地搜索"><a href="#配置hexo本地搜索" class="headerlink" title="配置hexo本地搜索"></a>配置hexo本地搜索</h4><p>安装<code>hexo-generator-searchdb</code>插件</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">npm install hexo<span class="literal">-generator</span><span class="literal">-searchdb</span> -<span class="literal">-save</span></span><br></pre></td></tr></table></figure>
+
+<p>修改站点配置文件<code>_config.yml</code>,添加如下内容</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 本地搜索</span></span><br><span class="line"><span class="attr">search:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line">  <span class="attr">field:</span> <span class="string">post</span></span><br><span class="line">  <span class="attr">format:</span> <span class="string">html</span></span><br><span class="line">  <span class="attr">limit:</span> <span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<p>修改主题配置文件<code>_config.yml</code>,开启<code>local_search</code></p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Local Search</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span> <span class="comment">#开启本地搜索</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="配置头像"><a href="#配置头像" class="headerlink" title="配置头像"></a>配置头像</h4><p>编辑主题配置文件<code>_config.yml</code>,修改其中的<code>avatar</code>字段</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将头像文件 Sakai Izumi2.png 放置在主题目录的source/images目录下</span></span><br><span class="line"><span class="attr">avatar:</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">/images/Sakai</span> <span class="string">Izumi2.png</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="配置社交链接"><a href="#配置社交链接" class="headerlink" title="配置社交链接"></a>配置社交链接</h4><p>修改主题配置文件中的Social字段，显示相关社交账号</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">social:</span></span><br><span class="line">  <span class="attr">GitHub:</span> <span class="string">https://github.com/example</span> <span class="string">||</span> <span class="string">fab</span> <span class="string">fa-github</span></span><br><span class="line">  <span class="attr">E-Mail:</span> <span class="string">mailto:example@hotmail.com</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-envelope</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="首页博客显示摘要"><a href="#首页博客显示摘要" class="headerlink" title="首页博客显示摘要"></a>首页博客显示摘要</h4><p>NexT7.6之后移除了截断文章作为的摘要功能，现在我们可以通过<code>&lt;!--more--&gt;</code>来精确控制摘要的内容:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 2020.5.4 奇怪的知识增加了</span><br><span class="line">&lt;!-- more --&gt;</span><br></pre></td></tr></table></figure>
+
+<p>添加<!--more-->之后，将会以该标签之前的文本作为摘要内容。</p>
+<h4 id="页面阅读统计"><a href="#页面阅读统计" class="headerlink" title="页面阅读统计"></a>页面阅读统计</h4><p>修改主题配置文件<code>_config.yml</code>中的<code>busuanzi_count</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">busuanzi_count:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span>              <span class="comment"># 设true 开启</span></span><br><span class="line">  <span class="attr">total_visitors:</span> <span class="literal">true</span>       <span class="comment"># 总阅读人数（uv数）</span></span><br><span class="line">  <span class="attr">total_visitors_icon:</span> <span class="string">user</span>  <span class="comment"># 阅读总人数的图标</span></span><br><span class="line">  <span class="attr">total_views:</span> <span class="literal">true</span>          <span class="comment"># 总阅读次数（pv数）</span></span><br><span class="line">  <span class="attr">total_views_icon:</span> <span class="string">eye</span>      <span class="comment"># 阅读总次数的图标</span></span><br><span class="line">  <span class="attr">post_views:</span> <span class="literal">true</span>           <span class="comment"># 开启内容阅读次数</span></span><br><span class="line">  <span class="attr">post_views_icon:</span> <span class="string">eye</span>       <span class="comment"># 内容页阅读数的图标</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="背景动画设置"><a href="#背景动画设置" class="headerlink" title="背景动画设置"></a>背景动画设置</h4><p><strong>Canvas-nest</strong></p>
+<p>在站点目录下CloudMadao/source/_data创建一个<code>footer.swig</code>文件,若是<code>_data</code>目录不存在先创建目录.</p>
+<p>在<code>footer.swig</code>文件下添加如下内容</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;script color=<span class="string">"0,0,255"</span> opacity=<span class="string">"0.5"</span> zIndex=<span class="string">"-1"</span> count=<span class="string">"99"</span> </span><br><span class="line">        src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在主题配置文件中启用该文件：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">custom_file_path:</span></span><br><span class="line">  <span class="attr">footer:</span> <span class="string">source/_data/footer.swig</span></span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>记一次CentOs7上安装Oracle的踩坑过程</title>
+    <url>/2020/05/29/%E8%AE%B0%E4%B8%80%E6%AC%A1CentOs7%E4%B8%8A%E5%AE%89%E8%A3%85Oracle%E7%9A%84%E8%B8%A9%E5%9D%91%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<h3 id="安装环境："><a href="#安装环境：" class="headerlink" title="安装环境："></a>安装环境：</h3><p>操作系统：CentOS 7.8<br>Oracle： Oracle 11g </p>
+<blockquote>
+<p>难装的一批，辣鸡软件！</p>
+</blockquote>
+<a id="more"></a>
+
+
+
+<h3 id="Yum-安装vim软件，用于编辑配置文件（个人习惯）"><a href="#Yum-安装vim软件，用于编辑配置文件（个人习惯）" class="headerlink" title="Yum 安装vim软件，用于编辑配置文件（个人习惯）"></a>Yum 安装vim软件，用于编辑配置文件（个人习惯）</h3>   <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install vim -y</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装Oracle-11g依赖包"><a href="#安装Oracle-11g依赖包" class="headerlink" title="安装Oracle 11g依赖包"></a>安装Oracle 11g依赖包</h3>   <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install yum install gcc make binutils gcc-c++ compat-libstdc++-33 elfutils-libelf-devel elfutils-libelf-devel-static ksh libaio libaio-devel numactl-devel sysstat unixODBC unixODBC-devel pcre-devel –y</span><br></pre></td></tr></table></figure>
+
+<h3 id="关闭selinux"><a href="#关闭selinux" class="headerlink" title="关闭selinux"></a>关闭selinux</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;selinux&#x2F;config</span><br></pre></td></tr></table></figure>
+
+<p>设置SELINUX=disabled</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加Oracle用户组和用户"><a href="#添加Oracle用户组和用户" class="headerlink" title="添加Oracle用户组和用户"></a>添加Oracle用户组和用户</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# groupadd oinstall</span><br><span class="line">[root@localhost ~]# groupadd dba</span><br><span class="line">[root@localhost ~]# groupadd oper</span><br><span class="line">[root@localhost ~]# useradd -g oinstall -G dba,oper oracle</span><br></pre></td></tr></table></figure>
+
+<p>更改oracle密码</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">passwd oracle</span><br></pre></td></tr></table></figure>
+
+<p>添加完成后查看oracle用户</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# id oracle</span><br><span class="line">uid=1000(oracle) gid=1000(oinstall) 组=1000(oinstall),1001(dba),1002(oper)</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置HostName"><a href="#配置HostName" class="headerlink" title="配置HostName"></a>配置HostName</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<p>在其中添加如下代码：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">192.168.192.128 CentOS</span><br></pre></td></tr></table></figure>
+
+<p>测试hostname</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# ping -c 3 CentOS</span><br><span class="line">PING CentOS (192.168.192.128) 56(84) bytes of data.</span><br><span class="line">64 bytes from CentOS (192.168.192.128): icmp_seq=1 ttl=64 time=0.063 ms</span><br><span class="line">64 bytes from CentOS (192.168.192.128): icmp_seq=2 ttl=64 time=0.034 ms</span><br><span class="line">64 bytes from CentOS (192.168.192.128): icmp_seq=3 ttl=64 time=0.036 ms</span><br><span class="line"></span><br><span class="line">--- CentOS ping statistics ---</span><br><span class="line">3 packets transmitted, 3 received, 0% packet loss, time 2000ms</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改内核参数"><a href="#修改内核参数" class="headerlink" title="修改内核参数"></a>修改内核参数</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# vim /etc/sysctl.conf </span><br><span class="line"></span><br><span class="line">fs.aio-max-nr=1048576</span><br><span class="line">fs.file-max=6815744</span><br><span class="line">kernel.shmall=2097152      </span><br><span class="line">kernel.shmmni=4096  </span><br><span class="line">kernel.shmmax = 2147483648 #其值为内存的一半，单位为byte</span><br><span class="line">kernel.sem=250 32000 100 128</span><br><span class="line">net.ipv4.ip_local_port_range=9000 65500</span><br><span class="line">net.core.rmem_default=262144</span><br><span class="line">net.core.rmem_max=4194304</span><br><span class="line">net.core.wmem_default=262144</span><br><span class="line">net.core.wmem_max=1048586</span><br></pre></td></tr></table></figure>
+
+<p>使参数生效</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改文件限制"><a href="#修改文件限制" class="headerlink" title="修改文件限制"></a>修改文件限制</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# vim /etc/security/limits.conf</span><br></pre></td></tr></table></figure>
+<p>在文件末端添加如下代码</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">oracle soft nproc 2047</span><br><span class="line">oracle hard nproc 16384</span><br><span class="line">oracle soft nofile 1024</span><br><span class="line">oracle hard nofile 65536</span><br><span class="line">oracle soft stack 10240</span><br></pre></td></tr></table></figure>
+
+<p>其次还需修改<code>/etc/pam.d/login</code>中内容</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# vim /etc/pam.d/login</span><br><span class="line">session  required   /lib64/security/pam_limits.so</span><br><span class="line">session  required   pam_limits.so</span><br></pre></td></tr></table></figure>
+
+<p>在<code>/etc/profile</code>中添加如下命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if [ $USER = "oracle" ]; then</span><br><span class="line">  if [ $SHELL = "/bin/ksh" ]; then</span><br><span class="line">   ulimit -p 16384</span><br><span class="line">   ulimit -n 65536</span><br><span class="line">  else</span><br><span class="line">   ulimit -u 16384 -n 65536</span><br><span class="line">  fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>使环境变量立即生效</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建Oracle安装目录"><a href="#创建Oracle安装目录" class="headerlink" title="创建Oracle安装目录"></a>创建Oracle安装目录</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# mkdir -p /db/app/oracle/product/11.2.0</span><br><span class="line">[root@localhost ~]# mkdir /db/app/oracle/oradata</span><br><span class="line">[root@localhost ~]# mkdir /db/app/oracle/inventory</span><br><span class="line">[root@localhost ~]# mkdir /db/app/oracle/fast_recovery_area</span><br><span class="line">[root@localhost ~]# chown -R oracle:oinstall /db/app/oracle</span><br><span class="line">[root@localhost ~]# chmod -R 775 /db/app/oracle</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置Oracle用户环境变量"><a href="#配置Oracle用户环境变量" class="headerlink" title="配置Oracle用户环境变量"></a>配置Oracle用户环境变量</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# su - oracle</span><br><span class="line">[oracle@localhost ~]$ vim .bash_profile </span><br><span class="line"></span><br><span class="line">umask 022</span><br><span class="line">export ORACLE_HOSTNAME=CentOS</span><br><span class="line">export ORACLE_BASE=/db/app/oracle</span><br><span class="line">export ORACLE_HOME=$ORACLE_BASE/product/11.2.0/</span><br><span class="line">export ORACLE_SID=orcl</span><br><span class="line">export PATH=.:$ORACLE_HOME/bin:$ORACLE_HOME/OPatch:$ORACLE_HOME/jdk/bin:$PATH</span><br><span class="line">export LC_ALL="en_US"</span><br><span class="line">export LANG="en_US"</span><br><span class="line">export NLS_LANG="AMERICAN_AMERICA.UTF8"</span><br><span class="line">export NLS_DATE_FORMAT="YYYY-MM-DD HH24:MI:SS"</span><br></pre></td></tr></table></figure>
+
+<p>配置完使环境变量生效</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[oracle@localhost ~]$ source .bash_profile</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压Oracle文件"><a href="#解压Oracle文件" class="headerlink" title="解压Oracle文件"></a>解压Oracle文件</h3><p>安装unzip</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost db]# yum install -y unzip</span><br></pre></td></tr></table></figure>
+
+<p>解压Oracle</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost db]# unzip linux.x64_11gR2_database_1of2.zip &amp;&amp; unzip linux.x64_11gR2_database_2of2.zip</span><br></pre></td></tr></table></figure>
+
+<p>解压完成后执行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost db]# cp -R database/response/ /db/app/</span><br><span class="line">[root@localhost app]# chmod -R 755 response</span><br><span class="line">[root@localhost app]# chown -R oracle:oinstall /db/app/</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置db-install-rsp响应模板文件开始静默安装"><a href="#配置db-install-rsp响应模板文件开始静默安装" class="headerlink" title="配置db_install.rsp响应模板文件开始静默安装"></a>配置<code>db_install.rsp</code>响应模板文件开始静默安装</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[oracle@localhost app]$ vim response/db_install.rsp </span><br><span class="line"></span><br><span class="line">oracle.install.option=INSTALL_DB_SWONLY</span><br><span class="line">DECLINE_SECURITY_UPDATES=true</span><br><span class="line">UNIX_GROUP_NAME=oinstall</span><br><span class="line">INVENTORY_LOCATION=/db/app/oracle/inventory</span><br><span class="line">SELECTED_LANGUAGES=en,zh_CN</span><br><span class="line">ORACLE_HOSTNAME=CentOS</span><br><span class="line">ORACLE_HOME=/db/app/oracle/product/11.2.0</span><br><span class="line">ORACLE_BASE=/db/app/oracle</span><br><span class="line">oracle.install.db.InstallEdition=EE</span><br><span class="line">oracle.install.db.isCustomInstall=true</span><br><span class="line">oracle.install.db.DBA_GROUP=dba</span><br><span class="line">oracle.install.db.OPER_GROUP=dba</span><br></pre></td></tr></table></figure>
+
+<h3 id="开始静默安装"><a href="#开始静默安装" class="headerlink" title="开始静默安装"></a>开始静默安装</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chown -R oracle:oinstall /db/</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[oracle@localhost database]$ ./runInstaller -ignorePrereq  -silent -responseFile /db/app/response/db_install.rsp</span><br></pre></td></tr></table></figure>
+
+<p>安装过程可能比较长，可以通过以下命令监听安装日志，如:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tail -f /db/app/oracle/inventory/logs/installActions2020-05-28_09-42-18AM.log</span><br></pre></td></tr></table></figure>
+
+<p>安装完成会显示如下信息 </p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200528094822.png" alt=""></p>
+<p>按照提示，我们需要执行相应脚本以进行下一步操作:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost database]# sh /db/app/oracle/inventory/orainstRoot.sh </span><br><span class="line">[root@localhost database]# sh /db/app/oracle/product/11.2.0/root.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置静默监听"><a href="#配置静默监听" class="headerlink" title="配置静默监听"></a>配置静默监听</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[oracle@localhost ~]$ netca /silent /responsefile /db/app/response/netca.rsp</span><br><span class="line"><span class="meta">#</span><span class="bash">显示如下信息</span></span><br><span class="line">Parsing command line arguments:</span><br><span class="line">    Parameter "silent" = true</span><br><span class="line">    Parameter "responsefile" = /db/app/response/netca.rsp</span><br><span class="line">Done parsing command line arguments.</span><br><span class="line">Oracle Net Services Configuration:</span><br><span class="line">Profile configuration complete.</span><br><span class="line">Oracle Net Listener Startup:</span><br><span class="line">    Running Listener Control: </span><br><span class="line">      /db/app/oracle/product/11.2.0/bin/lsnrctl start LISTENER</span><br><span class="line">    Listener Control complete.</span><br><span class="line">    Listener started successfully.</span><br><span class="line">Listener configuration complete.</span><br><span class="line">Oracle Net Services configuration successful. The exit code is 0</span><br></pre></td></tr></table></figure>
+
+<p>查看监听端口</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# yum install net-tools</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">netstat -tnulp | grep 1521</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200528164450.png" alt=""></p>
+<h3 id="静默创建dbca数据库"><a href="#静默创建dbca数据库" class="headerlink" title="静默创建dbca数据库"></a>静默创建dbca数据库</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /db/app/response/dbca.rsp</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">GDBNAME = "orcl"</span><br><span class="line">SID = "orcl"</span><br><span class="line">SYSPASSWORD = "oracle"</span><br><span class="line">SYSTEMPASSWORD = "oracle"</span><br><span class="line">SYSMANPASSWORD = "oracle"</span><br><span class="line">DBSNMPPASSWORD = "oracle"</span><br><span class="line">DATAFILEDESTINATION =/db/app/oracle/oradata</span><br><span class="line">RECOVERYAREADESTINATION=/db/app/oracle/fast_recovery_area</span><br><span class="line">CHARACTERSET = "AL32UTF8"</span><br><span class="line">TOTALMEMORY = "8192" #设置为内存的50%</span><br></pre></td></tr></table></figure>
+
+<p>执行静默建库</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[oracle@localhost database]$ dbca -silent -responseFile /db/app/response/dbca.rsp</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200528100906.png" alt=""><br>查看Oracle实例进程</p>
+<blockquote>
+<p>在最后一步安装的时候安装界面会先清屏，需要按下Enter按钮输入密码（123456），输入2次然后才看见安装进程。</p>
+</blockquote>
+<blockquote>
+<p>若出现<code>Look at the log file &quot;/db/app/oracle/cfgtoollogs/dbca/orcl11g.log&quot; for further details.</code>是因为在/etc/oratab文件中已经指定了<code>$ORACLE_SID</code>（上次删除数据库时，没有彻底清除/etc/oratab）此时只需要将<code>/etc/oratab</code>中的<code>orcl11g:/db/app/oracle/product/11.2.0:N</code>这一行删除或注释即可。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[oracle@localhost database]$ ps -ef | grep ora_ | grep -v grep</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200528164747.png" alt=""><br>查看监听状态</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[oracle@localhost database]$ lsnrctl status</span><br><span class="line">    </span><br><span class="line">LSNRCTL for Linux: Version 11.2.0.1.0 - Production on 28-MAY-2020 16:41:11</span><br><span class="line">    </span><br><span class="line">Copyright (c) 1991, 2009, Oracle.  All rights reserved.</span><br><span class="line">    </span><br><span class="line">Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=IPC)(KEY=EXTPROC1521)))</span><br><span class="line">STATUS of the LISTENER</span><br><span class="line">------------------------</span><br><span class="line">    Alias                     LISTENER</span><br><span class="line">    Version                   TNSLSNR for Linux: Version 11.2.0.1.0 - Production</span><br><span class="line">Start Date                28-MAY-2020 16:37:29</span><br><span class="line">    Uptime                    0 days 0 hr. 3 min. 41 sec</span><br><span class="line">    Trace Level               off</span><br><span class="line">Security                  ON: Local OS Authentication</span><br><span class="line">    SNMP                      OFF</span><br><span class="line">Listener Parameter File   /db/app/oracle/product/11.2.0/network/admin/listener.ora</span><br><span class="line">    Listener Log File         /db/app/oracle/diag/tnslsnr/localhost/listener/alert/log.xml</span><br><span class="line">Listening Endpoints Summary...</span><br><span class="line">      (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=EXTPROC1521)))</span><br><span class="line">  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=192.168.192.129)(PORT=1521)))</span><br><span class="line">    Services Summary...</span><br><span class="line">Service "orcl11g.us.oracle.com" has 1 instance(s).</span><br><span class="line">      Instance "orcl11g", status READY, has 1 handler(s) for this service...</span><br><span class="line">Service "orcl11gXDB.us.oracle.com" has 1 instance(s).</span><br><span class="line">      Instance "orcl11g", status READY, has 1 handler(s) for this service...</span><br><span class="line">The command completed successfully</span><br></pre></td></tr></table></figure>
+
+<h3 id="登录sqlplus-查看实例状态"><a href="#登录sqlplus-查看实例状态" class="headerlink" title="登录sqlplus,查看实例状态"></a>登录sqlplus,查看实例状态</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[oracle@CentOS ~]$ sqlplus /nolog</span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> conn / as sysdba</span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> select * from v<span class="variable">$version</span>;</span></span><br><span class="line"></span><br><span class="line">BANNER</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production</span><br><span class="line">PL/SQL Release 11.2.0.1.0 - Production</span><br><span class="line">CORE	11.2.0.1.0	Production</span><br><span class="line">TNS for Linux: Version 11.2.0.1.0 - Production</span><br><span class="line">NLSRTL Version 11.2.0.1.0 - Production</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此处出现错误，请查看错误一揽子</p>
+</blockquote>
+<h3 id="激活scott用户"><a href="#激活scott用户" class="headerlink" title="激活scott用户"></a>激活scott用户</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> alter user scott account unlock;</span></span><br><span class="line">User altered.</span><br><span class="line"></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> alter user scott identified by tiger;</span></span><br><span class="line">User altered.</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建用户并授权"><a href="#创建用户并授权" class="headerlink" title="创建用户并授权"></a>创建用户并授权</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> create user asuan identified by <span class="string">"123456"</span>;</span></span><br><span class="line">User created.</span><br><span class="line"></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> grant connect,resource to asuan;</span></span><br><span class="line">Grant succeeded.</span><br></pre></td></tr></table></figure>
+
+<h3 id="开启防火墙"><a href="#开启防火墙" class="headerlink" title="开启防火墙"></a>开启防火墙</h3><h3 id="Navicat远程连接Oracle"><a href="#Navicat远程连接Oracle" class="headerlink" title="Navicat远程连接Oracle"></a>Navicat远程连接Oracle</h3><p>开放1521端口</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone&#x3D;public --add-port&#x3D;1521&#x2F;tcp --permanent</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<p>配置Navicat，如图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200529084750.png" alt=""></p>
+<blockquote>
+<p>注意</p>
+<p>若此处以服务名连接，则许键入<code>tnsnames.ora</code>中的<code>SERVICE_NAME</code></p>
+<p>端口默认为1521，但有时会是其他端口，如1522，需与<code>tnsnames.ora</code>一致</p>
+<p>若端口是1522端口，需要修改防火墙规则开放1522端口，否则会出现连接超时错误</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ORCL11G =</span><br><span class="line">  (DESCRIPTION =</span><br><span class="line">    (ADDRESS = (PROTOCOL = TCP)(HOST = CentOS)(PORT = 1521))</span><br><span class="line">    (CONNECT_DATA =</span><br><span class="line">      (SERVER = DEDICATED)</span><br><span class="line">      (SERVICE_NAME = orcl11g.us.oracle.com)</span><br><span class="line">    )</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">LISTENER_ORCL11G =</span><br><span class="line">  (ADDRESS = (PROTOCOL = TCP)(HOST = CentOS)(PORT = 1521))</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置Oracle开机自启"><a href="#设置Oracle开机自启" class="headerlink" title="设置Oracle开机自启"></a>设置Oracle开机自启</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[oracle@CentOS ~]$ dbstart</span><br></pre></td></tr></table></figure>
+
+<p>执行此命令后会出现错误，错误原因为：：dbstart和dbshut脚本文件中ORACLE_HOME_LISTNER的设置有问题</p>
+<p>分别修改<code>dbstart</code>和<code>dbshut</code>脚本</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[oracle@CentOS ~]$ vim &#x2F;db&#x2F;app&#x2F;oracle&#x2F;product&#x2F;11.2.0&#x2F;bin&#x2F;dbstart </span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">ORACLE_HOME_LISTNER&#x3D;$1</span><br><span class="line">修改为：</span><br><span class="line">ORACLE_HOME_LISTNER&#x3D;$ORACLE_HOME</span><br></pre></td></tr></table></figure>
+
+<p><code>dbshut</code>也进行同样的修改，修改后保存退出，问题解决</p>
+<h5 id="Linux启动时自动启动Oracle监听和实例"><a href="#Linux启动时自动启动Oracle监听和实例" class="headerlink" title="Linux启动时自动启动Oracle监听和实例"></a>Linux启动时自动启动Oracle监听和实例</h5><ul>
+<li>修改<code>/etc/oratab</code>文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@CentOS ~]# vim &#x2F;etc&#x2F;oratab </span><br><span class="line">---------------------------------------------------------</span><br><span class="line">orcl11g:&#x2F;db&#x2F;app&#x2F;oracle&#x2F;product&#x2F;11.2.0:N</span><br><span class="line">修改为:</span><br><span class="line">orcl11g:&#x2F;db&#x2F;app&#x2F;oracle&#x2F;product&#x2F;11.2.0:Y</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>把lsnrctl start和dbstart添加到rc.local文件中</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@CentOS ~]# vim /etc/rc.d/rc.local</span><br></pre></td></tr></table></figure>
+
+<p>添加：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">su - oracle -lc "/db/app/oracle/product/11.2.0/bin/lsnrctl start"</span><br><span class="line">su - oracle -lc "/db/app/oracle/product/11.2.0/bin/dbstart"</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>说明:</p>
+<p>第一行为开机启动数据库监听服务，第二行为开机启动数据库</p>
+</blockquote>
+<blockquote>
+<p>注意：CentOs7中/etc/rc.d/rc.local不会开机执行，需添加执行权限</p>
+</blockquote>
+<p>查看<code>rc.local</code>权限:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@CentOS ~]# ll /etc/rc.d/rc.local </span><br><span class="line">-rw-r--r--. 1 root root 600 5月  29 09:13 /etc/rc.d/rc.local</span><br></pre></td></tr></table></figure>
+
+<p>可以发现并没有执行权限，现在添加执行权限：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chmod +x /etc/rc.d/rc.local</span><br></pre></td></tr></table></figure>
+
+<p>至此，Oracle的开机自启就完成了，执行<code>reboot</code>重启之后查看是否自启动成功：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200529084747.png" alt=""></p>
+<p>查看Oracle服务状态</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[oracle@CentOS ~]$ ps -aux | grep oracle</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200529084749.png" alt=""></p>
+<blockquote>
+<p>注：设置Oracle开机自启之后虽然可以监听到实例，但是不能通过Navicat远程连接，需要执行oracle的关闭和开启操作之后才能正常远程连接，原因可能是启动了阻塞实例？</p>
+</blockquote>
+<h3 id="Linux下Oracle的启动和关闭"><a href="#Linux下Oracle的启动和关闭" class="headerlink" title="Linux下Oracle的启动和关闭"></a>Linux下Oracle的启动和关闭</h3><ul>
+<li>启动的时候先启动oracle，然后启动监听器，即：startup-&gt;lsnrctl start</li>
+<li>关闭的时候先关闭监听器，然后在关闭oracle,即：lsnrctl stop-&gt;shutdown</li>
+</ul>
+<h3 id="解决Linux下数据库插入中文乱码问题"><a href="#解决Linux下数据库插入中文乱码问题" class="headerlink" title="解决Linux下数据库插入中文乱码问题"></a>解决Linux下数据库插入中文乱码问题</h3><p>首先以系统DBA权限登录sqlplus</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sqlplus /nolog</span><br><span class="line">conn /as sysdba</span><br></pre></td></tr></table></figure>
+
+<p>查看数据库编码：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">select userenv('language') from dual;</span><br></pre></td></tr></table></figure>
+
+<p>结果为：AMERICAN_AMERICA.WE8MSWIN1252 ，这种编码中文会乱码。</p>
+<p>修改数据库编码方式：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> shutdown immediate;</span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> startup mount;</span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> alter system <span class="built_in">enable</span> restricted session;</span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> alter system <span class="built_in">set</span> job_queue_processes=0;</span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> alter database open;</span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> alter database character <span class="built_in">set</span> internal_use AL32UTF8; <span class="comment">#AL32UTF8或者ZHS16GBK都行</span></span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> shutdown immediate;</span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> startup</span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> alter system <span class="built_in">disable</span> restricted session;</span></span><br></pre></td></tr></table></figure>
+
+<p>此时，查看数据库编码:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> select userenv(<span class="string">'language'</span>) from dual;</span></span><br><span class="line"></span><br><span class="line">USERENV('LANGUAGE')</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">AMERICAN_AMERICA.AL32UTF8</span><br></pre></td></tr></table></figure>
+
+<h3 id="错误一揽子"><a href="#错误一揽子" class="headerlink" title="错误一揽子"></a>错误一揽子</h3><h4 id="ORA-01034"><a href="#ORA-01034" class="headerlink" title="ORA-01034"></a>ORA-01034</h4><ul>
+<li>错误原因，数据库未启动，查询v$instance报错</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ERROR at line 1:</span><br><span class="line">ORA-01034: ORACLE not available</span><br><span class="line">Process ID: 0</span><br><span class="line">Session ID: 0 Serial number: 0</span><br></pre></td></tr></table></figure>
+
+<p>启动数据库-报错:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> startup mount</span></span><br><span class="line">ORA-01078: failure in processing system parameters</span><br><span class="line">LRM-00109: could not open parameter file '/db/app/oracle/product/11.2.0/dbs/initorcl.ora'</span><br></pre></td></tr></table></figure>
+
+<p>转<code>LRM-00109</code>解决方法</p>
+<h4 id="LRM-00109"><a href="#LRM-00109" class="headerlink" title="LRM-00109"></a>LRM-00109</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> startup </span></span><br><span class="line">ORA-01078: failure in processing system parameters</span><br><span class="line">LRM-00109: could not open parameter file '/db/app/oracle/product/11.2.0/dbs/initorcl.ora'</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>错误原因：在oracle9i、10g、11g最近几个版本中，数据库默认使用spfile启动数据库，如果spfile不存在，则就会出现上述错误。</p>
+</li>
+<li><p>解决办法：</p>
+<p>查询pfile文件位置，将pfile目录中的init.ora.2182020183512形式的文件copy到$ORACLE_HOME/dbs目录下命名为initorcl.ora即可。具体操作如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[oracle@CentOS ~]$ echo $ORACLE_BASE</span><br><span class="line">/db/app/oracle</span><br><span class="line">[oracle@CentOS ~]$ find /db/app/oracle -name pfile</span><br><span class="line">/db/app/oracle/admin/orcl11g/pfile</span><br><span class="line">[oracle@localhost ~]$ cd /db/app/oracle/admin/orcl11g/pfile</span><br><span class="line">[oracle@localhost pfile]$ ls</span><br><span class="line">init.ora.428202010617</span><br><span class="line">[oracle@localhost pfile]$ cp init.ora.428202010617 /db/app/oracle/product/11.2.0/dbs/initorcl.ora</span><br><span class="line">[oracle@localhost pfile]$</span><br></pre></td></tr></table></figure>
+<p>此操作之后数据库startup mount出现如下错误：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ORACLE instance started.</span><br><span class="line">      </span><br><span class="line">Total System Global Area 1586708480 bytes</span><br><span class="line">Fixed Size		    2213736 bytes</span><br><span class="line">Variable Size		  922749080 bytes</span><br><span class="line">Database Buffers	  654311424 bytes</span><br><span class="line">Redo Buffers		    7434240 bytes</span><br><span class="line">ORA-00205: error in identifying control file, check alert log for more info</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="ORA-00845"><a href="#ORA-00845" class="headerlink" title="ORA-00845"></a>ORA-00845</h4><p>在oracle 11g中新增的内存自动管理的参数MEMORY_TARGET,它能自动调整SGA和PGA，这个特性需要用到/dev/shm共享文件系统，而且要求/dev/shm必须大于MEMORY_TARGET，如果/dev/shm比MEMORY_TARGET小就会报错</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200528153248.png" alt=""> </p>
+<ul>
+<li>解决方案</li>
+</ul>
+<p>解决的办法之一是增加tmpfs文件系统的容量:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@CentOS ~]# mount -t tmpfs tmpfs -o size=4g /dev/shm</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>参考文章:</p>
+<p><a href="https://blog.csdn.net/yjj_xss/article/details/104977384" target="_blank" rel="noopener">https://blog.csdn.net/yjj_xss/article/details/104977384</a></p>
+<p><a href="https://blog.csdn.net/russ44/article/details/52137799" target="_blank" rel="noopener">https://blog.csdn.net/russ44/article/details/52137799</a></p>
+</blockquote>
+<h4 id="ORA-01102"><a href="#ORA-01102" class="headerlink" title="ORA-01102"></a>ORA-01102</h4><p>错误如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> startup mount</span></span><br><span class="line">ORACLE instance started.</span><br><span class="line">    </span><br><span class="line">Total System Global Area 1586708480 bytes</span><br><span class="line">Fixed Size		    2213736 bytes</span><br><span class="line">Variable Size		  922749080 bytes</span><br><span class="line">Database Buffers	  654311424 bytes</span><br><span class="line">Redo Buffers		    7434240 bytes</span><br><span class="line">ORA-01102: cannot mount database in EXCLUSIVE mode</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>可能原因：</p>
+<pre><code>Oracle被异常关闭时，有资源没有被释放
+1） Oracle的共享内存段或信号量没有被释放；
+2） Oracle的后台进程（如SMON、PMON、DBWn等）没有被关闭；
+3） 用于锁内存的文件lk和sgadef.dbf文件没有被删除。</code></pre><ul>
+<li><p>解决思路：<br>如果是HA系统，检查其他节点是否已经启动实例检查Oracle进程是否存在，如果存在则杀掉进程检查信号量是否存在，如果存在，则清除信号量；<br>检查共享内存段是否存在，如果存在，则清除共享内存段；<br>检查锁内存文件lk和sgadef.dbf是否存在，如果存在，则删除.</p>
+</li>
+<li><p>此处我依靠下面的步骤解决掉了该问题（我遇到的问题是存在锁文件和共享内存段问题）：</p>
+</li>
+</ul>
+</li>
+<li><p>如果存在lk和sgadef.dbf文件，则删除</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[oracle@localhost dbs]$  cd $ORACLE_HOME/dbs</span><br><span class="line">[oracle@localhost dbs]$  ls lk*</span><br><span class="line">lkORCL11G</span><br><span class="line">[oracle@localhost dbs]$  rm lk*</span><br></pre></td></tr></table></figure>
+
+<p> 再次启动时又遇到下面的错误</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> startup</span></span><br><span class="line">ORACLE instance started.</span><br><span class="line">        </span><br><span class="line">Total System Global Area 1586708480 bytes</span><br><span class="line">Fixed Size		    2213736 bytes</span><br><span class="line">Variable Size		  922749080 bytes</span><br><span class="line">Database Buffers	  654311424 bytes</span><br><span class="line">Redo Buffers		    7434240 bytes</span><br><span class="line">ORA-00205: error in identifying control file, check alert log for more info</span><br></pre></td></tr></table></figure>
+
+<h4 id="ORA-00205"><a href="#ORA-00205" class="headerlink" title="ORA-00205"></a>ORA-00205</h4><blockquote>
+<p>此问题比较复杂，最后不知道是哪个方法起效了</p>
+</blockquote>
+<h5 id="情况1："><a href="#情况1：" class="headerlink" title="情况1："></a>情况1：</h5><p>由于数据库控制文件之一不正确</p>
+<ul>
+<li>解决方法：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> show parameter control_files</span></span><br><span class="line">NAME                                 TYPE        VALUE</span><br><span class="line">------------------------------------ ----------- ------------------------------</span><br><span class="line">control_files                        string      /u01/app/oracle/oradata/RTS/co</span><br><span class="line">                                                  ntrol01.ctl, /u01/app/oracle/o</span><br><span class="line">                                                  radata/RTS/control02.ctl</span><br></pre></td></tr></table></figure>
+
+<p>可以看到存在两个控制文件，判断哪个控制文件不可用</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">[oracle@PR]$</span><span class="bash"> ll /u01/app/oracle/oradata/RTS/control01.ctl</span></span><br><span class="line">-rw-r-----. 1 oracle oinstall 9748480 Jun 24 03:37 /u01/app/oracle/oradata/RTS/control01.ctl</span><br><span class="line"><span class="meta">[oracle@PR]$</span><span class="bash"> ll /u01/app/oracle/oradata/RTS/control02.ctl</span></span><br><span class="line">ls: cannot access /u01/app/oracle/oradata/RTS/control02.ctl: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>可以看到，control02.ctl是不可用的，进行修改</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> alter system <span class="built_in">set</span> control_files=<span class="string">'/u01/app/oracle/oradata/RTS/control01.ctl'</span> scope=spfile;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意，此时可能会出现 <code>ORA-32001</code>错误</p>
+</blockquote>
+<p>关闭，并重启oracle</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> shut immediate;</span></span><br><span class="line">ORA-01507: database not mounted</span><br><span class="line">ORACLE instance shut down.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> startup</span></span><br><span class="line">ORACLE instance started.</span><br><span class="line">ORA-00205......</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>该方法对我这种情况好像并没有什么卵用–</p>
+</blockquote>
+<h5 id="情况2"><a href="#情况2" class="headerlink" title="情况2:"></a>情况2:</h5><p>打开日志文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[oracle@localhost orcl]$ cd /db/app/oracle/diag/rdbms/orcl11g/orcl/trace</span><br><span class="line">[oracle@localhost trace]$ vim alert_orcl.log</span><br></pre></td></tr></table></figure>
+
+<p>可以看到如下错误：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ALTER DATABASE   MOUNT</span><br><span class="line">ORA-00210: cannot open the specified control file</span><br><span class="line">ORA-00202: control file: '/db/app/oracle/oradata/orcl11g/control01.ctl'</span><br><span class="line">ORA-27086: unable to lock file - already in use</span><br><span class="line">Linux-x86_64 Error: 11: Resource temporarily unavailable</span><br><span class="line">Additional information: 8</span><br><span class="line">Additional information: 13879</span><br><span class="line">ORA-205 signalled during: ALTER DATABASE   MOUNT...</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>解决思路</p>
+<p>查看<code>$ORACLE_HOME/dbs</code>文件夹下是否存在<code>lk*</code>和<code>sgadef.dbf</code>文件，如果存在，删除</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[oracle@localhost dbs]$ ps -ef | grep ora_ | grep -v grep</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">oracle    13857      1  0 16:40 ?        00:00:02 ora_pmon_orcl11g</span><br><span class="line">oracle    13859      1  0 16:40 ?        00:00:25 ora_vktm_orcl11g</span><br><span class="line">oracle    13863      1  0 16:40 ?        00:00:00 ora_gen0_orcl11g</span><br><span class="line">oracle    13865      1  0 16:40 ?        00:00:00 ora_diag_orcl11g</span><br><span class="line">oracle    13867      1  0 16:40 ?        00:00:00 ora_dbrm_orcl11g</span><br><span class="line">oracle    13869      1  0 16:40 ?        00:00:01 ora_psp0_orcl11g</span><br><span class="line">oracle    13871      1  0 16:40 ?        00:00:02 ora_dia0_orcl11g</span><br><span class="line">oracle    13873      1  0 16:40 ?        00:00:00 ora_mman_orcl11g</span><br><span class="line">oracle    13875      1  0 16:40 ?        00:00:00 ora_dbw0_orcl11g</span><br><span class="line">oracle    13877      1  0 16:40 ?        00:00:00 ora_lgwr_orcl11g</span><br><span class="line">oracle    13879      1  0 16:40 ?        00:00:02 ora_ckpt_orcl11g</span><br><span class="line">oracle    13881      1  0 16:40 ?        00:00:00 ora_smon_orcl11g</span><br><span class="line">oracle    13883      1  0 16:40 ?        00:00:00 ora_reco_orcl11g</span><br><span class="line">oracle    13885      1  0 16:40 ?        00:00:01 ora_mmon_orcl11g</span><br><span class="line">oracle    13887      1  0 16:40 ?        00:00:02 ora_mmnl_orcl11g</span><br><span class="line">oracle    13889      1  0 16:40 ?        00:00:00 ora_d000_orcl11g</span><br><span class="line">oracle    13891      1  0 16:40 ?        00:00:00 ora_s000_orcl11g</span><br><span class="line">oracle    13930      1  0 16:40 ?        00:00:00 ora_qmnc_orcl11g</span><br><span class="line">oracle    13945      1  0 16:40 ?        00:00:01 ora_cjq0_orcl11g</span><br><span class="line">oracle    13959      1  0 16:40 ?        00:00:00 ora_q000_orcl11g</span><br><span class="line">oracle    13961      1  0 16:40 ?        00:00:00 ora_q001_orcl11g</span><br><span class="line">oracle    14005      1  0 16:50 ?        00:00:01 ora_smco_orcl11g</span><br><span class="line">oracle    29258      1  0 18:59 ?        00:00:00 ora_pmon_orcl</span><br><span class="line">oracle    29260      1  0 18:59 ?        00:00:01 ora_vktm_orcl</span><br><span class="line">oracle    29264      1  0 18:59 ?        00:00:00 ora_gen0_orcl</span><br><span class="line">oracle    29266      1  0 18:59 ?        00:00:00 ora_diag_orcl</span><br><span class="line">oracle    29268      1  0 18:59 ?        00:00:00 ora_dbrm_orcl</span><br><span class="line">oracle    29270      1  0 18:59 ?        00:00:00 ora_psp0_orcl</span><br><span class="line">oracle    29272      1  0 18:59 ?        00:00:00 ora_dia0_orcl</span><br><span class="line">oracle    29274      1  0 18:59 ?        00:00:00 ora_mman_orcl</span><br><span class="line">oracle    29276      1  0 18:59 ?        00:00:00 ora_dbw0_orcl</span><br><span class="line">oracle    29278      1  0 18:59 ?        00:00:00 ora_lgwr_orcl</span><br><span class="line">oracle    29280      1  0 18:59 ?        00:00:00 ora_ckpt_orcl</span><br><span class="line">oracle    29282      1  0 18:59 ?        00:00:00 ora_smon_orcl</span><br><span class="line">oracle    29284      1  0 18:59 ?        00:00:00 ora_reco_orcl</span><br><span class="line">oracle    29286      1  0 18:59 ?        00:00:00 ora_mmon_orcl</span><br><span class="line">oracle    29288      1  0 18:59 ?        00:00:00 ora_mmnl_orcl</span><br><span class="line">oracle    29290      1  0 18:59 ?        00:00:00 ora_d000_orcl</span><br><span class="line">oracle    29292      1  0 18:59 ?        00:00:00 ora_s000_orcl</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[oracle@localhost dbs]$ kill -9 13857  </span><br><span class="line">[oracle@localhost dbs]$ kill -9 29258</span><br><span class="line">[oracle@localhost dbs]$ ipcs -m</span><br><span class="line">      </span><br><span class="line">------ Shared Memory Segments --------</span><br><span class="line">key        shmid      owner      perms      bytes      nattch     status      </span><br><span class="line">0x087c7b68 7          oracle     660        4096       0     </span><br><span class="line">      </span><br><span class="line">[oracle@localhost dbs]$ ipcs -map</span><br><span class="line">------ Message Queues PIDs --------</span><br><span class="line">msqid      owner      lspid      lrpid     </span><br><span class="line">      </span><br><span class="line">------ Shared Memory Creator/Last-op PIDs --------</span><br><span class="line">shmid      owner      cpid       lpid      </span><br><span class="line">7          oracle     13829      13863</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[oracle@localhost dbs]$ ipcrm -m 7</span><br><span class="line"> [oracle@localhost dbs]$ ipcs -s</span><br><span class="line">      </span><br><span class="line">------ Semaphore Arrays --------</span><br><span class="line">key        semid      owner      perms      nsems     </span><br><span class="line">      </span><br><span class="line">[oracle@localhost dbs]$ ipcs -m</span><br><span class="line">      </span><br><span class="line">------ Shared Memory Segments --------</span><br><span class="line">key        shmid      owner      perms      bytes      nattch     status</span><br></pre></td></tr></table></figure>
+
+<p>此时启动Oracle</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> startup mount </span></span><br><span class="line">ORACLE instance started.</span><br><span class="line">      </span><br><span class="line">Total System Global Area 1586708480 bytes</span><br><span class="line">Fixed Size		    2213736 bytes</span><br><span class="line">Variable Size		  922749080 bytes</span><br><span class="line">Database Buffers	  654311424 bytes</span><br><span class="line">Redo Buffers		    7434240 bytes</span><br><span class="line">Database mounted.</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>本部分参考文章:</p>
+<p><a href="https://blog.csdn.net/yjj_xss/article/details/104977384" target="_blank" rel="noopener">https://blog.csdn.net/yjj_xss/article/details/104977384</a></p>
+<p><a href="https://www.cnblogs.com/suifu/p/5823099.html" target="_blank" rel="noopener">https://www.cnblogs.com/suifu/p/5823099.html</a></p>
+<p><a href="https://dbatricksworld.com/ora-00205-error-in-identifying-control-file-check-alert-log-for-more-info" target="_blank" rel="noopener">https://dbatricksworld.com/ora-00205-error-in-identifying-control-file-check-alert-log-for-more-info</a></p>
+</blockquote>
+<h4 id="ORA-32001"><a href="#ORA-32001" class="headerlink" title="ORA-32001"></a>ORA-32001</h4><p>在执行命令时可能出现<code>ORA-32001: write to SPFILE requested but no SPFILE is in use</code></p>
+<p>解决：</p>
+<ol>
+<li><p>查看是否有<code>spfile</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash">show parameter spfile;</span></span><br><span class="line"></span><br><span class="line">NAME            TYPE              VALUE            </span><br><span class="line">------------------------------------ -----</span><br><span class="line">spfile          string</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从pfile创建spfile</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash">create spfile from pfile;</span></span><br><span class="line">File created.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭并重启数据库</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash">shutdown immediate;</span></span><br><span class="line"><span class="meta">SQL&gt;</span><span class="bash">startup mount</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看是否有<code>spfile</code>文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash">show parameter spfile;</span></span><br><span class="line"></span><br><span class="line">NAME                TYPE            VALUE</span><br><span class="line">------------------------------------ ----------------------</span><br><span class="line">spfile              string         db/app/oracle/product/11.2.0/dbs/spfilePROD.ora</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再次执行需要执行的命令，发现该错误已解决。</p>
+</li>
+</ol>
+<h4 id="ORA-01109"><a href="#ORA-01109" class="headerlink" title="ORA-01109"></a>ORA-01109</h4><p>在数据库未打开时对数据库进行操作会收到<code>ORA-01109</code>错误</p>
+<p>使用如下命令打开数据库即可:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">alter database open;</span><br></pre></td></tr></table></figure>
+
+<h4 id="The-listener-supports-no-services"><a href="#The-listener-supports-no-services" class="headerlink" title="The listener supports no services"></a>The listener supports no services</h4><p>使用<code>lsnrctl status</code>命令时可能会出现<code>The listener supports no services</code></p>
+<p>问题原因：数据库实例没有注册到<code>listner</code></p>
+<ul>
+<li><p>解决方法一：</p>
+<p>登录数据库</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[oracle@CentOS ~]$ sqlplus /nolog</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash"> conn / as sysdba</span></span><br></pre></td></tr></table></figure>
+
+<p>强制注册服务</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">SQL&gt;</span><span class="bash">alter system register;</span></span><br></pre></td></tr></table></figure>
+
+<p>查看监听状态</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[oracle@CentOS ~]$ lsnrctl status</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解决方法二：</p>
+<p>在<code>listener.ora</code>中添加如下代码：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">SID_LIST_LISTENER =  </span><br><span class="line">(SID_LIST =  </span><br><span class="line">  (SID_DESC =  </span><br><span class="line">  (GLOBAL_DBNAME = orcl)</span><br><span class="line">  (SID_NAME = orcl)</span><br><span class="line">  )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注1：里面的orcl根据安装的数据库实例名确定</p>
+</blockquote>
+<blockquote>
+<p>注2：此方法我并没有使用，不确定是否有效</p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>环境搭建</tag>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java面试笔记 </title>
+    <url>/2021/09/10/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0%20/</url>
+    <content><![CDATA[<h3 id="Java面试笔记"><a href="#Java面试笔记" class="headerlink" title="Java面试笔记"></a>Java面试笔记</h3><blockquote>
+<p>来个公司收了我吧</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="面向对象与面向过程的区别"><a href="#面向对象与面向过程的区别" class="headerlink" title="面向对象与面向过程的区别"></a>面向对象与面向过程的区别</h3><p>面向过程是让计算机有步骤地顺序做一件事，是过程化思维，在开发大型项目时，软件复用和维护困难，<strong>模块之间耦合严重。</strong>面向对象可以拆解问题的复杂度，<strong>对现实事物进行抽象并映射为开发对象</strong>，更接近人的思维。</p>
+<p>面向过程代码松散，强调流程化解决问题，面向对象代码强调高内聚、低耦合，先抽象模型定义共性行为，再解决实际问题。</p>
+<h4 id="C-和Java"><a href="#C-和Java" class="headerlink" title="C++和Java"></a>C++和Java</h4><ol>
+<li>C++可以继承多个类，Java只能单继承，但是可以实现多个接口</li>
+<li>Java和C++都是强类型语言，都存在类的概念，并且都有private，protected，public等访问限定符。</li>
+</ol>
+<h3 id="面向对象的特点"><a href="#面向对象的特点" class="headerlink" title="面向对象的特点"></a>面向对象的特点</h3><p>封装，继承，多态</p>
+<p><strong>封装：</strong>就是把对象的属性和操作封装为一个独立的整体，并尽可能隐藏对象的内部实现细节，并且可以只让可信的类或对象访问自身的数据和方法。</p>
+<p><strong>继承：</strong>子类继承父类的特征和行为，使得子类具有父类相同的行为，如果父类中拥有被private修饰属性，则子类不能继承。Java只支持单继承，即一个子类只允许有一个父类，但可以实现多级继承。通过继承，提高了代码的复用性。</p>
+<p>继承的实现方法有实现继承和接口继承，实现继承指直接使用基类的方法和属性，接口继承时子类需要实现父类的方法。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;继承链中的优先级调用</span><br><span class="line">this.show(O);super.show(O);this.show((super)O);super.show((super)O)</span><br><span class="line">&#x2F;&#x2F;如果(super)O重写了this的方法，则会覆盖。</span><br></pre></td></tr></table></figure>
+
+<p><strong>多态：</strong>一个类实例的相同方法，在不同情形下有不同的表现形式，只有在运行时才知道引用变量指向的具体对象。多态消除了类型之间的耦合关系，实现低耦合。</p>
+<p>在Java中可以<strong>通过继承和接口两种方式实现多态</strong>。多态的<strong>实现需要进行继承、重写、向上转型</strong>，在多态中必须存在继承关系的子类和父类，子类需要对父类中的某些方法进行重写，向上转型即在多态中父类的引用指向子类，如</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Integer&gt; a =<span class="keyword">new</span> ArrayList&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>注意：向上转型之后，子类的特有方法就不能再被调用了。</p>
+<h3 id="Java中子类的初始化顺序"><a href="#Java中子类的初始化顺序" class="headerlink" title="Java中子类的初始化顺序"></a>Java中子类的初始化顺序</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">父类的静态变量和代码块</span><br><span class="line">子类的静态变量和代码块</span><br><span class="line">父类的实例变量，普通语句块</span><br><span class="line">父类的构造函数</span><br><span class="line">子类的实例变量，普通语句块</span><br><span class="line">子类的构造函数</span><br></pre></td></tr></table></figure>
+
+<h3 id="抽象类和接口的区别"><a href="#抽象类和接口的区别" class="headerlink" title="抽象类和接口的区别"></a>抽象类和接口的区别</h3><ol>
+<li><p>一个类可以实现多个接口，但是只能继承一个类</p>
+</li>
+<li><p>接口的成员只能是public(JDK8中允许default修饰定义默认方法)，抽象类无所谓。</p>
+</li>
+<li><p>接口中的字段只能是static final类型，抽象类无所谓</p>
+</li>
+<li><p>接口用于让不相关的类实现同一方法和需要多重继承的时候，</p>
+<p>例如：Plane和Bird类都有fly(),应该把fly定义为接口，因为除了fly外，bird和plane基本没有其他相同特征。</p>
+</li>
+</ol>
+<h3 id="重写和重载"><a href="#重写和重载" class="headerlink" title="重写和重载"></a>重写和重载</h3><p><strong>重写(override): **是子类对父类</strong>允许访问的方法**的实现过程进行重新编写，其返回值和形参都不能改变</p>
+<p>重写规则：1. 被final修饰的方法不能被重写； 2. 构造方法不能被重写；3. 访问权限不能比父类中被重写的方法访问权限更低;<code>public&gt;protected&gt;(default)&gt;private</code></p>
+<p><strong>重载(overload):</strong>在一个类中，方法名相同，而参数不同称为方法的重载。</p>
+<p>重载的规则：1. 被重载的方法可以改变返回类型；2. 被重载的方法可以改变访问修饰符；<strong>3.被重载的方法必须改变参数列表。</strong></p>
+<p>JVM在重载方法中选择合适方法的顺序为：1. 精确匹配；2. 基本数据类型转为更大的表示范围；3. 自动拆箱装箱；4. 子类向上转型；5. 可变参数</p>
+<h3 id="自动装箱与拆箱"><a href="#自动装箱与拆箱" class="headerlink" title="自动装箱与拆箱"></a>自动装箱与拆箱</h3><p>在Java中，每个数据类型都有一个对应的包装类(char的包装类为Character)</p>
+<p>自动装箱，指将基本数据类型包装为一个包装类类型，如向泛型为<code>Inetger</code>的类型添加int元素</p>
+<p>自动拆箱，即将一个包装类的对象转换为一个基本数据类型</p>
+<p>注意：比较两个包装类数值时需要使用<code>equal</code>s而不是<code>==</code>；</p>
+<h3 id="Java如何实现平台无关性"><a href="#Java如何实现平台无关性" class="headerlink" title="Java如何实现平台无关性"></a>Java如何实现平台无关性</h3><p>java可以一次编写，到处运行，Java编译器可生成与计算机体系结构无关的字节码指令，字节码文件不仅可以轻易的在任何机器上执行，还可以动态的转换为本地机器代码，转换由JVM实现，屏蔽了不同操作系统之间的差异。</p>
+<h3 id="Java中Class类的作用"><a href="#Java中Class类的作用" class="headerlink" title="Java中Class类的作用"></a>Java中Class类的作用</h3><p>在java运行时，系统会为所有对象维护一个运行时类型标识，这个信息会跟踪每个对象所属的类，虚拟机利用运行时类信息选择要执行的正确方法，保存这些信息的类就是Class，这是一个泛型类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">类名<span class="class">.<span class="keyword">class</span>；对象的<span class="title">getclass</span>方法；<span class="title">Class</span>.<span class="title">forName</span>(类的全限定名)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="fail-fast和fail-safe"><a href="#fail-fast和fail-safe" class="headerlink" title="fail-fast和fail-safe"></a>fail-fast和fail-safe</h3><p><strong>fail-fast(快速失败机制)：</strong>是java集合的一种错误检测机制，当<strong>多个线程对部分集合进行结构上的改变操作</strong>时可能会发生fail-fast，抛出ConcurrentModificationException异常。如当在迭代集合的过程中，集合在结构上发生了改变。</p>
+<p>:warning:fail-fast不能保证不同步的情况下一定会抛出异常，只能尽力去抛出异常</p>
+<p><strong>fail-safe(安全失败)：</strong>采用fail-safe的集合容器，在遍历是不是直接在集合内容上访问，而是先复制原有集合的内容，然后在拷贝的集合上进行遍历操作，由于是对拷贝的集合遍历，<strong>对原集合的修改并不会被迭代器检测到</strong>抛出异常。缺点是迭代器也不能访问到修改后的内容。(java.util.concurrent)</p>
+<h3 id="浅拷贝与深拷贝"><a href="#浅拷贝与深拷贝" class="headerlink" title="浅拷贝与深拷贝"></a>浅拷贝与深拷贝</h3><p>Object类中的<strong>Clone()</strong>方法用于拷贝对象，默认Clone()方法是浅拷贝。</p>
+<p><strong>浅拷贝：</strong>只复制当前对象的基本数据类型和引用变量，没有复制引用对象指向的实际对象，对克隆对象的修改可能影响原对象，不安全。</p>
+<blockquote>
+<p>对于引用类型，比如数组或者类对象，因为引用类型是引用传递，所以浅拷贝只是把内存地址赋值给了成员变量，它们指向了同一内存空间。改变其中一个，会对另外一个也产生影响。</p>
+</blockquote>
+<p><strong>深拷贝：</strong>完全拷贝基本数据类型和引用类型，安全，但是较浅拷贝速度慢且开销大</p>
+<blockquote>
+<p>深拷贝，在拷贝引用类型成员变量时，为引用类型的数据成员另辟了一个独立的内存空间，实现真正内容上的拷贝。</p>
+</blockquote>
+<p>对于有多层对象的，每个对象都需要实现Cloneable,并重写clone()方法，进而实现对象的串行层层拷贝。</p>
+<p><strong>实现对象拷贝的类，需要实现Cloneable接口，并覆写clone()方法</strong>。</p>
+<h3 id="数组和链表"><a href="#数组和链表" class="headerlink" title="数组和链表"></a>数组和链表</h3><p>数组可以随机访问其中元素，查询快，增删慢(需要移动后面所有元素)；链表删除快，查询需要遍历整个链表。</p>
+<p>数组需要连续的内存空间，而链表的空间可以不连续。</p>
+<p>数组的扩容需要分配一块更大的空间再迁移数据，而链表可以动态扩容。</p>
+<h3 id="ArrayList和LinkedList"><a href="#ArrayList和LinkedList" class="headerlink" title="ArrayList和LinkedList"></a>ArrayList和LinkedList</h3><p>ArrayList基于数组实现，LinkedList基于双向链表设计，两者都可以非空，重复，有序，且线程不安全。</p>
+<p>LinkedList因为基于双向链表，所以获取元素较ArrayList要慢 (遍历整个链表O(N))</p>
+<p>LinkedList做插入删除操作的时候慢在寻址，快在操作只需要更改前后Node的引用地址</p>
+<p>ArrayList快在寻址，慢在数组元素的批量copy</p>
+<blockquote>
+<p>当要插入和删除的元素在前半段或者非常靠前的位置的时候，LinkedList的效率大大快过ArrayList，但是越往后ArrayList要Copy的元素越来越少，操作速度必然追上或者超过LinkedList</p>
+</blockquote>
+<blockquote>
+<p>LinkedList在查找元素的时候，若index小于size的一半从头开始遍历链表，当index在链表的后半部时，从尾部遍历链表</p>
+</blockquote>
+<p>ArrayList中的所有方法都是不同步的，所以在并发下 <strong>必然出现线程安全问题</strong>，vector是ArrayList的线程安全版本，其默认2倍扩容。</p>
+<p>ArrayList调用grow方法判断是否需要多次扩容，每次默认扩容为原容器容量右移一位，即相当于原容器的1.5倍。</p>
+<h3 id="List和Set"><a href="#List和Set" class="headerlink" title="List和Set"></a>List和Set</h3><p><img src="https://img.php.cn/upload/article/000/000/028/5c73a16ef1c04585.jpg" alt="img"></p>
+<p>List和Set都是继承的Collection接口</p>
+<p><strong>List：</strong>有序，可重复；<strong>Set：</strong>无序，不可重复，重复元素会被覆盖掉</p>
+<p>List可以通过迭代器和下标遍历，Set只能通过迭代器遍历</p>
+<p>HashSet通过 HashMap实现，HashMap的Key即HashSet的值，可以存在null值，线程不安全</p>
+<p>TreeSet通过TreeMap实现</p>
+<p>ArrayList和LinkedList见上述。</p>
+<h4 id="HashSet如何实现添加元素时保证元素不重复"><a href="#HashSet如何实现添加元素时保证元素不重复" class="headerlink" title="HashSet如何实现添加元素时保证元素不重复"></a>HashSet如何实现添加元素时保证元素不重复</h4><p>如果不存在元素和传入对象的Hash值相等，表示该对象不存在，存。</p>
+<p>如果存在元素和传入对象的Hash值相等，若equals判读相等，不存，若equals判断不等，存</p>
+<h4 id="关于HashMap"><a href="#关于HashMap" class="headerlink" title="关于HashMap"></a>关于HashMap</h4><p>HashMap在底层数据结构上采用了数组+链表+红黑树的结构，通过散列映射来存储键值对数据，因为在查询上使用散列码，所以查询上速度比较快。HashMap最多允许一对键值对的key为null，多个键值对的value为null。无序，且非线程安全。(ConcurrentHashMap线程安全)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">1</span> &lt;&lt; 默认的table 初始容量（<span class="number">16</span>）</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="number">0.75f</span>：默认的负载因子</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TREEIFY_THRESHOLD = <span class="number">8</span>: 链表长度大于该参数转红黑树</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNTREEIFY_THRESHOLD = <span class="number">6</span>: 当树的节点数小于等于该参数转成链表</span><br></pre></td></tr></table></figure>
+
+<p><strong>HashMap的动态扩容：</strong>假设hashmap的table长度是m，键值对为n，table中每个链表长度为n/m,为了使查找成本尽可能小需要m尽可能大，可以使用resize实现，hashMap默认负载因子0.75f，即当容量达到3/4时进行扩容，负载因子越大，能容纳的键值对越多，但是查找的代价也会相应增大。</p>
+<p><strong>hash():</strong>如果key为null，返回0，否则将hashcode方法的返回值高低16位异或（ h ^ (h &gt;&gt;&gt; 16) ）,<strong>让尽可能多的位参与运算，使结果的0,1分布更加均匀,降低Hash冲突概率</strong> （右位移16位正好是32bit的一半，高半区和低半区异或加大低位的随机性，而且混合后的低位参杂了高位的部分特征，变相保留了高位的信息）</p>
+<p><strong>Hash冲突：</strong>hash冲突指hash方法出来key的hash值是相同的</p>
+<h5 id="Hash冲突的解决办法："><a href="#Hash冲突的解决办法：" class="headerlink" title="Hash冲突的解决办法："></a>Hash冲突的解决办法：</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">开放地址</span><br><span class="line">建立公共溢出区</span><br><span class="line">再哈希：发生Hash冲突的时候再进行一次Hash，缺点是每次冲突都要再Hash，时间成本增加</span><br><span class="line">拉链法：将Hash冲突的同义词存储在同一个线性链表中 缺点是需要额外的空间</span><br></pre></td></tr></table></figure>
+
+<h5 id="为什么HsahMap的数组长度要取2的整数幂"><a href="#为什么HsahMap的数组长度要取2的整数幂" class="headerlink" title="为什么HsahMap的数组长度要取2的整数幂"></a>为什么HsahMap的数组长度要取2的整数幂</h5><ol>
+<li>扩容，大小指定为2的幂次，当哈希桶扩大为2倍时只需要进行左移操作，位操作的速度比较快</li>
+<li>减少Hash冲突：2的幂次Length-1值后面的二进制位全为1，这种情况下，index=key值的Hashcode&amp;(Length-1),index结果等同与hashcode后几位的值，只要Hashcode本身分布均匀，Hash算法的结果就是均匀的。</li>
+</ol>
+<h3 id="二叉查找树，AVL树，B树，红黑树"><a href="#二叉查找树，AVL树，B树，红黑树" class="headerlink" title="二叉查找树，AVL树，B树，红黑树"></a>二叉查找树，AVL树，B树，红黑树</h3><p><strong>二叉查找树(BST)：</strong>左节点小于根节点，右节点大于根节点(O(logN)),在极端情况下会变成线性链表结构O(N)，为解决这个出现了AVL树</p>
+<p><strong>平衡二叉树(AVL)：</strong>是一种自平衡的树，除了二叉树的特征外，规定左子树和右子树高度差不超过1（保证不会成为线性链表），但是由于要维持自身平衡，所以插入删除节点的时候需要对节点进行频繁旋转。</p>
+<p><strong>B树(也叫B-树)：</strong>是一种多路平衡查找树</p>
+<ol>
+<li>其所有的叶子节点处于同一层，每个节点中的元素从小到大排序，可以看成矮胖版的AVL树</li>
+</ol>
+<p><strong>B+树：</strong>B+树每个非叶子结点存放的元素只用于索引作用，所有数据保存在叶子结点。</p>
+<p><strong>红黑树：</strong>一种自平衡的二叉查找树</p>
+<img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210907203427.jpg" style="zoom:80%;" />
+
+<ol>
+<li>每个节点或是黑色或是红色</li>
+<li>根节点是黑色</li>
+<li>每个叶子节点为黑色(叶子节点指为空的叶子节点)</li>
+<li>如果一个节点为红色，则子节点必须是黑色</li>
+<li>从一个节点到该节点的子孙节点所有路径上包含相同数目的黑节点</li>
+</ol>
+<blockquote>
+<p>红黑树相较于AVL树牺牲了严格的高度平衡的条件，只要求部分达到平衡要求，由于红黑树的设计，任何不平衡都会在3次旋转内解决，相较于BST，红黑树可以确保树的最长路径不大于两倍最短路径的长度，即查找效果是有最低保证的，即O(logN)</p>
+</blockquote>
+<p><strong>红黑树旋转(左旋右旋)：</strong></p>
+<p>对x进行左旋，意味着，将“x的右孩子”设为“x的父亲节点”；即，将 x变成了一个左节点(x成了为z的左孩子)！。 因此，<strong>左旋中的“左”，意味着“被旋转的节点将变成一个左节点”</strong>。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210907203502.jpg" alt=""></p>
+<p><strong>红黑树插入：</strong></p>
+<p>将红黑树当作一颗二叉查找树，插入节点</p>
+<p>将节点着色为红色（将插入的节点着色为红色，不会违背”特性(5)”！少违背一条特性，就意味着我们需要处理的情况越少。）</p>
+<p>通过旋转着色生成新的红黑树</p>
+<h3 id="String、StringBuilder、StringBuffer"><a href="#String、StringBuilder、StringBuffer" class="headerlink" title="String、StringBuilder、StringBuffer"></a>String、StringBuilder、StringBuffer</h3><ol>
+<li><strong>可变性：</strong>只有String不可变</li>
+</ol>
+<blockquote>
+<p>因为String被声明为final，所以不可以被继承，<strong>对于String对象的任何修改，其实都是在创建一个新的String对象再引用该对象，只是修改了变量引用的对象，没有修改原本String对象本身</strong>。</p>
+<p>因为String的不可变：可以用做HashMap的Key，并且线程安全</p>
+</blockquote>
+<ol start="2">
+<li><strong>安全性：</strong>只有StringBuilder线程不安全</li>
+</ol>
+<blockquote>
+<p>因为StringBuilder在append操作时并未使用线程同步，而StringBuffer几乎大部分方法都使用了synchronized关键字进行方法级别的同步处理。</p>
+</blockquote>
+<p><strong>字符串的拼接</strong></p>
+<ol>
+<li><p>直接使用+的话，底层使用StringBuilder实现，在循环中若使用+拼接，相当于不断创建新的StringBuilder对象再转换为String对象，效率差。</p>
+</li>
+<li><p>使用String的concat方法，效率稍高与直接使用+</p>
+</li>
+<li><p>使用StringBuilder和StringBuffer的append方法，StringBuilder效率高，但是线程不安全；StrinBuffer使用synchronized保证线程安全，但是效率低一些</p>
+</li>
+</ol>
+<blockquote>
+<p>常量和常量拼接，结果仍然是常量，结果在常量池；只要有变量参与结果就是变量，存在堆中。</p>
+</blockquote>
+<h3 id="finally，finalize，final"><a href="#finally，finalize，final" class="headerlink" title="finally，finalize，final"></a>finally，finalize，final</h3><p><strong>finalize()：</strong> 在垃圾回收器(GC)准备释放对象占用的内存时，首先调用finalize(),并且在下一次垃圾回收动作发生，才会真正回收该对象占用的内存，一个对象的finalize()方法只会调用一次，而且finalize()被调用不意味着gc会回收该对象。</p>
+<p><strong>finally：</strong>作为异常处理的一部分，只能用在try-catch语句中，finally的语句不论是否抛出异常都一定会被执行</p>
+<blockquote>
+<p>try语句执行之前的抛出异常或返回时finally不会被执行</p>
+<p>try语句中System.exit（0）终止虚拟局运行时不会执行finally</p>
+<p>try或者catch语句执行时被打断(如断电死机)，finally语句不会被执行</p>
+<p>try-catch中有return时会先执行finally，若finally也有return则返回finally的return</p>
+</blockquote>
+<h3 id="final，Static，Static-final"><a href="#final，Static，Static-final" class="headerlink" title="final，Static，Static final"></a>final，Static，Static final</h3><p><strong>final：</strong></p>
+<ol>
+<li>final类不能被继承，类中的所有方法默认是final的</li>
+<li>final方法可以被继承，但不能被子类覆盖</li>
+<li>final成员变量只能赋值一次，赋值之后不能再改变</li>
+<li>final不能修饰构造方法</li>
+<li>private类型的方法默认是final类型的</li>
+<li>final可以先声明，不给初始值，但是final在使用之前必须被初始化。</li>
+</ol>
+<p><strong>static final/final static：</strong></p>
+<p>用来修饰成员变量和成员方法，可以理解为全局变量(final static和static final没有任何区别)</p>
+<ol>
+<li><p>对于变量，表示一旦赋值就不可修改，可以通过类名访问</p>
+</li>
+<li><p>对于方法，表示不可覆盖，可以通过类名直接访问</p>
+</li>
+</ol>
+<p><strong>Static: ** 被Static修饰的成员变量和成员方法 **独立于该类的任何对象</strong>，即不依赖类的特定实例，只要这个类被加载，虚拟机就能根据类名在 <strong>运行时数据区的方法区找到</strong>，因此Static对象可以在它的任何对象创建之前访问。<strong>Public</strong>修饰的<strong>Static</strong>成员变量和成员方法本质是全局变量和全局方法。</p>
+<h4 id="Static可以被继承嘛"><a href="#Static可以被继承嘛" class="headerlink" title="Static可以被继承嘛"></a>Static可以被继承嘛</h4><p>static修饰可以被继承，<strong>但不能被重写</strong>，静态方法在编译时绑定，方法重写是运行时绑定</p>
+<h4 id="是否可以从一个static方法内部访问该类的非static方法"><a href="#是否可以从一个static方法内部访问该类的非static方法" class="headerlink" title="是否可以从一个static方法内部访问该类的非static方法"></a>是否可以从一个static方法内部访问该类的非static方法</h4><p><strong>不可以，</strong>因为非Static方法需要和对象关联在一起，必须创建一个对象才可以在该对象上进行方法的调用，在static方法被调用时，可能还没有创建任何实例对象。</p>
+<h4 id="静态变量和实例变量的区别"><a href="#静态变量和实例变量的区别" class="headerlink" title="静态变量和实例变量的区别"></a>静态变量和实例变量的区别</h4><p>静态变量需要static修饰</p>
+<p>实例对象属于 <strong>某个对象的属性</strong>，必须创建实例对象才会被分配空间使用这个实例变量。</p>
+<p>静态变量属于类，又叫类变量，<strong>程序加载类的字节码文件时静态变量就会被分配空间被使用</strong></p>
+<h3 id="Java的运行时数据区"><a href="#Java的运行时数据区" class="headerlink" title="Java的运行时数据区"></a>Java的运行时数据区</h3><ol>
+<li>程序计数器：一块较小的内存空间，可以看作当前线程所执行字节码的行号指示器，是唯一虚拟机没有规定内存溢出情况的区域。</li>
+<li>JVM栈：为虚拟机执行Java服务，每当有一个新线程创建时就会分配一个栈空间，线程结束后栈空间被回收，栈空间与线程拥有相同的生命周期。当线程请求的栈深度大于虚拟机允许的深度时抛出StackOverflowError，如果jvm栈容量可以动态扩展，栈扩展无法申请到足够内存时抛出：OutOfMemoryError</li>
+<li>本地方法栈：与Jvm栈类似，调用本地方法时JVM栈保持不变，动态链接并直接调用本地方法。</li>
+<li>堆：JVM管理内存中最大的一块，<strong>被所有线程共享，在虚拟机启动时创建。</strong>Java中几乎所有的实例都在堆分配内存。堆在物理上可以处于不连续的空间，逻辑上应该连续。</li>
+<li>方法区：用于存储被虚拟机加载的常量、静态变量、类型信息、即时编译器编译后的代码缓存等数据，可以固定大小，也可以扩展，<strong>还可以不实现垃圾回收。</strong></li>
+</ol>
+<h4 id="运行时常量池的作用"><a href="#运行时常量池的作用" class="headerlink" title="运行时常量池的作用"></a>运行时常量池的作用</h4><p>运行时常量池 <strong>是运行时数据区中方法区的一部分</strong>，受方法区内存限制，无法再申请内存时抛出OutOfMemoryError</p>
+<p>Class文件中出了有类的版本、字段、方法、接口等描述信息外<strong>，还有一项是常量池表</strong>，<strong>用于存放编译器生成的各种字面量与符号引用</strong>，这部分内容在 **类加载之存放到运行时常量池</p>
+<h4 id="常量池的好处"><a href="#常量池的好处" class="headerlink" title="常量池的好处"></a>常量池的好处</h4><p>常量池是为了避免频繁创建和销毁对象而影响系统系能，实现了对象的共享</p>
+<ol>
+<li>节省内存空间：常量池中所有相同的字符串常量被合并，只占用一个空间。</li>
+<li>节省运行时间：比较字符串时 ==比equals要快。</li>
+</ol>
+<h3 id="什么是直接内存"><a href="#什么是直接内存" class="headerlink" title="什么是直接内存"></a>什么是直接内存</h3><p>直接内存，又称为堆外内存，NIO的Buffer提供了一个可以不经过JVM内存直接访问系统物理内存的类：<strong>DirectBuffer</strong>，DirectBuffer与普通的ByteBuffer不同，其直接分配在物理内存中，并不占用堆空间，其可以申请的最大内存受操作系统的限制，<strong>直接内存读写比普通Buffer快，但是创建销毁要比普通Buffer慢。</strong></p>
+<p><strong>使用堆外内存的原因：</strong></p>
+<ol>
+<li>对垃圾回收停顿改善：使用堆外内存时可以保持较小的堆内内存规模，从而在GC时减少回收停顿对系统的影响</li>
+<li>提升程序I/O操作的性能：通常再I/O通信中，通常会存在堆内内存和堆外内存的拷贝操作。</li>
+</ol>
+<h3 id="内存溢出-OOM"><a href="#内存溢出-OOM" class="headerlink" title="内存溢出(OOM)"></a>内存溢出(OOM)</h3><p><strong>内存溢出和内存泄露的区别：</strong></p>
+<p>内存溢出OutOfMemory，指程序在申请内存时，没有足够的内存空间供其使用。</p>
+<p>内存泄露，是指无用对象(不再使用的对象)持续占有内存或者内存得不到释放，从而导致内存空间的浪费称为内存泄露，内存泄漏最终会导致内存溢出。</p>
+<blockquote>
+<p><strong>原因场景：</strong>长生命周期的对象持有短生命周期对象的引用时就很可能发生内存泄露，尽管短生命周期的对象已经不在需要，但是因为长生命周期对象持有它的引用而导致不能回收，这就是Java中内存泄露的场景。</p>
+</blockquote>
+<p><strong>堆OOM：</strong>堆用于存储对象实例，当不断创建对象，并保证GC Roots到对象有可达路径 避免垃圾回收，随着对象数量的增加，总容量触及最大堆容量之后就会OOM，如一直在while循环中创建实例。</p>
+<blockquote>
+<p><strong>堆OOM的处理：</strong>通过内存映象分析工具对Dump出的堆转存储快照分析，确认是内存泄漏还是内存溢出</p>
+<p>若是内存泄漏，通过工具查看泄漏对象到GC Roots的引用链，准确定位产生内存泄漏代码的具体位置</p>
+<p>若不是内存泄漏，即内存中的所有对象都必须存活时，应当检查JVM堆参数，判断是否还有向上调整的空间，再检查是否存在某些对象生命周期过长，持有状态时间过长灯情况，尽量降低程序运行时的内存消耗。</p>
+</blockquote>
+<p><strong>栈OOM：</strong> 若线程请求的栈深度大于虚拟机所允许的深度，将抛出StackOverFlowerError，如果JVM栈可以动态扩展，当扩展无法申请到足够的内存时，会出现OOM</p>
+<p><strong>方法区OOM</strong>：方法区主要存放类型信息，如类名，访问修饰符，常量值，方法描述等，只要在运行是不断产生大量的类，方法区就会溢出。<strong>如使用JDK反射或这CGLib直接操作字节码在运行时生成大量的类</strong>。</p>
+<h3 id="Spring-中Ioc的工厂模式"><a href="#Spring-中Ioc的工厂模式" class="headerlink" title="Spring 中Ioc的工厂模式"></a>Spring 中Ioc的工厂模式</h3><p>IOC指在程序开发过程中，对象实例的创建不再由调用者管理，而是由Spring容器创建，Spring容器会负责控制程序之间的关系，因此，控制权由程序代码转移到了Spring容器，控制权发生了反转，即控制反转。</p>
+<blockquote>
+<p>在没有使用Spring的时候，对象需要通过<code>new object()</code>来创建，这个对象是主动创建的，创建对象的主动权由自己把控，这样就会使得对象之间的耦合度高，A对象需要使用合作对象B来共同完成一件事，A要使用B，那么A就对B产生了依赖，也就是A和B之间存在一种耦合关系，并且是紧密耦合在一起，而使用了Spring之后就不一样了，创建合作对象B的工作是由Spring来做的，Spring创建好B对象，然后存储到一个容器里面，当A对象需要使用B对象时，Spring就从存放对象的那个容器里面取出A要使用的那个B对象，然后交给A对象使用，至于Spring是如何创建那个对象，以及什么时候创建好对象的，A对象不需要关心这些细节问题。</p>
+</blockquote>
+<p>IOC最基本的技术就是反射，通过给出的类名来动态的生成对象，可以让对象在生成时才被决定是哪一种对象，降低耦合。</p>
+<p>IOC是工厂模式+反射机制，IOC中的工厂模式内部使用反射来创建对象，对象的实例化都交给工厂完成，通过工厂来获取对象。</p>
+<h3 id="Spring中Bean的生命周期"><a href="#Spring中Bean的生命周期" class="headerlink" title="Spring中Bean的生命周期"></a>Spring中Bean的生命周期</h3><ol>
+<li>实例化一个Bean</li>
+<li>按照Spring上下文对实例化的Bean进行配置 （IOC注入）</li>
+<li>如果Bean实现了BeanNameAware接口，则调用setBeanName(String)方法，传递的是配置文件中Bean的id</li>
+<li>如果实现了BeanFactoryAware接口，则调用setBeanFactory(BeanFactory)</li>
+<li>如果这个Bean关联了BeanPostProcessor接口，将会调用<code>postProcessBeforeInitialization(Object obj, String s)</code>方法，BeanPostProcessor经常被用作是Bean内容的更改，并且由于这个是在Bean初始化结束时调用那个的方法，也可以被应用于内存或缓存技术；</li>
+<li>如果Bean在Spring配置文件中配置了init-method属性会自动调用其配置的初始化方法。</li>
+<li>如果这个Bean关联了BeanPostProcessor接口，将会调用<code>postProcessAfterInitialization(Object obj, String s)</code>方法；</li>
+<li>当Bean不再需要时，会经过清理阶段，如果Bean实现了DisposableBean这个接口，会调用那个其实现的destroy()方法；</li>
+<li>最后，如果这个Bean的Spring配置中配置了destroy-method属性，会自动调用其配置的销毁方法。</li>
+</ol>
+<h3 id="SpringBoot的自动装配"><a href="#SpringBoot的自动装配" class="headerlink" title="SpringBoot的自动装配"></a>SpringBoot的自动装配</h3><p>在SpringBoot启动时加载入口类，通过$@EnableAutoConfiguration$开启自动装配功能，自动装配时会扫描所有jar包类路径下$META-INF/spring.factories$ 中的所有自动配置类，如果符合相应的条件，则使用相应的自动配置类实现自动装配。</p>
+<p>自动配置类实现自动装配时，配置类会给容器中添加各种组件，这些组件的属性从对应的$properties$类中获取，而对应的$properties$中的属性和配置文件进行相互绑定。</p>
+<blockquote>
+<p>SpringBoot中的自动装配技术用到了：</p>
+<ol>
+<li>Spring 模式注解装配</li>
+<li>Spring @Enable 模块装配</li>
+<li>Spring 条件装配</li>
+<li>Spring 工厂加载机制</li>
+</ol>
+</blockquote>
+<h3 id="Java中的异常体系"><a href="#Java中的异常体系" class="headerlink" title="Java中的异常体系"></a>Java中的异常体系</h3><p>Java标准裤内建了一些通用的异常，这些类以Throwable为顶层父类，Throwable又派生出Error类和Exception类。</p>
+<p><strong>Error</strong>：Error类以及他的子类的实例，代表了JVM本身的错误。错误不能被程序员通过代码处理。</p>
+<p><strong>Exception</strong>：Exception以及他的子类，代表程序运行时发送的各种不期望发生的事件。可以被Java异常处理机制使用</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210908191952.png" alt=""></p>
+<p><strong>根据Javac对异常的处理要求，将异常类分为2类</strong></p>
+<p><strong>非检查异常</strong>（unckecked exception）：Error 和 RuntimeException 以及他们的子类。javac在编译时，不会提示和发现这样的异常，不要求在程序处理这些异常。所以如果愿意，我们可以编写代码处理（使用try…catch…finally）这样的异常，也可以不处理。对于这些异常，我们应该修正代码，而不是去通过异常处理器处理 。这样的异常发生的原因多半是代码写的有问题。如除0错误ArithmeticException，错误的强制类型转换错误ClassCastException，数组索引越界ArrayIndexOutOfBoundsException，使用了空对象NullPointerException等等。 </p>
+<p><strong>检查异常</strong>（checked exception）：除了Error 和 RuntimeException的其它异常。javac强制要求程序员为这样的异常做预备处理工作（使用try…catch…finally或者throws）。在方法中要么用try-catch语句捕获它并处理，要么用throws子句声明抛出它，否则编译不会通过。这样的异常一般是由程序的运行环境导致的。因为程序可能被运行在各种未知的环境下，而程序员无法干预用户如何使用他编写的程序，于是程序员就应该为这样的异常时刻准备着。如SQLException , IOException,ClassNotFoundException 等。</p>
+<p>需要明确的是：检查和非检查是对于javac来说的，这样就很好理解和区分了</p>
+<p><strong>多个异常的捕获顺序</strong></p>
+<p>对于try..catch捕获异常的形式来说，对于异常的捕获，可以有多个catch。对于try里面发生的异常，他会根据发生的异常和catch里面的进行从上往下匹配，当它匹配某一个catch块的时候，他就直接进入到这个catch块里面去了，后面在再有catch块的话，它不做任何处理，直接跳过去，全部忽略掉。如果有finally的话进入到finally里面继续执行。换句话说，如果有匹配的catch，它就会忽略掉这个catch后面所有的catch。</p>
+<p><strong>在写异常处理的时候，一定要把异常范围小的放在前面，范围大的放在后面</strong>，Exception这个异常的根类一定要放在最后一个catch里面，如果放在前面或者中间，任何异常都会和Exception匹配的，就会报已捕获到…异常的错误。 </p>
+<p><strong>throws和throw</strong></p>
+<p><strong>Throw</strong>：<strong>作用在方法内</strong>，表示抛出具体异常，由方法体内的语句处理。具体向外抛出的动作，所以它抛出的是一个异常实体类。若执行了throw一定是抛出了某种异常。</p>
+<p><strong>throws</strong>：作用在<strong>方法的声明上</strong>，表示如果抛出异常，则由该方法的调用者来进行异常处理。（自身不处理异常）</p>
+<p>主要的声明这个方法会抛出会抛出某种类型的异常，让它的使用者知道捕获异常的类型。出现异常是一种可能性，但不一定会发生异常。</p>
+<h3 id="BIO，NIO，AIO"><a href="#BIO，NIO，AIO" class="headerlink" title="BIO，NIO，AIO"></a>BIO，NIO，AIO</h3><p><strong>同步与异步</strong></p>
+<ul>
+<li><strong>同步：</strong> 同步就是发起一个调用后，被调用者未处理完请求之前，调用不返回。</li>
+<li><strong>异步：</strong> 异步就是发起一个调用后，立刻得到被调用者的回应表示已接收到请求，但是被调用者并没有返回结果，此时我们可以处理其他的请求，被调用者通常依靠事件，回调等机制来通知调用者其返回结果。</li>
+</ul>
+<p>同步和异步的区别最大在于异步的话调用者不需要等待处理结果，被调用者会通过回调等机制来通知调用者其返回结果。</p>
+<p><strong>阻塞和非阻塞</strong></p>
+<ul>
+<li><strong>阻塞：</strong> 阻塞就是发起一个请求，调用者一直等待请求结果返回，也就是当前线程会被挂起，无法从事其他任务，只有当条件就绪才能继续。</li>
+<li><strong>非阻塞：</strong> 非阻塞就是发起一个请求，调用者不用一直等着结果返回，可以先去干其他事情。</li>
+</ul>
+<p><strong>BIO:</strong><code>同步阻塞</code>，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不作任何事情会造成不必要的线程开销。</p>
+<p><strong>NIO</strong>：<code>同步非阻塞</code>，服务器实现模式为一个线程处理多个请求(连接)，即客户端发送的连接请求会被注册到多路复用器（selector）上，多路复用器轮询到有 I/O 请求就会进行处理,通过轮询代替了始终保持一个连接。</p>
+<blockquote>
+<p>客户端发送一个请求，并建立一个连接，服务端接收到了。如果服务端没有数据，就告知客户端“没有数据”；如果有数据，则返回数据。客户端接到了服务端回复的“没有数据”就断开连接，过了一段时间后，客户端重新问服务端是否有数据。服务器重复以上步骤。</p>
+</blockquote>
+<blockquote>
+<p>Selector： 多路复用器，轮询检查多个Channel 的状态，判断注册事件是否发生，即判断Channel 是否处于可读或可写状态。使用前需要将Channel 注册到Selector，注册后会得到一个SelectionKey，通过SelectionKey 获取Channel 和Selector 相关信息。<br>Channel： 双向通道，替换了BIO 中的Stream 流，不能直接访问数据，要通过Buffer 来读写数据，也可以和其他Channel 交互。<br>Buffer： 缓冲区，本质是一块可读写数据的内存，用来简化数据读写</p>
+</blockquote>
+<p><strong>AIO：</strong><code>异步非阻塞</code>，AIO 引入了异步通道的概念，采用了 Proactor 模式，简化了程序编写，有效的请求才启动线程，它的特点是先由操作系统完成后才通知服务端程序启动线程去处理，一般适用于连接数较多且连接时间较长的应用。</p>
+<blockquote>
+<p>客户端向服务端请求数据。服务端若有，则返回数据；若无，则告诉客户端“没有数据”。客户端收到“没有数据”的回复后，就做自己的其他事情。服务端有了数据之后，就主动通知客户端，并把数据返回去</p>
+</blockquote>
+<blockquote>
+<p>BIO 方式适用于<code>连接数比较小且固定</code>的架构</p>
+<p>NIO 方式适用于<code>连接数目多且连接比较短</code>的架构，比如聊天服务器，弹幕系统</p>
+<p>AIO 方式适用于<code>连接数目多且连接比较长</code>的架构，比如相册服务器</p>
+</blockquote>
+<h4 id="NIO-和-BIO-对比"><a href="#NIO-和-BIO-对比" class="headerlink" title="NIO 和 BIO 对比"></a>NIO 和 BIO 对比</h4><ol>
+<li>BIO 以流的方式处理数据，而 NIO 以块的方式处理数据，块 I/O 的效率比流 I/O 高很多。</li>
+<li>BIO 是阻塞的，而 NIO 是非阻塞的。</li>
+<li>BIO 基于字节流和字符流进行操作，而 NIO 基于 Channel（通道）和 Buffer（缓冲区）进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。Selector（选择器）用于监听多个通道事件（比如连接请求，数据到达等），因此<code>使用单个线程就可以监听多个客户端通道</code>。</li>
+</ol>
+<h3 id="线程和进程"><a href="#线程和进程" class="headerlink" title="线程和进程"></a>线程和进程</h3><p><strong>进程</strong>：在操作系统中能够独立运行，并且作为资源分配的基本单位。它表示运行中的程序。系统运行一个程序就是一个进程从创建、运行到消亡的过程。</p>
+<p><strong>线程</strong>：是一个比进程更小的执行单位，能够完成进程中的一个功能，也被称为轻量级进程。一个进程在其执行的过程中可以产生多个线程。</p>
+<p>线程与进程不同的是：同类的多个线程<strong>共享进程的堆和方法区资源</strong>，但<strong>每个线程有自己的程序计数器、虚拟机栈和本地方法栈</strong>，所以系统在产生一个线程，或是在各个线程之间作切换工作时，负担要比进程小得多。</p>
+<blockquote>
+<p>为了<strong>保证线程中的局部变量不被别的线程访问到</strong>，虚拟机栈和本地方法栈是线程私有的</p>
+</blockquote>
+<h3 id="线程的生命周期和状态"><a href="#线程的生命周期和状态" class="headerlink" title="线程的生命周期和状态"></a>线程的生命周期和状态</h3><p><strong>线程的状态：</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210909160042.png" alt=""></p>
+<p><strong>线程的生命周期包含5个阶段，包括：新建、就绪、运行、阻塞、销毁。</strong></p>
+<ul>
+<li>新建：就是刚使用new方法，new出来的线程；</li>
+<li>就绪：就是调用的线程的start()方法后，这时候线程处于等待CPU分配资源阶段，谁先抢的CPU资源，谁开始执行;</li>
+<li>运行：当就绪的线程被调度并获得CPU资源时，便进入运行状态，run方法定义了线程的操作和功能;</li>
+<li>阻塞：在运行状态的时候，可能因为某些原因导致运行状态的线程变成了阻塞状态，比如sleep()、wait()之后线程就处于了阻塞状态，这个时候需要其他机制将处于阻塞状态的线程唤醒，比如调用notify或者notifyAll()方法。唤醒的线程不会立刻执行run方法，它们要再次等待CPU分配资源进入运行状态;</li>
+<li>销毁：如果线程正常执行完毕后或线程被提前强制性的终止或出现异常导致结束，那么线程就要被销毁，释放资源;</li>
+</ul>
+<h3 id="sleep-方法和wait-方法区别和共同点"><a href="#sleep-方法和wait-方法区别和共同点" class="headerlink" title="sleep()方法和wait()方法区别和共同点"></a>sleep()方法和wait()方法区别和共同点</h3><p><strong>共同点：</strong>两者都可以暂停线程的执行，都会让线程进入等待状态。</p>
+<p><strong>不同点：</strong></p>
+<ul>
+<li>sleep()方法没有释放锁，而 wait()方法释放了锁。</li>
+<li>sleep()方法属于Thread类的静态方法，作用于当前线程；而wait()方法是Object类的实例方法，作用于对象本身。</li>
+<li>执行sleep()方法后，可以通过超时或者调用interrupt()方法唤醒休眠中的线程；执行wait()方法后，通过调用notify()或notifyAll()方法唤醒等待线程。</li>
+</ul>
+<h3 id="多线程开发带来的问题与解决方法："><a href="#多线程开发带来的问题与解决方法：" class="headerlink" title="多线程开发带来的问题与解决方法："></a>多线程开发带来的问题与解决方法：</h3><h4 id="线程安全问题："><a href="#线程安全问题：" class="headerlink" title="线程安全问题："></a>线程安全问题：</h4><p>线程安全问题指的是在某一线程从开始访问到结束<strong>访问某一数据期间，该数据被其他的线程所修改</strong>，那么对于当前线程而言，该线程就发生了线程安全问题，表现形式为数据的缺失，数据不一致等。</p>
+<p><strong>线程安全问题发生的条件</strong></p>
+<p>1）多线程环境下，即存在包括自己在内存在有多个线程。</p>
+<p>2）多线程环境下<strong>存在共享资源</strong>，且<strong>多线程操作该共享资源。</strong></p>
+<p>3）多个线程必须对该共享资源有非原子性操作</p>
+<p><strong>线程安全的解决思路：</strong></p>
+<p>1）<strong>尽量不使用共享变量</strong>，将不必要的共享变量变成局部变量来使用。</p>
+<p>2）<strong>使用synchronized关键字同步代码块</strong>，或者使用jdk包中提供的Lock为操作进行<strong>加锁</strong>。</p>
+<p>3）<strong>使用ThreadLocal为每一个线程建立一个变量的副本，各个线程间独立操作，互不影响。</strong></p>
+<h4 id="性能问题"><a href="#性能问题" class="headerlink" title="性能问题"></a>性能问题</h4><p>线程的生命周期开销是非常大的，<strong>一个线程的创建到销毁都会占用大量的内存</strong>。同时如果不合理的创建了多个线程，cup的处理器数量小于了线程数量，那么将会有很多的线程被闲置，闲置的线程将会占用大量的内存，为垃圾回收带来很大压力，同时cup在分配线程时还会消耗其性能。</p>
+<p><strong>解决思路：</strong>利用线程池<strong>，模拟一个池，预先创建有限合理个数的线程放入池中，当需要执行任务时从池中取出空闲的先去执行任务，执行完成后将线程归还到池中，这样就</strong>减少了线程的频繁创建和销毁，节省内存开销**和减小了垃圾回收的压力。同时因为任务到来时本身线程已经存在，减少了创建线程时间，提高了执行效率，而且合理的创建线程池数量还会使各个线程都处于忙碌状态，提高任务执行效率，线程池还提供了拒绝策略，当任务数量到达某一临界区时，线程池将拒绝任务的进入，保持现有任务的顺利执行，减少池的压力。</p>
+<h4 id="活跃性问题"><a href="#活跃性问题" class="headerlink" title="活跃性问题"></a>活跃性问题</h4><p>1）<strong>死锁</strong>，假如线程 A 持有资源 2，线程 B 持有资源 1，他们同时都想申请对方的资源，所以这两个线程就会互相等待而进入死锁状态。多个线程环形占用资源也是一样的会产生死锁问题。</p>
+<p><strong>解决方法：</strong></p>
+<ul>
+<li>避免一个线程同时获取多个锁</li>
+<li>避免一个线程在锁内同时占用多个资源，尽量保证每个锁只占用一个资源。</li>
+<li>尝试使用定时锁，使用 lock.tryLock(timeout) 来代替使用内部锁机制。</li>
+</ul>
+<p>想要避免死锁，可以<strong>使用无锁函数</strong>（cas）<strong>或者使用重入锁（ReentrantLock），通过重入锁使线程中断或限时等待可以有效的规避死锁问题</strong>。</p>
+<p>2) <strong>饥饿</strong>，饥饿<strong>指的是某一线程或多个线程因为某些原因一直获取不到资源，导致程序一直无法执行</strong>。如某一线程优先级太低导致一直分配不到资源，或者是某一线程一直占着某种资源不放，导致该线程无法执行等。</p>
+<p><strong>解决方法：</strong>可以设置合适的线程优先级来尽量避免饥饿的产生。</p>
+<p>3）<strong>活锁</strong>，每个线程都想把资源让给对方，可能会产生一直将资源让来让去，导致资源在两个线程间跳动而无法使某一线程真正的到资源并执行，这就是活锁的问题。</p>
+<h4 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h4><p>阻塞是用来形容多线程的问题，<strong>几个线程之间共享临界区资源，那么当一个线程占用了临界区资源后，所有需要使用该资源的线程都需要进入该临界区等待，等待会导致线程挂起，一直不能工作，这种情况就是阻塞</strong>，<strong>如果某一线程一直都不释放资源，将会导致其他所有等待在这个临界区的线程都不能工作</strong>。</p>
+<p><strong>解决方法：</strong>可以通过减少锁持有时间，读写锁分离，减小锁的粒度，锁分离，锁粗化等方式来优化锁的性能</p>
+<h3 id="synchronized和Lock的区别："><a href="#synchronized和Lock的区别：" class="headerlink" title="synchronized和Lock的区别："></a>synchronized和Lock的区别：</h3><ol>
+<li><strong>Lock是一个接口，而synchronized是Java中的关键字</strong>，synchronized是内置的语言实现；</li>
+<li>synchronized在发生异常时，<strong>会自动释放线程占有的锁</strong>，因此不会导致死锁现象发生；而Lock在发生异常时，如果<strong>没有主动通过unLock()去释放锁，则很可能造成死锁现象</strong>，因此使用Lock时需要在finally块中释放锁；</li>
+<li>Lock可以让等待锁的线程响应中断，而synchronized却不行，使用synchronized时，等待的线程会一直等待下去，不能够响应中断；</li>
+<li>通过Lock可以知道有没有成功获取锁（tryLock()方法：如果获取锁成功，则返回true），而synchronized却无法办到。</li>
+<li>Lock可以提高多个线程进行读操作的效率。在性能上来说，如果<strong>竞争资源不激烈，两者的性能是差不多的</strong>，而当<strong>竞争资源非常激烈时（即有大量线程同时竞争），此时Lock的性能要远远优于synchronized</strong>。</li>
+</ol>
+<h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><h4 id="使用线程池的好处："><a href="#使用线程池的好处：" class="headerlink" title="使用线程池的好处："></a>使用线程池的好处：</h4><ol>
+<li>降低资源消耗。通过重复利用已创建的线程，降低线程创建和销毁造成的消耗。</li>
+<li>提高响应速度。当任务到达时，任务可以不需要等到线程创建就能立即执行。</li>
+<li>提高线程的可管理性。线程是稀缺资源，如果无限制地创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一分配、调优和监控</li>
+</ol>
+<h4 id="说说几种常见线程池和适用场景"><a href="#说说几种常见线程池和适用场景" class="headerlink" title="说说几种常见线程池和适用场景"></a>说说几种常见线程池和适用场景</h4><ol>
+<li><p><strong>FixedThreadPool</strong>：可重用固定线程数的线程池（<strong>适用于负载比较重的服务器</strong>）</p>
+<p>FixedThreadPool使用无界队列LinkedBlockingQueue作为线程池的工作队列</p>
+<p>该线程池中的线程数量始终不变。当有一个新的任务提交时，线程池中若有空闲线程，则立即执行。若没有，则新的任务会被暂存在一个任务队列中，待有线程空闲时，便处理在任务队列中的任务。</p>
+</li>
+<li><p><strong>SingleThreadExecutor：</strong>只会创建一个线程执行任务。（适用于需要保证顺序执行各个任务；并且在任意时间点，<strong>没有多线程活动的场景</strong>。）</p>
+<p>SingleThreadExecutorl也使用无界队列LinkedBlockingQueue作为工作队列</p>
+<p>若多余一个任务被提交到该线程池，任务会被保存在一个任务队列中，待线程空闲，按先入先出的顺序执行队列中的任务。</p>
+</li>
+<li><p><strong>CachedThreadPool：</strong> <strong>是一个会根据需要调整线程数量的线程池</strong>。（大小无界，适用于执行很多的短期异步任务的小程序，或负载较轻的服务器）</p>
+<ul>
+<li>CachedThreadPool使用没有容量的SynchronousQueue作为线程池的工作队列，但CachedThreadPool的maximumPool是无界的。</li>
+<li>线程池的线程数量不确定，但若有空闲线程可以复用，则会优先使用可复用的线程。若所有线程均在工作，又有新的任务提交，则会创建新的线程处理任务。所有线程在当前任务执行完毕后，将返回线程池进行复用。</li>
+</ul>
+</li>
+</ol>
+<h4 id="线程池都有哪些工作队列"><a href="#线程池都有哪些工作队列" class="headerlink" title="线程池都有哪些工作队列"></a>线程池都有哪些工作队列</h4><ul>
+<li><strong>ArrayBlockingQueue</strong>：是一个<strong>基于数组结构的有界阻塞队列</strong>，此队列按FIFO（先进先出）原则对元素进行排序。</li>
+<li><strong>LinkedBlockingQueue</strong>：是一个<strong>基于链表结构的阻塞队列</strong>，此队列按FIFO排序元素，吞吐量通常要高于ArrayBlockingQueue。静态工厂方法Executors.newFixedThreadPool()使用了这个队列。</li>
+<li><strong>SynchronousQueue</strong>：是一个<strong>不存储元素的阻塞队列</strong>。每个插入操作必须等到另一个线程调用移除操作，否则插入操作一直处于阻塞状态，吞吐量通常要高于Linked-BlockingQueue，静态工厂方法Executors.newCachedThreadPool使用了这个队列。</li>
+<li><strong>PriorityBlockingQueue</strong>：一个<strong>具有优先级的无限阻塞队列</strong>。</li>
+</ul>
+<h4 id="创建线程的几种方式"><a href="#创建线程的几种方式" class="headerlink" title="创建线程的几种方式"></a>创建线程的几种方式</h4><ul>
+<li><p>继承$Thread$类</p>
+</li>
+<li><p>实现$Runnaable$接口</p>
+</li>
+</ul>
+<blockquote>
+<p>不管是继承Thread还是实现Runnable接口，多线程代码都是通过运行Thread的start()方法来运行的。</p>
+</blockquote>
+<ul>
+<li>实现$callable$接口</li>
+</ul>
+<blockquote>
+<p>与Runnable接口不同的是，Callable接口提供了一个call() 方法作为线程执行体，call()方法可以有返回值、可以声明抛出异常</p>
+</blockquote>
+<ul>
+<li>使用Executor框架来创建线程池</li>
+</ul>
+<h4 id="线程池的执行流程"><a href="#线程池的执行流程" class="headerlink" title="线程池的执行流程"></a>线程池的执行流程</h4><p>任务被提交到线程池，会先判断当前线程数量是否小于corePoolSize，如果小于则创建线程来执行提交的任务，否则将任务放入workQueue队列，如果workQueue满了，则判断当前线程数量是否小于maximumPoolSize,如果小于则创建线程执行任务，否则就会调用handler，以表示线程池拒绝接收任务。</p>
+<blockquote>
+<p>corePoolSize：线程池的基本大小</p>
+<p>maximumPoolSize:最大线程数</p>
+<p>workQueue：用于保存等待执行任务的阻塞队列</p>
+<p>handler：拒绝策略</p>
+</blockquote>
+<h3 id="TCP三次握手与四次挥手"><a href="#TCP三次握手与四次挥手" class="headerlink" title="TCP三次握手与四次挥手"></a>TCP三次握手与四次挥手</h3><h4 id="三次握手的过程"><a href="#三次握手的过程" class="headerlink" title="三次握手的过程"></a>三次握手的过程</h4><p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200409195521.jfif" alt=""></p>
+<ol>
+<li><p>TCP服务器进程先创建<code>传输控制块TCB</code>，时刻准备接受客户进程的连接请求，此时服务器进入<code>LISTEN</code>状态。</p>
+</li>
+<li><p><strong>第一次握手</strong>： TCP客户进程也是先创建<code>TCB</code>,然后向服务器发出请求报文，此时报文中的<code>同部位SYN=1</code>（SYN，同步序列编号），同时选择一个初始序列号<code>seq=x</code>，此时TCP客户端进入<code>SYN-SENT(同步已发送)</code>状态。</p>
+</li>
+<li><p><strong>第二次握手：</strong> TCP服务器收到请求后，如果同意连接，则发出确认报文。<code>确认报文中应该ACK=1，SYN=1,确认号是ack=x+1</code>,同时为自己初始化一个序列号seq=y，此时TCP服务器进程进入<code>SYN-RCVD(同步收到)</code>状态。</p>
+</li>
+<li><p><strong>第三次握手：</strong> TCP客户进程收到确认后，还要向服务器给出确认。确认报文的<code>ACK=1,确认号ack=y+1</code>，自己序列号为：seq=x+1,此时，TCP连接已经建立，<strong>客户端</strong> 进入<code>ESTABLISHED(已建立连接)</code>状态，当 <strong>服务器</strong>收到客户端的确认后也进入**<code>ESTABLISHED</code>状态，双方可以开始通信。</p>
+</li>
+</ol>
+<h4 id="为什么TCP客户端最后还要发送一次确认呢"><a href="#为什么TCP客户端最后还要发送一次确认呢" class="headerlink" title="为什么TCP客户端最后还要发送一次确认呢?"></a>为什么TCP客户端最后还要发送一次确认呢?</h4><p> 一句话，<strong>主要防止已经失效的连接请求报文突然又传送到了服务器，从而产生错误</strong>。<br> 如果使用的是两次握手建立连接，假设有这样一种场景，客户端发送了第一个请求连接并且没有丢失，只是因为在网络结点中滞留的时间太长了，由于TCP的客户端迟迟没有收到确认报文，以为服务器没有收到，此时重新向服务器发送这条报文，此后客户端和服务器经过两次握手完成连接，传输数据，然后关闭连接。此时此前滞留的那一次请求连接，网络通畅了到达了服务器，这个报文本该是失效的，但是，两次握手的机制将会让客户端和服务器再次建立连接，这将导致不必要的错误和资源的浪费。</p>
+<p> 如果采用的是三次握手，就算是那一次失效的报文传送过来了，服务端接受到了那条失效报文并且回复了确认报文，但是客户端不会再次发出确认。由于服务器收不到确认，就知道客户端并没有请求连接。</p>
+<h4 id="四次挥手的过程"><a href="#四次挥手的过程" class="headerlink" title="四次挥手的过程"></a>四次挥手的过程</h4><p>   <img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200409212059.jfif" alt=""></p>
+<ol>
+<li><p>客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部<code>FIN=1,序列号seq=u</code>(其值为之前传过来的数据最后一个字节的序号+1)，此时，<strong>客户端</strong>进入<code>FIN-WATI=1(终止等待1)</code>状态。</p>
+</li>
+<li><p>服务器收到连接释放报文，发出确认报文，<code>ACK=1,ack=u+1</code>,并且带上自身序列号<code>seq=v</code> ,此时，<strong>服务端</strong>进入<code>CLOSE-WATI(等待关闭)</code>状态。</p>
+<blockquote>
+<p>此时处于半关闭状态,即客户端已无数据需要发送，但服务器若是发送数据，客户端依然需要接收</p>
+</blockquote>
+</li>
+<li><p>客户端收到服务器的确认请求，此时，客户端进入<code>FIN-WAIT-2(终止等待2)</code>状态，等待服务器发送连接释放报文。</p>
+</li>
+<li><p>服务器将最后的数据发送完毕之后，向客户端发送连接释放报文,<code>FIN=1,ack=u+1</code>，由于在半关闭状态，服务 器可能又发送了一些数据，因此假定此时的<code>序列号seq=w</code>,此时，服务器进入<code>LAST-ACK(最后确认)</code>状态。</p>
+</li>
+<li><p>客户端收到服务器的连接释放报文之后，必须发出确认<code>ACK=1,ack=w+1，seq=u+1</code>，此时客户端进入<code>TIME-WAIT(时间等待)</code>状态。</p>
+<p>服务器只要收到了客户端发出的确认，立即进入<code>CLOSE</code>状态，同样，撤掉TCB后结束的此次连接(<code>可见，服务器结束TCP要早于客户端</code>)。</p>
+<blockquote>
+<p>此时TCP连接还未释放，必须经过2*MSL(<em>最长报文段寿命</em>)时间，客户端撤销相应TCB后，才进入<em>CLOSED</em>状态</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="为什么建立连接是三次握手，释放连接确实四次挥手？"><a href="#为什么建立连接是三次握手，释放连接确实四次挥手？" class="headerlink" title="为什么建立连接是三次握手，释放连接确实四次挥手？"></a>为什么建立连接是三次握手，释放连接确实四次挥手？</h4><p>   建立连接时，服务器在LISTEN状态下，收到建立连接请求的 <em>SYN</em> 报文之后，把ACK和SYN放在一个报文发送给客户端。</p>
+<p>   而在关闭连接时，服务器收到 <em>FIN</em>报文时，仅仅表示客户端不在发送数据但任能接收数据，因此客户端既可以立即关闭，也可以在发送一些数据给客户端之后，此时会先发送确认报文告知客户端已经准备关闭连接，当服务器数据发送完成之后，再发送 <em>FIN报文</em>给客户端。因此，服务端的ACK和FIN会分开发送，从而导致了四次挥手。</p>
+<h4 id="三次握手过程中可以携带数据嘛"><a href="#三次握手过程中可以携带数据嘛" class="headerlink" title="三次握手过程中可以携带数据嘛"></a>三次握手过程中可以携带数据嘛</h4><p><strong>在第三次握手的时候可以携带数据</strong>，但是第一次、第二次握手不可以携带数据一个简单的原因就是会让服务器更加容易受到攻击，对于第三次的话，此时客户端已经处于ESTABLISHED 状态。对于客户端来说，他已经建立起连接了，并且也已经知道服务器的接收、发送能力是正常的了，所以能携带数据。</p>
+<blockquote>
+<p>假如第一次握手可以携带数据的话，如果有人要恶意攻击服务器，那他每次都在第一次握手中的SYN 报文中放入大量的数据。因为攻击者根本就不理服务器的接收、发送能力是否正常，然后疯狂着重复发SYN 报文的话，这会让服务器花费很多时间、内存空间来接收这些报文。</p>
+</blockquote>
+<h3 id="如果已经建立连接，但是客户端出现故障-TCP的保活机制-keapalive长连接"><a href="#如果已经建立连接，但是客户端出现故障-TCP的保活机制-keapalive长连接" class="headerlink" title="如果已经建立连接，但是客户端出现故障(TCP的保活机制)(keapalive长连接)"></a>如果已经建立连接，但是客户端出现故障(TCP的保活机制)(keapalive长连接)</h3><p>TCP有一个机制是保活机制，工作原理为：当一个TCP 连接建立之后，启用TCP Keepalive 的一端便会启动一个计时器，当这个计时器数值到达0 内（7200s)，连接没有任何动作,，一个TCP 探测包便会被发出。这个TCP 探测包是一个纯ACK 包，客户主机必须处于以下4 个状态之一：</p>
+<ol>
+<li>客户主机依然正常运行，并从服务器可达。客户的TCP 响应正常，而服务器也知道对方是正常的，服务器在两小时后将保活定时器复位。</li>
+<li>客户主机已经崩溃，并且关闭或者正在重新启动。在任何一种情况下，客户的TCP 都没有响应。服务端将不能收到对探测的响应，并在75 秒后超时。服务器总共发送9 个这样的探测，每个间隔75 秒。如果服务器没有收到一个响应，它就认为客户主机已经关闭并终止连接。</li>
+<li>客户主机崩溃并已经重新启动。服务器将收到一个对其保活探测的响应，但是由于没有该连接的有效信息，会产生一个RST报文，这样很快就发现TCP连接已经被重置。</li>
+</ol>
+<blockquote>
+<p>保活机制需要消耗额外的宽带和流量。</p>
+</blockquote>
+<h3 id="TCP的重传机制"><a href="#TCP的重传机制" class="headerlink" title="TCP的重传机制"></a>TCP的重传机制</h3><p>TCP实现可靠传输的方式之一，是通过序列号与确认应答。</p>
+<p>在 TCP 中，当发送端的数据到达接收主机时，接收端主机会返回一个确认应答消息，表示已收到消息。万一数据在传输过程中丢失了呢？所以 TCP 针对数据包丢失的情况，会用<strong>重传机制</strong>解决。</p>
+<p><strong>超时重传</strong></p>
+<p>在发送数据时，设定一个定时器，当超过指定的时间后，没有收到对方的 <code>ACK</code> 确认应答报文，就会重发该数据，也就是我们常说的<strong>超时重传</strong>。</p>
+<p><strong>超时重传时间 RTO 的值应该略大于报文往返 RTT 的值,每当遇到一次超时重传的时候，都会将下一次超时时间间隔设为先前值的两倍。两次超时，就说明网络环境差，不宜频繁反复发送。</strong></p>
+<blockquote>
+<p>TCP 会在以下两种情况发生超时重传：</p>
+<ul>
+<li>数据包丢失</li>
+<li>确认应答丢失</li>
+</ul>
+</blockquote>
+<p><strong>快速重传</strong></p>
+<p>快速重传机制<strong>不以时间为驱动，而是以数据驱动重传</strong>。快速重传的工作方式是当收到三个相同的 ACK 报文时，会在定时器过期之前，重传丢失的报文段。</p>
+<img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210909091033.png" style="zoom: 80%;" />
+
+<p>在上图，发送方发出了 1，2，3，4，5 份数据：</p>
+<ul>
+<li>第一份 Seq1 先送到了，于是就 Ack 回 2；</li>
+<li>结果 Seq2 因为某些原因没收到，Seq3 到达了，于是还是 Ack 回 2；</li>
+<li>后面的 Seq4 和 Seq5 都到了，但还是 Ack 回 2，因为 Seq2 还是没有收到；</li>
+<li><strong>发送端收到了三个 Ack = 2 的确认，知道了 Seq2 还没有收到，就会在定时器过期之前，重传丢失的 Seq2。</strong></li>
+<li>最后，收到了 Seq2，此时因为 Seq3，Seq4，Seq5 都收到了，于是 Ack 回 6 。</li>
+</ul>
+<blockquote>
+<p>因为发送端并不清楚这连续的三个 Ack 2 是谁传回来的,所以快速重传临着另外一个问题。就是<strong>重传的时候，是重传之前的一个，还是重传所有的问题。</strong></p>
+</blockquote>
+<p><strong>SACK方法(选择性确认)</strong></p>
+<p>这种方式需要在 TCP 头部「选项」字段里加一个 <code>SACK</code> 的东西，它<strong>可以将缓存的地图发送给发送方</strong>，这样发送方就可以知道哪些数据收到了，哪些数据没收到，知道了这些信息，就可以<strong>只重传丢失的数据</strong></p>
+<p>如下图，发送方收到了三次同样的 ACK 确认报文，于是就会触发快速重发机制，通过 <code>SACK</code> 信息发现只有 <code>200~299</code> 这段数据丢失，则重发时，就只选择了这个 TCP 段进行重复。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210909091602.png" alt=""></p>
+<p><strong>Duplicate SACK</strong></p>
+<p>Duplicate SACK 又称 <code>D-SACK</code>，其主要<strong>使用了 SACK 来告诉「发送方」有哪些数据被重复接收了</strong></p>
+<blockquote>
+<ol>
+<li>可以让「发送方」知道，是发出去的包丢了，还是接收方回应的 ACK 包丢了;</li>
+<li>可以知道是不是「发送方」的数据包被网络延迟了;</li>
+<li>可以知道网络中是不是把「发送方」的数据包给复制了;</li>
+</ol>
+</blockquote>
+<h3 id="TCP的流量控制"><a href="#TCP的流量控制" class="headerlink" title="TCP的流量控制"></a>TCP的流量控制</h3><p>流量控制是为了控制发送方发送速率，让「发送方」根据「接收方」的实际接收能力控制发送的数据量，这就是所谓的流量控制。<br>接收方发送的确认报文中的窗口字段可以用来控制发送方窗口大小，从而影响发送方的发送速率。将窗口字段设置为0，则发送方不能发送数据。</p>
+<h4 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h4><p><strong>为什么需要滑动窗口：</strong>按数据包进行确认应答的传输方式有一个缺点：数据包的<strong>往返时间越长，通信的效率就越低</strong>。</p>
+<p>为解决这个问题，TCP 引入了<strong>窗口</strong>这个概念。即使在往返时间较长的情况下，它也不会降低网络通信的效率。</p>
+<p>那么有了窗口，就可以指定窗口大小，窗口大小就是指<strong>无需等待确认应答，而可以继续发送数据的最大值</strong>。</p>
+<p>TCP 头里有一个字段叫 <code>Window</code>，也就是窗口大小。</p>
+<p><strong>这个字段是接收端告诉发送端自己还有多少缓冲区可以接收数据。于是发送端就可以根据这个接收端的处理能力来发送数据，而不会导致接收端处理不过来</strong></p>
+<p>发送方的滑动窗口</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210909103101.png" alt=""></p>
+<blockquote>
+<ul>
+<li>#1 是已发送并收到 ACK确认的数据：1~31 字节</li>
+<li>#2 是已发送但未收到 ACK确认的数据：32~45 字节</li>
+<li>#3 是未发送但总大小在接收方处理范围内（接收方还有空间）：46~51字节</li>
+<li>#4 是未发送但总大小超过接收方处理范围（接收方没有空间）：52字节以后</li>
+</ul>
+</blockquote>
+<p>接收方的滑动窗口</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210909103156.png" alt=""></p>
+<blockquote>
+<ul>
+<li>#1 + #2 是已成功接收并确认的数据（等待应用进程读取）；</li>
+<li>#3 是未收到数据但可以接收的数据；</li>
+<li>#4 未收到数据并不可以接收的数据</li>
+</ul>
+</blockquote>
+<h3 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h3><p>在网络出现拥堵时，如果继续发送大量数据包，可能会导致数据包时延、丢失等，这时 TCP 就会重传数据，但是一重传就会导致网络的负担更重，于是会导致更大的延迟以及更多的丢包，这个情况就会进入恶性循环被不断地放大…</p>
+<p>于是，就有了<strong>拥塞控制</strong>，控制的目的就是<strong>避免「发送方」的数据填满整个网络。</strong></p>
+<blockquote>
+<p><strong>此处引入一个拥塞窗口：</strong><br><strong>拥塞窗口 cwnd</strong>是发送方维护的一个的状态变量，它会根据<strong>网络的拥塞程度动态变化的</strong>。</p>
+<p>加入了拥塞窗口的概念后，此时发送窗口的值是swnd = min(cwnd, rwnd)，也就是拥塞窗口和接收窗口中的最小值。</p>
+</blockquote>
+<p><strong>如何判断当前网络是否出现了拥塞</strong></p>
+<p>其实只要「发送方」没有在规定时间内接收到 ACK 应答报文，也就是<strong>发生了超时重传，就会认为网络出现了用拥塞。</strong></p>
+<p><strong>拥塞控制有哪些控制算法：</strong></p>
+<ul>
+<li>慢启动</li>
+<li>拥塞避免</li>
+<li>拥塞发生</li>
+<li>快速恢复</li>
+</ul>
+<p><strong>慢启动</strong></p>
+<p>慢启动的意思就是一点一点的提高发送数据包的数量，</p>
+<p>慢启动的算法记住一个规则就行：<strong>当发送方每收到一个 ACK，拥塞窗口 cwnd 的大小就会加 1。</strong></p>
+<p>这里假定拥塞窗口 <code>cwnd</code> 和发送窗口 <code>swnd</code> 相等，下面举个栗子：</p>
+<ul>
+<li>连接建立完成后，一开始初始化 <code>cwnd = 1</code>，表示可以传一个 <code>MSS</code> 大小的数据。</li>
+<li>当收到一个 ACK 确认应答后，cwnd 增加 1，于是一次能够发送 2 个</li>
+<li>当收到 2 个的 ACK 确认应答后， cwnd 增加 2，于是就可以比之前多发2 个，所以这一次能够发送 4 个</li>
+<li>当这 4 个的 ACK 确认到来的时候，每个确认 cwnd 增加 1， 4 个确认 cwnd 增加 4，于是就可以比之前多发 4 个，所以这一次能够发送 8 个。</li>
+</ul>
+<blockquote>
+<p>慢启动算法，发包的个数是<strong>指数性的增长</strong></p>
+</blockquote>
+<p>存在一个慢启动门限(ssthresh)状态变量(一般是65535字节)</p>
+<ul>
+<li>当 <code>cwnd</code> &lt; <code>ssthresh</code> 时，使用慢启动算法。</li>
+<li>当 <code>cwnd</code> &gt;= <code>ssthresh</code> 时，就会使用「拥塞避免算法」。</li>
+</ul>
+<p><strong>拥塞避免</strong></p>
+<p>进入拥塞避免算法后，它的规则是：<strong>每当收到一个 ACK 时，cwnd 增加 1/cwnd。</strong></p>
+<blockquote>
+<ul>
+<li>当 8 个 ACK 应答确认到来时，每个确认增加 1/8，8 个 ACK 确认 cwnd 一共增加 1，于是这一次能够发送 9 个 <code>MSS</code> 大小的数据，变成了<strong>线性增长。</strong></li>
+</ul>
+</blockquote>
+<p><strong>拥塞发生</strong></p>
+<p>当网络出现拥塞，也就是会发生数据包重传，重传机制主要有两种：超时重传；快速重传</p>
+<p><strong>超时重传的拥塞发生算法：</strong>当发生了超时重传，则就会使用拥塞发生算法。</p>
+<p>这个时候，ssthresh 和 cwnd 的值会发生变化：</p>
+<ul>
+<li><code>ssthresh</code> 设为 <code>cwnd/2</code>，</li>
+<li><code>cwnd</code> 重置为 <code>1</code></li>
+</ul>
+<blockquote>
+<p>接着，就重新开始慢启动，慢启动是会突然减少数据流的。这种方式太激进了，反应也很强烈，会造成网络卡顿。</p>
+</blockquote>
+<p><strong>快速重传的拥塞发生算法：</strong>当发生快速重传的时候，则使用快速重传的拥塞发生算法</p>
+<ul>
+<li><code>cwnd = cwnd/2</code> ，也就是设置为原来的一半;</li>
+<li><code>ssthresh = cwnd</code>;</li>
+<li>进入快速恢复算法</li>
+</ul>
+<p><strong>快速恢复算法</strong></p>
+<p>快速重传和快速恢复算法一般同时使用，快速恢复算法是认为，你还能收到 3 个重复 ACK 说明网络也不那么糟糕，所以没有必要像 <code>RTO</code> 超时那么强烈。</p>
+<ul>
+<li>拥塞窗口 <code>cwnd = ssthresh + 3</code> （ 3 的意思是确认有 3 个数据包被收到了）；</li>
+<li>重传丢失的数据包；</li>
+<li>如果再收到重复的 ACK，那么 cwnd 增加 1；</li>
+<li>如果收到新数据的 ACK 后，把 cwnd 设置为第一步中的 ssthresh 的值，原因是该 ACK 确认了新的数据，说明从 duplicated ACK 时的数据都已收到，该恢复过程已经结束，可以回到恢复之前的状态了，也即再次进入拥塞避免状态；</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210909151522.png" alt=""></p>
+<h3 id="TCP的可靠性"><a href="#TCP的可靠性" class="headerlink" title="TCP的可靠性"></a>TCP的可靠性</h3><p><strong>1. 校验和</strong></p>
+<p><strong>计算方式：</strong>检验和是存在于各种报文中的一个字段，它存在的目的是验证报文在网络传输过程中的完整性。因此，在报文的发送端，会根据报文中的首部或数据来计算一个检验和，然后一旦接收端接受到相应报文，接收端也会对报文的首部或数据进行一次检验和计算，如果接收端算出来的检验和和发送端发送的不一样，那么接收端认为报文在传输过程中出了错，于是就丢掉该报文。</p>
+<blockquote>
+<p>在数据传输的过程中，将发送的数据段都当做一个16 位的整数。将这些整数加起来。并且前面的进位不能丢弃，补在后面，最后取反，得到校验和</p>
+</blockquote>
+<blockquote>
+<p>接收方和发送方校验和比对一致，数据也不一定传输成功。</p>
+</blockquote>
+<p><strong>2.序列号和确认应答</strong></p>
+<p><strong>序列号</strong>：TCP 传输时<strong>将每个字节的数据都进行了编号</strong>，这就是序列号。序列号的作用不仅仅是应答的作用，有了序列号能够将接收到的数据根据序列号排序，并且去掉重复序列号的数据。这也是TCP 传输可靠性的保证之一。</p>
+<p><strong>确认应答：</strong>TCP 传输的过程中，每次接收方收到数据后，都会对传输方进行确认应答。也就是发送ACK 报文。这个<strong>ACK 报文当中带有对应的确认序列号</strong>，告诉发送方，接收到了哪些数据，下一次的数据从哪里发。</p>
+<p><strong>3. 连接管理：</strong>即TCP建立连接时的三次握手与四次挥手</p>
+<p><strong>4. 重传机制</strong>；<strong>5. 流量控制</strong>；<strong>6.拥塞控制</strong></p>
+<h3 id="TCP和UDP的区别"><a href="#TCP和UDP的区别" class="headerlink" title="TCP和UDP的区别"></a>TCP和UDP的区别</h3><ol>
+<li>TCP 面向连接（如打电话要先拨号建立连接）;UDP 是无连接的，即发送数据之前不需要建立连接</li>
+<li>TCP 提供可靠的服务。也就是说，通过TCP 连接传送的数据，无差错，不丢失，不重复，且按序到达;UDP 尽最大努力交付，即不保证可靠交付</li>
+<li>TCP 面向字节流，实际上是TCP 把数据看成一连串无结构的字节流;UDP 是面向报文的，UDP 没有拥塞控制，因此网络出现拥塞不会使源主机的发送速率降低（对实时应用很有用，如IP 电话，实时视频会议等），并且UDP 速度更快</li>
+<li>每一条TCP 连接只能是点到点的;UDP 支持一对一，一对多，多对一和多对多的交互通信</li>
+<li>TCP 首部开销20 字节;UDP 的首部开销小，只有8 个字节</li>
+<li>TCP 的逻辑通信信道是全双工的可靠信道，UDP 则是不可靠信道</li>
+</ol>
+<h4 id="TCP和UDP的应用"><a href="#TCP和UDP的应用" class="headerlink" title="TCP和UDP的应用"></a>TCP和UDP的应用</h4><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210909152412.png" style="zoom:50%;" />
+
+<h3 id="JVM-新生代和老年代都使用什么GC算法"><a href="#JVM-新生代和老年代都使用什么GC算法" class="headerlink" title="JVM 新生代和老年代都使用什么GC算法"></a>JVM 新生代和老年代都使用什么GC算法</h3><h4 id="新生代和老年代的区别"><a href="#新生代和老年代的区别" class="headerlink" title="新生代和老年代的区别"></a>新生代和老年代的区别</h4><p><img src="https://github.com/Snailclimb/JavaGuide/raw/master/docs/java/jvm/pictures/jvm%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/01d330d8-2710-4fad-a91c-7bbbfaaefc0e.png" alt="img">新生代和老年代是针对于分代收集算法来定义的，新生代又分为Eden 和Survivor 两个区。加上老年代就这三个区。数据会首先分配到Eden 区当中（当然也有特殊情况，<strong>如果是大对象那么会直接放入到老年代</strong>（大对象是指需要大量连续内存空间的java 对象）。），<strong>当Eden没有足够空间的时候就会触发jvm 发起一次Minor GC</strong>。如果对象经过一次Minor GC 还存活，并且又能被Survivor 空间接受，那么将被移动到Survivor 空间当中。并将其年龄设为1，对象在Survivor 每熬过一次Minor GC，年龄就加1，当年龄达到一定的程度（默认为15）时，就会被晋升到老年代中了，当然晋升老年代的年龄是可以设置的。如果老年代满了就执行：Full GC 因为不经常执行，因此采用了Mark-Compact 算法清理。</p>
+<p><strong>新生代回收</strong>的判断条件是新生代内存不足时候。新生代主要是用来存放新生的对象，会频繁创建对象，所有垃圾收集会频繁进行回收。在新生代中，每次垃圾收集时都发现有大批对象死去，只有少量存活，那就选用复制算法，只需要付出少量存活对象的复制成本就可以完成收集。</p>
+<p><strong>新生代使用的算法：复制（Copy）算法</strong><br>将可用内存容量划分为大小相等的两块，每次只用其中一块。当这块内存用完了，就将还存活的对象复制到另外一块上面，然后再把已使用过的内存空间一次清理掉。(From到to；to到from)</p>
+<blockquote>
+<p>优点：不会产生大量不连续的内存空间</p>
+<p>缺点：效率也不是很高，需要占用双倍内存空间</p>
+</blockquote>
+<p><strong>老年代回收的判断条件</strong></p>
+<ol>
+<li><p><strong>System.gc()方法的调用</strong>，在代码中调用System.gc()方法会<strong>建议</strong>JVM 进行Full GC，在大多数情况下会增加Full GC的次数，导致系统性能下降，一般不建议手动进行此方法的调用。</p>
+</li>
+<li><p><strong>老年代空间不足</strong>：在Survivor 区域的对象满足晋升到老年代的条件时，晋升进入老年代的对象大小大于老年代的可用内存，这个时候会触发Full GC。</p>
+</li>
+<li><p><strong>Metaspace 区内存达到阈值：</strong>Metaspace 使用的是本地内存，而不是堆内存，也就是说在默认情况下Metaspace<br>的大小只与本地内存大小有关（约为20.8MB），超过这个值就会引发Full GC，这个值不是固定的，是会随着JVM 的运行进行动态调整的。</p>
+</li>
+<li><p><strong>堆中产生大对象超过阈值：</strong>大对象或者长期存活的对象进入老年代，典型的大对象就是很长的字符串或者数组，它们在被创建后会直接进入老年代，在要放置的时候JVM 如果发现老年代的空间不足时，会触发GC。</p>
+</li>
+<li><p><strong>老年代连续空间不足：</strong>JVM 如果判断老年代没有做足够的连续空间来放置大对象，那么就会引起Full GC</p>
+</li>
+<li><p><strong>统计得到的Minor GC 晋升到旧生代的平均大小大于老年代的剩余空间</strong></p>
+<blockquote>
+<p>新生代晋升的另外一种情况是如果JVM 发现Survivor 区域中的相同年龄的对象占到所有对象的一半以上时，就会将大于这个年龄的对象移动到老年代，在这批对象在统计后发现可以晋升到老年代，但是发现老年代没有足够的空间来放置这些对象，这就会引起Full GC</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>老年代使用的算法</strong></p>
+<p><strong>标记清除：</strong></p>
+<p>标记清除算法是最基础的回收算法，分为标记和清除两个部分：首先标记出所有需要回收的对象，这一过程<strong>在可达性分析过程中进行</strong>。在标记完之后统一回收所有被标记的对象。</p>
+<img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210909213741.png" style="zoom:80%;" />
+
+<blockquote>
+<p><strong>优点</strong>：速度较快</p>
+<p><strong>缺点：</strong>会造成内存碎片，导致在程序运行过程中需要分配较大对象的时候，无法找到足够的连续内存而不得不提前触发一次垃圾收集动作。</p>
+</blockquote>
+<p><strong>标记整理：</strong></p>
+<p>标记过程仍然与“标记-清除”算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存。</p>
+<img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210909213810.png" style="zoom:80%;" />
+
+<blockquote>
+<p><strong>优点：</strong>没有内存碎片<br><strong>缺点：</strong>速度慢</p>
+</blockquote>
+<p><strong>分代垃圾回收：</strong>根据各个年代的特点采取最适当的收集算法</p>
+<p>在新生代中，每次垃圾收集时候都发现有大批对象死去，只有少量存活，那就选用复制算法。只需要付出少量存活对象的复制成本就可以完成收集。<br> 老年代中因为对象存活率高、没有额外空间对他进行分配担保，就必须用标记-清除或者标记-整理。</p>
+<h3 id="JVM垃圾收集器"><a href="#JVM垃圾收集器" class="headerlink" title="JVM垃圾收集器"></a>JVM垃圾收集器</h3><h4 id="CMS回收器"><a href="#CMS回收器" class="headerlink" title="CMS回收器"></a>CMS回收器</h4>]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
+        <tag>java</tag>
+      </tags>
+  </entry>
 </search>
