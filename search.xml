@@ -1105,4 +1105,660 @@
         <tag>redis</tag>
       </tags>
   </entry>
+  <entry>
+    <title>java面试</title>
+    <url>/2021/09/09/java%E9%9D%A2%E8%AF%95/</url>
+    <content><![CDATA[<h3 id="Java面试笔记"><a href="#Java面试笔记" class="headerlink" title="Java面试笔记"></a>Java面试笔记</h3><blockquote>
+<p>来个公司收了我吧</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="面向对象与面向过程的区别"><a href="#面向对象与面向过程的区别" class="headerlink" title="面向对象与面向过程的区别"></a>面向对象与面向过程的区别</h3><p>面向过程是让计算机有步骤地顺序做一件事，是过程化思维，在开发大型项目时，软件复用和维护困难，<strong>模块之间耦合严重。</strong>面向对象可以拆解问题的复杂度，<strong>对现实事物进行抽象并映射为开发对象</strong>，更接近人的思维。</p>
+<p>面向过程代码松散，强调流程化解决问题，面向对象代码强调高内聚、低耦合，先抽象模型定义共性行为，再解决实际问题。</p>
+<h4 id="C-和Java"><a href="#C-和Java" class="headerlink" title="C++和Java"></a>C++和Java</h4><ol>
+<li>C++可以继承多个类，Java只能单继承，但是可以实现多个接口</li>
+<li>Java和C++都是强类型语言，都存在类的概念，并且都有private，protected，public等访问限定符。</li>
+</ol>
+<h3 id="面向对象的特点"><a href="#面向对象的特点" class="headerlink" title="面向对象的特点"></a>面向对象的特点</h3><p>封装，继承，多态</p>
+<p><strong>封装：</strong>就是把对象的属性和操作封装为一个独立的整体，并尽可能隐藏对象的内部实现细节，并且可以只让可信的类或对象访问自身的数据和方法。</p>
+<p><strong>继承：</strong>子类继承父类的特征和行为，使得子类具有父类相同的行为，如果父类中拥有被private修饰属性，则子类不能继承。Java只支持单继承，即一个子类只允许有一个父类，但可以实现多级继承。通过继承，提高了代码的复用性。</p>
+<p>继承的实现方法有实现继承和接口继承，实现继承指直接使用基类的方法和属性，接口继承时子类需要实现父类的方法。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;继承链中的优先级调用</span><br><span class="line">this.show(O);super.show(O);this.show((super)O);super.show((super)O)</span><br><span class="line">&#x2F;&#x2F;如果(super)O重写了this的方法，则会覆盖。</span><br></pre></td></tr></table></figure>
+
+<p><strong>多态：</strong>一个类实例的相同方法，在不同情形下有不同的表现形式，只有在运行时才知道引用变量指向的具体对象。多态消除了类型之间的耦合关系，实现低耦合。</p>
+<p>在Java中可以<strong>通过继承和接口两种方式实现多态</strong>。多态的<strong>实现需要进行继承、重写、向上转型</strong>，在多态中必须存在继承关系的子类和父类，子类需要对父类中的某些方法进行重写，向上转型即在多态中父类的引用指向子类，如</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Integer&gt; a =<span class="keyword">new</span> ArrayList&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>注意：向上转型之后，子类的特有方法就不能再被调用了。</p>
+<h3 id="Java中子类的初始化顺序"><a href="#Java中子类的初始化顺序" class="headerlink" title="Java中子类的初始化顺序"></a>Java中子类的初始化顺序</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">父类的静态变量和代码块</span><br><span class="line">子类的静态变量和代码块</span><br><span class="line">父类的实例变量，普通语句块</span><br><span class="line">父类的构造函数</span><br><span class="line">子类的实例变量，普通语句块</span><br><span class="line">子类的构造函数</span><br></pre></td></tr></table></figure>
+
+<h3 id="抽象类和接口的区别"><a href="#抽象类和接口的区别" class="headerlink" title="抽象类和接口的区别"></a>抽象类和接口的区别</h3><ol>
+<li><p>一个类可以实现多个接口，但是只能继承一个类</p>
+</li>
+<li><p>接口的成员只能是public(JDK8中允许default修饰定义默认方法)，抽象类无所谓。</p>
+</li>
+<li><p>接口中的字段只能是static final类型，抽象类无所谓</p>
+</li>
+<li><p>接口用于让不相关的类实现同一方法和需要多重继承的时候，</p>
+<p>例如：Plane和Bird类都有fly(),应该把fly定义为接口，因为除了fly外，bird和plane基本没有其他相同特征。</p>
+</li>
+</ol>
+<h3 id="重写和重载"><a href="#重写和重载" class="headerlink" title="重写和重载"></a>重写和重载</h3><p><strong>重写(override): **是子类对父类</strong>允许访问的方法**的实现过程进行重新编写，其返回值和形参都不能改变</p>
+<p>重写规则：1. 被final修饰的方法不能被重写； 2. 构造方法不能被重写；3. 访问权限不能比父类中被重写的方法访问权限更低;<code>public&gt;protected&gt;(default)&gt;private</code></p>
+<p><strong>重载(overload):</strong>在一个类中，方法名相同，而参数不同称为方法的重载。</p>
+<p>重载的规则：1. 被重载的方法可以改变返回类型；2. 被重载的方法可以改变访问修饰符；<strong>3.被重载的方法必须改变参数列表。</strong></p>
+<p>JVM在重载方法中选择合适方法的顺序为：1. 精确匹配；2. 基本数据类型转为更大的表示范围；3. 自动拆箱装箱；4. 子类向上转型；5. 可变参数</p>
+<h3 id="自动装箱与拆箱"><a href="#自动装箱与拆箱" class="headerlink" title="自动装箱与拆箱"></a>自动装箱与拆箱</h3><p>在Java中，每个数据类型都有一个对应的包装类(char的包装类为Character)</p>
+<p>自动装箱，指将基本数据类型包装为一个包装类类型，如向泛型为<code>Inetger</code>的类型添加int元素</p>
+<p>自动拆箱，即将一个包装类的对象转换为一个基本数据类型</p>
+<p>注意：比较两个包装类数值时需要使用<code>equal</code>s而不是<code>==</code>；</p>
+<h3 id="Java如何实现平台无关性"><a href="#Java如何实现平台无关性" class="headerlink" title="Java如何实现平台无关性"></a>Java如何实现平台无关性</h3><p>java可以一次编写，到处运行，Java编译器可生成与计算机体系结构无关的字节码指令，字节码文件不仅可以轻易的在任何机器上执行，还可以动态的转换为本地机器代码，转换由JVM实现，屏蔽了不同操作系统之间的差异。</p>
+<h3 id="Java中Class类的作用"><a href="#Java中Class类的作用" class="headerlink" title="Java中Class类的作用"></a>Java中Class类的作用</h3><p>在java运行时，系统会为所有对象维护一个运行时类型标识，这个信息会跟踪每个对象所属的类，虚拟机利用运行时类信息选择要执行的正确方法，保存这些信息的类就是Class，这是一个泛型类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">类名<span class="class">.<span class="keyword">class</span>；对象的<span class="title">getclass</span>方法；<span class="title">Class</span>.<span class="title">forName</span>(类的全限定名)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="fail-fast和fail-safe"><a href="#fail-fast和fail-safe" class="headerlink" title="fail-fast和fail-safe"></a>fail-fast和fail-safe</h3><p><strong>fail-fast(快速失败机制)：</strong>是java集合的一种错误检测机制，当<strong>多个线程对部分集合进行结构上的改变操作</strong>时可能会发生fail-fast，抛出ConcurrentModificationException异常。如当在迭代集合的过程中，集合在结构上发生了改变。</p>
+<p>:warning:fail-fast不能保证不同步的情况下一定会抛出异常，只能尽力去抛出异常</p>
+<p><strong>fail-safe(安全失败)：</strong>采用fail-safe的集合容器，在遍历是不是直接在集合内容上访问，而是先复制原有集合的内容，然后在拷贝的集合上进行遍历操作，由于是对拷贝的集合遍历，<strong>对原集合的修改并不会被迭代器检测到</strong>抛出异常。缺点是迭代器也不能访问到修改后的内容。(java.util.concurrent)</p>
+<h3 id="浅拷贝与深拷贝"><a href="#浅拷贝与深拷贝" class="headerlink" title="浅拷贝与深拷贝"></a>浅拷贝与深拷贝</h3><p>Object类中的<strong>Clone()</strong>方法用于拷贝对象，默认Clone()方法是浅拷贝。</p>
+<p><strong>浅拷贝：</strong>只复制当前对象的基本数据类型和引用变量，没有复制引用对象指向的实际对象，对克隆对象的修改可能影响原对象，不安全。</p>
+<blockquote>
+<p>对于引用类型，比如数组或者类对象，因为引用类型是引用传递，所以浅拷贝只是把内存地址赋值给了成员变量，它们指向了同一内存空间。改变其中一个，会对另外一个也产生影响。</p>
+</blockquote>
+<p><strong>深拷贝：</strong>完全拷贝基本数据类型和引用类型，安全，但是较浅拷贝速度慢且开销大</p>
+<blockquote>
+<p>深拷贝，在拷贝引用类型成员变量时，为引用类型的数据成员另辟了一个独立的内存空间，实现真正内容上的拷贝。</p>
+</blockquote>
+<p>对于有多层对象的，每个对象都需要实现Cloneable,并重写clone()方法，进而实现对象的串行层层拷贝。</p>
+<p><strong>实现对象拷贝的类，需要实现Cloneable接口，并覆写clone()方法</strong>。</p>
+<h3 id="数组和链表"><a href="#数组和链表" class="headerlink" title="数组和链表"></a>数组和链表</h3><p>数组可以随机访问其中元素，查询快，增删慢(需要移动后面所有元素)；链表删除快，查询需要遍历整个链表。</p>
+<p>数组需要连续的内存空间，而链表的空间可以不连续。</p>
+<p>数组的扩容需要分配一块更大的空间再迁移数据，而链表可以动态扩容。</p>
+<h3 id="ArrayList和LinkedList"><a href="#ArrayList和LinkedList" class="headerlink" title="ArrayList和LinkedList"></a>ArrayList和LinkedList</h3><p>ArrayList基于数组实现，LinkedList基于双向链表设计，两者都可以非空，重复，有序，且线程不安全。</p>
+<p>LinkedList因为基于双向链表，所以获取元素较ArrayList要慢 (遍历整个链表O(N))</p>
+<p>LinkedList做插入删除操作的时候慢在寻址，快在操作只需要更改前后Node的引用地址</p>
+<p>ArrayList快在寻址，慢在数组元素的批量copy</p>
+<blockquote>
+<p>当要插入和删除的元素在前半段或者非常靠前的位置的时候，LinkedList的效率大大快过ArrayList，但是越往后ArrayList要Copy的元素越来越少，操作速度必然追上或者超过LinkedList</p>
+</blockquote>
+<blockquote>
+<p>LinkedList在查找元素的时候，若index小于size的一半从头开始遍历链表，当index在链表的后半部时，从尾部遍历链表</p>
+</blockquote>
+<p>ArrayList中的所有方法都是不同步的，所以在并发下 <strong>必然出现线程安全问题</strong>，vector是ArrayList的线程安全版本，其默认2倍扩容。</p>
+<p>ArrayList调用grow方法判断是否需要多次扩容，每次默认扩容为原容器容量右移一位，即相当于原容器的1.5倍。</p>
+<h3 id="List和Set"><a href="#List和Set" class="headerlink" title="List和Set"></a>List和Set</h3><p><img src="https://img.php.cn/upload/article/000/000/028/5c73a16ef1c04585.jpg" alt="img"></p>
+<p>List和Set都是继承的Collection接口</p>
+<p><strong>List：</strong>有序，可重复；<strong>Set：</strong>无序，不可重复，重复元素会被覆盖掉</p>
+<p>List可以通过迭代器和下标遍历，Set只能通过迭代器遍历</p>
+<p>HashSet通过 HashMap实现，HashMap的Key即HashSet的值，可以存在null值，线程不安全</p>
+<p>TreeSet通过TreeMap实现</p>
+<p>ArrayList和LinkedList见上述。</p>
+<h4 id="HashSet如何实现添加元素时保证元素不重复"><a href="#HashSet如何实现添加元素时保证元素不重复" class="headerlink" title="HashSet如何实现添加元素时保证元素不重复"></a>HashSet如何实现添加元素时保证元素不重复</h4><p>如果不存在元素和传入对象的Hash值相等，表示该对象不存在，存。</p>
+<p>如果存在元素和传入对象的Hash值相等，若equals判读相等，不存，若equals判断不等，存</p>
+<h4 id="关于HashMap"><a href="#关于HashMap" class="headerlink" title="关于HashMap"></a>关于HashMap</h4><p>HashMap在底层数据结构上采用了数组+链表+红黑树的结构，通过散列映射来存储键值对数据，因为在查询上使用散列码，所以查询上速度比较快。HashMap最多允许一对键值对的key为null，多个键值对的value为null。无序，且非线程安全。(ConcurrentHashMap线程安全)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">1</span> &lt;&lt; 默认的table 初始容量（<span class="number">16</span>）</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="number">0.75f</span>：默认的负载因子</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TREEIFY_THRESHOLD = <span class="number">8</span>: 链表长度大于该参数转红黑树</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNTREEIFY_THRESHOLD = <span class="number">6</span>: 当树的节点数小于等于该参数转成链表</span><br></pre></td></tr></table></figure>
+
+<p><strong>HashMap的动态扩容：</strong>假设hashmap的table长度是m，键值对为n，table中每个链表长度为n/m,为了使查找成本尽可能小需要m尽可能大，可以使用resize实现，hashMap默认负载因子0.75f，即当容量达到3/4时进行扩容，负载因子越大，能容纳的键值对越多，但是查找的代价也会相应增大。</p>
+<p><strong>hash():</strong>如果key为null，返回0，否则将hashcode方法的返回值高低16位异或（ h ^ (h &gt;&gt;&gt; 16) ）,<strong>让尽可能多的位参与运算，使结果的0,1分布更加均匀,降低Hash冲突概率</strong> （右位移16位正好是32bit的一半，高半区和低半区异或加大低位的随机性，而且混合后的低位参杂了高位的部分特征，变相保留了高位的信息）</p>
+<p><strong>Hash冲突：</strong>hash冲突指hash方法出来key的hash值是相同的</p>
+<h5 id="Hash冲突的解决办法："><a href="#Hash冲突的解决办法：" class="headerlink" title="Hash冲突的解决办法："></a>Hash冲突的解决办法：</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">开放地址</span><br><span class="line">建立公共溢出区</span><br><span class="line">再哈希：发生Hash冲突的时候再进行一次Hash，缺点是每次冲突都要再Hash，时间成本增加</span><br><span class="line">拉链法：将Hash冲突的同义词存储在同一个线性链表中 缺点是需要额外的空间</span><br></pre></td></tr></table></figure>
+
+<h5 id="为什么HsahMap的数组长度要取2的整数幂"><a href="#为什么HsahMap的数组长度要取2的整数幂" class="headerlink" title="为什么HsahMap的数组长度要取2的整数幂"></a>为什么HsahMap的数组长度要取2的整数幂</h5><ol>
+<li>扩容，大小指定为2的幂次，当哈希桶扩大为2倍时只需要进行左移操作，位操作的速度比较快</li>
+<li>减少Hash冲突：2的幂次Length-1值后面的二进制位全为1，这种情况下，index=key值的Hashcode&amp;(Length-1),index结果等同与hashcode后几位的值，只要Hashcode本身分布均匀，Hash算法的结果就是均匀的。</li>
+</ol>
+<h3 id="二叉查找树，AVL树，B树，红黑树"><a href="#二叉查找树，AVL树，B树，红黑树" class="headerlink" title="二叉查找树，AVL树，B树，红黑树"></a>二叉查找树，AVL树，B树，红黑树</h3><p><strong>二叉查找树(BST)：</strong>左节点小于根节点，右节点大于根节点(O(logN)),在极端情况下会变成线性链表结构O(N)，为解决这个出现了AVL树</p>
+<p><strong>平衡二叉树(AVL)：</strong>是一种自平衡的树，除了二叉树的特征外，规定左子树和右子树高度差不超过1（保证不会成为线性链表），但是由于要维持自身平衡，所以插入删除节点的时候需要对节点进行频繁旋转。</p>
+<p><strong>B树(也叫B-树)：</strong>是一种多路平衡查找树</p>
+<ol>
+<li>其所有的叶子节点处于同一层，每个节点中的元素从小到大排序，可以看成矮胖版的AVL树</li>
+</ol>
+<p><strong>B+树：</strong>B+树每个非叶子结点存放的元素只用于索引作用，所有数据保存在叶子结点。</p>
+<p><strong>红黑树：</strong>一种自平衡的二叉查找树</p>
+<img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210907203427.jpg" style="zoom:80%;" />
+
+<ol>
+<li>每个节点或是黑色或是红色</li>
+<li>根节点是黑色</li>
+<li>每个叶子节点为黑色(叶子节点指为空的叶子节点)</li>
+<li>如果一个节点为红色，则子节点必须是黑色</li>
+<li>从一个节点到该节点的子孙节点所有路径上包含相同数目的黑节点</li>
+</ol>
+<blockquote>
+<p>红黑树相较于AVL树牺牲了严格的高度平衡的条件，只要求部分达到平衡要求，由于红黑树的设计，任何不平衡都会在3次旋转内解决，相较于BST，红黑树可以确保树的最长路径不大于两倍最短路径的长度，即查找效果是有最低保证的，即O(logN)</p>
+</blockquote>
+<p><strong>红黑树旋转(左旋右旋)：</strong></p>
+<p>对x进行左旋，意味着，将“x的右孩子”设为“x的父亲节点”；即，将 x变成了一个左节点(x成了为z的左孩子)！。 因此，<strong>左旋中的“左”，意味着“被旋转的节点将变成一个左节点”</strong>。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210907203502.jpg" alt=""></p>
+<p><strong>红黑树插入：</strong></p>
+<p>将红黑树当作一颗二叉查找树，插入节点</p>
+<p>将节点着色为红色（将插入的节点着色为红色，不会违背”特性(5)”！少违背一条特性，就意味着我们需要处理的情况越少。）</p>
+<p>通过旋转着色生成新的红黑树</p>
+<h3 id="String、StringBuilder、StringBuffer"><a href="#String、StringBuilder、StringBuffer" class="headerlink" title="String、StringBuilder、StringBuffer"></a>String、StringBuilder、StringBuffer</h3><ol>
+<li><strong>可变性：</strong>只有String不可变</li>
+</ol>
+<blockquote>
+<p>因为String被声明为final，所以不可以被继承，<strong>对于String对象的任何修改，其实都是在创建一个新的String对象再引用该对象，只是修改了变量引用的对象，没有修改原本String对象本身</strong>。</p>
+<p>因为String的不可变：可以用做HashMap的Key，并且线程安全</p>
+</blockquote>
+<ol start="2">
+<li><strong>安全性：</strong>只有StringBuilder线程不安全</li>
+</ol>
+<blockquote>
+<p>因为StringBuilder在append操作时并未使用线程同步，而StringBuffer几乎大部分方法都使用了synchronized关键字进行方法级别的同步处理。</p>
+</blockquote>
+<p><strong>字符串的拼接</strong></p>
+<ol>
+<li><p>直接使用+的话，底层使用StringBuilder实现，在循环中若使用+拼接，相当于不断创建新的StringBuilder对象再转换为String对象，效率差。</p>
+</li>
+<li><p>使用String的concat方法，效率稍高与直接使用+</p>
+</li>
+<li><p>使用StringBuilder和StringBuffer的append方法，StringBuilder效率高，但是线程不安全；StrinBuffer使用synchronized保证线程安全，但是效率低一些</p>
+</li>
+</ol>
+<blockquote>
+<p>常量和常量拼接，结果仍然是常量，结果在常量池；只要有变量参与结果就是变量，存在堆中。</p>
+</blockquote>
+<h3 id="finally，finalize，final"><a href="#finally，finalize，final" class="headerlink" title="finally，finalize，final"></a>finally，finalize，final</h3><p><strong>finalize()：</strong> 在垃圾回收器(GC)准备释放对象占用的内存时，首先调用finalize(),并且在下一次垃圾回收动作发生，才会真正回收该对象占用的内存，一个对象的finalize()方法只会调用一次，而且finalize()被调用不意味着gc会回收该对象。</p>
+<p><strong>finally：</strong>作为异常处理的一部分，只能用在try-catch语句中，finally的语句不论是否抛出异常都一定会被执行</p>
+<blockquote>
+<p>try语句执行之前的抛出异常或返回时finally不会被执行</p>
+<p>try语句中System.exit（0）终止虚拟局运行时不会执行finally</p>
+<p>try或者catch语句执行时被打断(如断电死机)，finally语句不会被执行</p>
+<p>try-catch中有return时会先执行finally，若finally也有return则返回finally的return</p>
+</blockquote>
+<h3 id="final，Static，Static-final"><a href="#final，Static，Static-final" class="headerlink" title="final，Static，Static final"></a>final，Static，Static final</h3><p><strong>final：</strong></p>
+<ol>
+<li>final类不能被继承，类中的所有方法默认是final的</li>
+<li>final方法可以被继承，但不能被子类覆盖</li>
+<li>final成员变量只能赋值一次，赋值之后不能再改变</li>
+<li>final不能修饰构造方法</li>
+<li>private类型的方法默认是final类型的</li>
+<li>final可以先声明，不给初始值，但是final在使用之前必须被初始化。</li>
+</ol>
+<p><strong>static final/final static：</strong></p>
+<p>用来修饰成员变量和成员方法，可以理解为全局变量(final static和static final没有任何区别)</p>
+<ol>
+<li><p>对于变量，表示一旦赋值就不可修改，可以通过类名访问</p>
+</li>
+<li><p>对于方法，表示不可覆盖，可以通过类名直接访问</p>
+</li>
+</ol>
+<p><strong>Static: ** 被Static修饰的成员变量和成员方法 **独立于该类的任何对象</strong>，即不依赖类的特定实例，只要这个类被加载，虚拟机就能根据类名在 <strong>运行时数据区的方法区找到</strong>，因此Static对象可以在它的任何对象创建之前访问。<strong>Public</strong>修饰的<strong>Static</strong>成员变量和成员方法本质是全局变量和全局方法。</p>
+<h4 id="Static可以被继承嘛"><a href="#Static可以被继承嘛" class="headerlink" title="Static可以被继承嘛"></a>Static可以被继承嘛</h4><p>static修饰可以被继承，<strong>但不能被重写</strong>，静态方法在编译时绑定，方法重写是运行时绑定</p>
+<h4 id="是否可以从一个static方法内部访问该类的非static方法"><a href="#是否可以从一个static方法内部访问该类的非static方法" class="headerlink" title="是否可以从一个static方法内部访问该类的非static方法"></a>是否可以从一个static方法内部访问该类的非static方法</h4><p><strong>不可以，</strong>因为非Static方法需要和对象关联在一起，必须创建一个对象才可以在该对象上进行方法的调用，在static方法被调用时，可能还没有创建任何实例对象。</p>
+<h4 id="静态变量和实例变量的区别"><a href="#静态变量和实例变量的区别" class="headerlink" title="静态变量和实例变量的区别"></a>静态变量和实例变量的区别</h4><p>静态变量需要static修饰</p>
+<p>实例对象属于 <strong>某个对象的属性</strong>，必须创建实例对象才会被分配空间使用这个实例变量。</p>
+<p>静态变量属于类，又叫类变量，<strong>程序加载类的字节码文件时静态变量就会被分配空间被使用</strong></p>
+<h3 id="Java的运行时数据区"><a href="#Java的运行时数据区" class="headerlink" title="Java的运行时数据区"></a>Java的运行时数据区</h3><ol>
+<li>程序计数器：一块较小的内存空间，可以看作当前线程所执行字节码的行号指示器，是唯一虚拟机没有规定内存溢出情况的区域。</li>
+<li>JVM栈：为虚拟机执行Java服务，每当有一个新线程创建时就会分配一个栈空间，线程结束后栈空间被回收，栈空间与线程拥有相同的生命周期。当线程请求的栈深度大于虚拟机允许的深度时抛出StackOverflowError，如果jvm栈容量可以动态扩展，栈扩展无法申请到足够内存时抛出：OutOfMemoryError</li>
+<li>本地方法栈：与Jvm栈类似，调用本地方法时JVM栈保持不变，动态链接并直接调用本地方法。</li>
+<li>堆：JVM管理内存中最大的一块，<strong>被所有线程共享，在虚拟机启动时创建。</strong>Java中几乎所有的实例都在堆分配内存。堆在物理上可以处于不连续的空间，逻辑上应该连续。</li>
+<li>方法区：用于存储被虚拟机加载的常量、静态变量、类型信息、即时编译器编译后的代码缓存等数据，可以固定大小，也可以扩展，<strong>还可以不实现垃圾回收。</strong></li>
+</ol>
+<h4 id="运行时常量池的作用"><a href="#运行时常量池的作用" class="headerlink" title="运行时常量池的作用"></a>运行时常量池的作用</h4><p>运行时常量池 <strong>是运行时数据区中方法区的一部分</strong>，受方法区内存限制，无法再申请内存时抛出OutOfMemoryError</p>
+<p>Class文件中出了有类的版本、字段、方法、接口等描述信息外<strong>，还有一项是常量池表</strong>，<strong>用于存放编译器生成的各种字面量与符号引用</strong>，这部分内容在 **类加载之存放到运行时常量池</p>
+<h4 id="常量池的好处"><a href="#常量池的好处" class="headerlink" title="常量池的好处"></a>常量池的好处</h4><p>常量池是为了避免频繁创建和销毁对象而影响系统系能，实现了对象的共享</p>
+<ol>
+<li>节省内存空间：常量池中所有相同的字符串常量被合并，只占用一个空间。</li>
+<li>节省运行时间：比较字符串时 ==比equals要快。</li>
+</ol>
+<h3 id="什么是直接内存"><a href="#什么是直接内存" class="headerlink" title="什么是直接内存"></a>什么是直接内存</h3><p>直接内存，又称为堆外内存，NIO的Buffer提供了一个可以不经过JVM内存直接访问系统物理内存的类：<strong>DirectBuffer</strong>，DirectBuffer与普通的ByteBuffer不同，其直接分配在物理内存中，并不占用堆空间，其可以申请的最大内存受操作系统的限制，<strong>直接内存读写比普通Buffer快，但是创建销毁要比普通Buffer慢。</strong></p>
+<p><strong>使用堆外内存的原因：</strong></p>
+<ol>
+<li>对垃圾回收停顿改善：使用堆外内存时可以保持较小的堆内内存规模，从而在GC时减少回收停顿对系统的影响</li>
+<li>提升程序I/O操作的性能：通常再I/O通信中，通常会存在堆内内存和堆外内存的拷贝操作。</li>
+</ol>
+<h3 id="内存溢出-OOM"><a href="#内存溢出-OOM" class="headerlink" title="内存溢出(OOM)"></a>内存溢出(OOM)</h3><p><strong>内存溢出和内存泄露的区别：</strong></p>
+<p>内存溢出OutOfMemory，指程序在申请内存时，没有足够的内存空间供其使用。</p>
+<p>内存泄露，是指无用对象(不再使用的对象)持续占有内存或者内存得不到释放，从而导致内存空间的浪费称为内存泄露，内存泄漏最终会导致内存溢出。</p>
+<blockquote>
+<p><strong>原因场景：</strong>长生命周期的对象持有短生命周期对象的引用时就很可能发生内存泄露，尽管短生命周期的对象已经不在需要，但是因为长生命周期对象持有它的引用而导致不能回收，这就是Java中内存泄露的场景。</p>
+</blockquote>
+<p><strong>堆OOM：</strong>堆用于存储对象实例，当不断创建对象，并保证GC Roots到对象有可达路径 避免垃圾回收，随着对象数量的增加，总容量触及最大堆容量之后就会OOM，如一直在while循环中创建实例。</p>
+<blockquote>
+<p><strong>堆OOM的处理：</strong>通过内存映象分析工具对Dump出的堆转存储快照分析，确认是内存泄漏还是内存溢出</p>
+<p>若是内存泄漏，通过工具查看泄漏对象到GC Roots的引用链，准确定位产生内存泄漏代码的具体位置</p>
+<p>若不是内存泄漏，即内存中的所有对象都必须存活时，应当检查JVM堆参数，判断是否还有向上调整的空间，再检查是否存在某些对象生命周期过长，持有状态时间过长灯情况，尽量降低程序运行时的内存消耗。</p>
+</blockquote>
+<p><strong>栈OOM：</strong> 若线程请求的栈深度大于虚拟机所允许的深度，将抛出StackOverFlowerError，如果JVM栈可以动态扩展，当扩展无法申请到足够的内存时，会出现OOM</p>
+<p><strong>方法区OOM</strong>：方法区主要存放类型信息，如类名，访问修饰符，常量值，方法描述等，只要在运行是不断产生大量的类，方法区就会溢出。<strong>如使用JDK反射或这CGLib直接操作字节码在运行时生成大量的类</strong>。</p>
+<h3 id="Spring-中Ioc的工厂模式"><a href="#Spring-中Ioc的工厂模式" class="headerlink" title="Spring 中Ioc的工厂模式"></a>Spring 中Ioc的工厂模式</h3><p>IOC指在程序开发过程中，对象实例的创建不再由调用者管理，而是由Spring容器创建，Spring容器会负责控制程序之间的关系，因此，控制权由程序代码转移到了Spring容器，控制权发生了反转，即控制反转。</p>
+<blockquote>
+<p>在没有使用Spring的时候，对象需要通过<code>new object()</code>来创建，这个对象是主动创建的，创建对象的主动权由自己把控，这样就会使得对象之间的耦合度高，A对象需要使用合作对象B来共同完成一件事，A要使用B，那么A就对B产生了依赖，也就是A和B之间存在一种耦合关系，并且是紧密耦合在一起，而使用了Spring之后就不一样了，创建合作对象B的工作是由Spring来做的，Spring创建好B对象，然后存储到一个容器里面，当A对象需要使用B对象时，Spring就从存放对象的那个容器里面取出A要使用的那个B对象，然后交给A对象使用，至于Spring是如何创建那个对象，以及什么时候创建好对象的，A对象不需要关心这些细节问题。</p>
+</blockquote>
+<p>IOC最基本的技术就是反射，通过给出的类名来动态的生成对象，可以让对象在生成时才被决定是哪一种对象，降低耦合。</p>
+<p>IOC是工厂模式+反射机制，IOC中的工厂模式内部使用反射来创建对象，对象的实例化都交给工厂完成，通过工厂来获取对象。</p>
+<h3 id="Spring中Bean的生命周期"><a href="#Spring中Bean的生命周期" class="headerlink" title="Spring中Bean的生命周期"></a>Spring中Bean的生命周期</h3><ol>
+<li>实例化一个Bean</li>
+<li>按照Spring上下文对实例化的Bean进行配置 （IOC注入）</li>
+<li>如果Bean实现了BeanNameAware接口，则调用setBeanName(String)方法，传递的是配置文件中Bean的id</li>
+<li>如果实现了BeanFactoryAware接口，则调用setBeanFactory(BeanFactory)</li>
+<li>如果这个Bean关联了BeanPostProcessor接口，将会调用<code>postProcessBeforeInitialization(Object obj, String s)</code>方法，BeanPostProcessor经常被用作是Bean内容的更改，并且由于这个是在Bean初始化结束时调用那个的方法，也可以被应用于内存或缓存技术；</li>
+<li>如果Bean在Spring配置文件中配置了init-method属性会自动调用其配置的初始化方法。</li>
+<li>如果这个Bean关联了BeanPostProcessor接口，将会调用<code>postProcessAfterInitialization(Object obj, String s)</code>方法；</li>
+<li>当Bean不再需要时，会经过清理阶段，如果Bean实现了DisposableBean这个接口，会调用那个其实现的destroy()方法；</li>
+<li>最后，如果这个Bean的Spring配置中配置了destroy-method属性，会自动调用其配置的销毁方法。</li>
+</ol>
+<h3 id="SpringBoot的自动装配"><a href="#SpringBoot的自动装配" class="headerlink" title="SpringBoot的自动装配"></a>SpringBoot的自动装配</h3><p>在SpringBoot启动时加载入口类，通过$@EnableAutoConfiguration$开启自动装配功能，自动装配时会扫描所有jar包类路径下$META-INF/spring.factories$ 中的所有自动配置类，如果符合相应的条件，则使用相应的自动配置类实现自动装配。</p>
+<p>自动配置类实现自动装配时，配置类会给容器中添加各种组件，这些组件的属性从对应的$properties$类中获取，而对应的$properties$中的属性和配置文件进行相互绑定。</p>
+<blockquote>
+<p>SpringBoot中的自动装配技术用到了：</p>
+<ol>
+<li>Spring 模式注解装配</li>
+<li>Spring @Enable 模块装配</li>
+<li>Spring 条件装配</li>
+<li>Spring 工厂加载机制</li>
+</ol>
+</blockquote>
+<h3 id="Java中的异常体系"><a href="#Java中的异常体系" class="headerlink" title="Java中的异常体系"></a>Java中的异常体系</h3><p>Java标准裤内建了一些通用的异常，这些类以Throwable为顶层父类，Throwable又派生出Error类和Exception类。</p>
+<p><strong>Error</strong>：Error类以及他的子类的实例，代表了JVM本身的错误。错误不能被程序员通过代码处理。</p>
+<p><strong>Exception</strong>：Exception以及他的子类，代表程序运行时发送的各种不期望发生的事件。可以被Java异常处理机制使用</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210908191952.png" alt=""></p>
+<p><strong>根据Javac对异常的处理要求，将异常类分为2类</strong></p>
+<p><strong>非检查异常</strong>（unckecked exception）：Error 和 RuntimeException 以及他们的子类。javac在编译时，不会提示和发现这样的异常，不要求在程序处理这些异常。所以如果愿意，我们可以编写代码处理（使用try…catch…finally）这样的异常，也可以不处理。对于这些异常，我们应该修正代码，而不是去通过异常处理器处理 。这样的异常发生的原因多半是代码写的有问题。如除0错误ArithmeticException，错误的强制类型转换错误ClassCastException，数组索引越界ArrayIndexOutOfBoundsException，使用了空对象NullPointerException等等。 </p>
+<p><strong>检查异常</strong>（checked exception）：除了Error 和 RuntimeException的其它异常。javac强制要求程序员为这样的异常做预备处理工作（使用try…catch…finally或者throws）。在方法中要么用try-catch语句捕获它并处理，要么用throws子句声明抛出它，否则编译不会通过。这样的异常一般是由程序的运行环境导致的。因为程序可能被运行在各种未知的环境下，而程序员无法干预用户如何使用他编写的程序，于是程序员就应该为这样的异常时刻准备着。如SQLException , IOException,ClassNotFoundException 等。</p>
+<p>需要明确的是：检查和非检查是对于javac来说的，这样就很好理解和区分了</p>
+<p><strong>多个异常的捕获顺序</strong></p>
+<p>对于try..catch捕获异常的形式来说，对于异常的捕获，可以有多个catch。对于try里面发生的异常，他会根据发生的异常和catch里面的进行从上往下匹配，当它匹配某一个catch块的时候，他就直接进入到这个catch块里面去了，后面在再有catch块的话，它不做任何处理，直接跳过去，全部忽略掉。如果有finally的话进入到finally里面继续执行。换句话说，如果有匹配的catch，它就会忽略掉这个catch后面所有的catch。</p>
+<p><strong>在写异常处理的时候，一定要把异常范围小的放在前面，范围大的放在后面</strong>，Exception这个异常的根类一定要放在最后一个catch里面，如果放在前面或者中间，任何异常都会和Exception匹配的，就会报已捕获到…异常的错误。 </p>
+<p><strong>throws和throw</strong></p>
+<p><strong>Throw</strong>：<strong>作用在方法内</strong>，表示抛出具体异常，由方法体内的语句处理。具体向外抛出的动作，所以它抛出的是一个异常实体类。若执行了throw一定是抛出了某种异常。</p>
+<p><strong>throws</strong>：作用在<strong>方法的声明上</strong>，表示如果抛出异常，则由该方法的调用者来进行异常处理。（自身不处理异常）</p>
+<p>主要的声明这个方法会抛出会抛出某种类型的异常，让它的使用者知道捕获异常的类型。出现异常是一种可能性，但不一定会发生异常。</p>
+<h3 id="BIO，NIO，AIO"><a href="#BIO，NIO，AIO" class="headerlink" title="BIO，NIO，AIO"></a>BIO，NIO，AIO</h3><p><strong>同步与异步</strong></p>
+<ul>
+<li><strong>同步：</strong> 同步就是发起一个调用后，被调用者未处理完请求之前，调用不返回。</li>
+<li><strong>异步：</strong> 异步就是发起一个调用后，立刻得到被调用者的回应表示已接收到请求，但是被调用者并没有返回结果，此时我们可以处理其他的请求，被调用者通常依靠事件，回调等机制来通知调用者其返回结果。</li>
+</ul>
+<p>同步和异步的区别最大在于异步的话调用者不需要等待处理结果，被调用者会通过回调等机制来通知调用者其返回结果。</p>
+<p><strong>阻塞和非阻塞</strong></p>
+<ul>
+<li><strong>阻塞：</strong> 阻塞就是发起一个请求，调用者一直等待请求结果返回，也就是当前线程会被挂起，无法从事其他任务，只有当条件就绪才能继续。</li>
+<li><strong>非阻塞：</strong> 非阻塞就是发起一个请求，调用者不用一直等着结果返回，可以先去干其他事情。</li>
+</ul>
+<p><strong>BIO:</strong><code>同步阻塞</code>，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不作任何事情会造成不必要的线程开销。</p>
+<p><strong>NIO</strong>：<code>同步非阻塞</code>，服务器实现模式为一个线程处理多个请求(连接)，即客户端发送的连接请求会被注册到多路复用器（selector）上，多路复用器轮询到有 I/O 请求就会进行处理,通过轮询代替了始终保持一个连接。</p>
+<blockquote>
+<p>客户端发送一个请求，并建立一个连接，服务端接收到了。如果服务端没有数据，就告知客户端“没有数据”；如果有数据，则返回数据。客户端接到了服务端回复的“没有数据”就断开连接，过了一段时间后，客户端重新问服务端是否有数据。服务器重复以上步骤。</p>
+</blockquote>
+<blockquote>
+<p>Selector： 多路复用器，轮询检查多个Channel 的状态，判断注册事件是否发生，即判断Channel 是否处于可读或可写状态。使用前需要将Channel 注册到Selector，注册后会得到一个SelectionKey，通过SelectionKey 获取Channel 和Selector 相关信息。<br>Channel： 双向通道，替换了BIO 中的Stream 流，不能直接访问数据，要通过Buffer 来读写数据，也可以和其他Channel 交互。<br>Buffer： 缓冲区，本质是一块可读写数据的内存，用来简化数据读写</p>
+</blockquote>
+<p><strong>AIO：</strong><code>异步非阻塞</code>，AIO 引入了异步通道的概念，采用了 Proactor 模式，简化了程序编写，有效的请求才启动线程，它的特点是先由操作系统完成后才通知服务端程序启动线程去处理，一般适用于连接数较多且连接时间较长的应用。</p>
+<blockquote>
+<p>客户端向服务端请求数据。服务端若有，则返回数据；若无，则告诉客户端“没有数据”。客户端收到“没有数据”的回复后，就做自己的其他事情。服务端有了数据之后，就主动通知客户端，并把数据返回去</p>
+</blockquote>
+<blockquote>
+<p>BIO 方式适用于<code>连接数比较小且固定</code>的架构</p>
+<p>NIO 方式适用于<code>连接数目多且连接比较短</code>的架构，比如聊天服务器，弹幕系统</p>
+<p>AIO 方式适用于<code>连接数目多且连接比较长</code>的架构，比如相册服务器</p>
+</blockquote>
+<h4 id="NIO-和-BIO-对比"><a href="#NIO-和-BIO-对比" class="headerlink" title="NIO 和 BIO 对比"></a>NIO 和 BIO 对比</h4><ol>
+<li>BIO 以流的方式处理数据，而 NIO 以块的方式处理数据，块 I/O 的效率比流 I/O 高很多。</li>
+<li>BIO 是阻塞的，而 NIO 是非阻塞的。</li>
+<li>BIO 基于字节流和字符流进行操作，而 NIO 基于 Channel（通道）和 Buffer（缓冲区）进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。Selector（选择器）用于监听多个通道事件（比如连接请求，数据到达等），因此<code>使用单个线程就可以监听多个客户端通道</code>。</li>
+</ol>
+<h3 id="线程和进程"><a href="#线程和进程" class="headerlink" title="线程和进程"></a>线程和进程</h3><p><strong>进程</strong>：在操作系统中能够独立运行，并且作为资源分配的基本单位。它表示运行中的程序。系统运行一个程序就是一个进程从创建、运行到消亡的过程。</p>
+<p><strong>线程</strong>：是一个比进程更小的执行单位，能够完成进程中的一个功能，也被称为轻量级进程。一个进程在其执行的过程中可以产生多个线程。</p>
+<p>线程与进程不同的是：同类的多个线程<strong>共享进程的堆和方法区资源</strong>，但<strong>每个线程有自己的程序计数器、虚拟机栈和本地方法栈</strong>，所以系统在产生一个线程，或是在各个线程之间作切换工作时，负担要比进程小得多。</p>
+<blockquote>
+<p>为了<strong>保证线程中的局部变量不被别的线程访问到</strong>，虚拟机栈和本地方法栈是线程私有的</p>
+</blockquote>
+<h3 id="线程的生命周期和状态"><a href="#线程的生命周期和状态" class="headerlink" title="线程的生命周期和状态"></a>线程的生命周期和状态</h3><p><strong>线程的状态：</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210909160042.png" alt=""></p>
+<p><strong>线程的生命周期包含5个阶段，包括：新建、就绪、运行、阻塞、销毁。</strong></p>
+<ul>
+<li>新建：就是刚使用new方法，new出来的线程；</li>
+<li>就绪：就是调用的线程的start()方法后，这时候线程处于等待CPU分配资源阶段，谁先抢的CPU资源，谁开始执行;</li>
+<li>运行：当就绪的线程被调度并获得CPU资源时，便进入运行状态，run方法定义了线程的操作和功能;</li>
+<li>阻塞：在运行状态的时候，可能因为某些原因导致运行状态的线程变成了阻塞状态，比如sleep()、wait()之后线程就处于了阻塞状态，这个时候需要其他机制将处于阻塞状态的线程唤醒，比如调用notify或者notifyAll()方法。唤醒的线程不会立刻执行run方法，它们要再次等待CPU分配资源进入运行状态;</li>
+<li>销毁：如果线程正常执行完毕后或线程被提前强制性的终止或出现异常导致结束，那么线程就要被销毁，释放资源;</li>
+</ul>
+<h3 id="sleep-方法和wait-方法区别和共同点"><a href="#sleep-方法和wait-方法区别和共同点" class="headerlink" title="sleep()方法和wait()方法区别和共同点"></a>sleep()方法和wait()方法区别和共同点</h3><p><strong>共同点：</strong>两者都可以暂停线程的执行，都会让线程进入等待状态。</p>
+<p><strong>不同点：</strong></p>
+<ul>
+<li>sleep()方法没有释放锁，而 wait()方法释放了锁。</li>
+<li>sleep()方法属于Thread类的静态方法，作用于当前线程；而wait()方法是Object类的实例方法，作用于对象本身。</li>
+<li>执行sleep()方法后，可以通过超时或者调用interrupt()方法唤醒休眠中的线程；执行wait()方法后，通过调用notify()或notifyAll()方法唤醒等待线程。</li>
+</ul>
+<h3 id="多线程开发带来的问题与解决方法："><a href="#多线程开发带来的问题与解决方法：" class="headerlink" title="多线程开发带来的问题与解决方法："></a>多线程开发带来的问题与解决方法：</h3><h4 id="线程安全问题："><a href="#线程安全问题：" class="headerlink" title="线程安全问题："></a>线程安全问题：</h4><p>线程安全问题指的是在某一线程从开始访问到结束<strong>访问某一数据期间，该数据被其他的线程所修改</strong>，那么对于当前线程而言，该线程就发生了线程安全问题，表现形式为数据的缺失，数据不一致等。</p>
+<p><strong>线程安全问题发生的条件</strong></p>
+<p>1）多线程环境下，即存在包括自己在内存在有多个线程。</p>
+<p>2）多线程环境下<strong>存在共享资源</strong>，且<strong>多线程操作该共享资源。</strong></p>
+<p>3）多个线程必须对该共享资源有非原子性操作</p>
+<p><strong>线程安全的解决思路：</strong></p>
+<p>1）<strong>尽量不使用共享变量</strong>，将不必要的共享变量变成局部变量来使用。</p>
+<p>2）<strong>使用synchronized关键字同步代码块</strong>，或者使用jdk包中提供的Lock为操作进行<strong>加锁</strong>。</p>
+<p>3）<strong>使用ThreadLocal为每一个线程建立一个变量的副本，各个线程间独立操作，互不影响。</strong></p>
+<h4 id="性能问题"><a href="#性能问题" class="headerlink" title="性能问题"></a>性能问题</h4><p>线程的生命周期开销是非常大的，<strong>一个线程的创建到销毁都会占用大量的内存</strong>。同时如果不合理的创建了多个线程，cup的处理器数量小于了线程数量，那么将会有很多的线程被闲置，闲置的线程将会占用大量的内存，为垃圾回收带来很大压力，同时cup在分配线程时还会消耗其性能。</p>
+<p><strong>解决思路：</strong>利用线程池<strong>，模拟一个池，预先创建有限合理个数的线程放入池中，当需要执行任务时从池中取出空闲的先去执行任务，执行完成后将线程归还到池中，这样就</strong>减少了线程的频繁创建和销毁，节省内存开销**和减小了垃圾回收的压力。同时因为任务到来时本身线程已经存在，减少了创建线程时间，提高了执行效率，而且合理的创建线程池数量还会使各个线程都处于忙碌状态，提高任务执行效率，线程池还提供了拒绝策略，当任务数量到达某一临界区时，线程池将拒绝任务的进入，保持现有任务的顺利执行，减少池的压力。</p>
+<h4 id="活跃性问题"><a href="#活跃性问题" class="headerlink" title="活跃性问题"></a>活跃性问题</h4><p>1）<strong>死锁</strong>，假如线程 A 持有资源 2，线程 B 持有资源 1，他们同时都想申请对方的资源，所以这两个线程就会互相等待而进入死锁状态。多个线程环形占用资源也是一样的会产生死锁问题。</p>
+<p><strong>解决方法：</strong></p>
+<ul>
+<li>避免一个线程同时获取多个锁</li>
+<li>避免一个线程在锁内同时占用多个资源，尽量保证每个锁只占用一个资源。</li>
+<li>尝试使用定时锁，使用 lock.tryLock(timeout) 来代替使用内部锁机制。</li>
+</ul>
+<p>想要避免死锁，可以<strong>使用无锁函数</strong>（cas）<strong>或者使用重入锁（ReentrantLock），通过重入锁使线程中断或限时等待可以有效的规避死锁问题</strong>。</p>
+<p>2) <strong>饥饿</strong>，饥饿<strong>指的是某一线程或多个线程因为某些原因一直获取不到资源，导致程序一直无法执行</strong>。如某一线程优先级太低导致一直分配不到资源，或者是某一线程一直占着某种资源不放，导致该线程无法执行等。</p>
+<p><strong>解决方法：</strong>可以设置合适的线程优先级来尽量避免饥饿的产生。</p>
+<p>3）<strong>活锁</strong>，每个线程都想把资源让给对方，可能会产生一直将资源让来让去，导致资源在两个线程间跳动而无法使某一线程真正的到资源并执行，这就是活锁的问题。</p>
+<h4 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h4><p>阻塞是用来形容多线程的问题，<strong>几个线程之间共享临界区资源，那么当一个线程占用了临界区资源后，所有需要使用该资源的线程都需要进入该临界区等待，等待会导致线程挂起，一直不能工作，这种情况就是阻塞</strong>，<strong>如果某一线程一直都不释放资源，将会导致其他所有等待在这个临界区的线程都不能工作</strong>。</p>
+<p><strong>解决方法：</strong>可以通过减少锁持有时间，读写锁分离，减小锁的粒度，锁分离，锁粗化等方式来优化锁的性能</p>
+<h3 id="synchronized和Lock的区别："><a href="#synchronized和Lock的区别：" class="headerlink" title="synchronized和Lock的区别："></a>synchronized和Lock的区别：</h3><ol>
+<li><strong>Lock是一个接口，而synchronized是Java中的关键字</strong>，synchronized是内置的语言实现；</li>
+<li>synchronized在发生异常时，<strong>会自动释放线程占有的锁</strong>，因此不会导致死锁现象发生；而Lock在发生异常时，如果<strong>没有主动通过unLock()去释放锁，则很可能造成死锁现象</strong>，因此使用Lock时需要在finally块中释放锁；</li>
+<li>Lock可以让等待锁的线程响应中断，而synchronized却不行，使用synchronized时，等待的线程会一直等待下去，不能够响应中断；</li>
+<li>通过Lock可以知道有没有成功获取锁（tryLock()方法：如果获取锁成功，则返回true），而synchronized却无法办到。</li>
+<li>Lock可以提高多个线程进行读操作的效率。在性能上来说，如果<strong>竞争资源不激烈，两者的性能是差不多的</strong>，而当<strong>竞争资源非常激烈时（即有大量线程同时竞争），此时Lock的性能要远远优于synchronized</strong>。</li>
+</ol>
+<h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><h4 id="使用线程池的好处："><a href="#使用线程池的好处：" class="headerlink" title="使用线程池的好处："></a>使用线程池的好处：</h4><ol>
+<li>降低资源消耗。通过重复利用已创建的线程，降低线程创建和销毁造成的消耗。</li>
+<li>提高响应速度。当任务到达时，任务可以不需要等到线程创建就能立即执行。</li>
+<li>提高线程的可管理性。线程是稀缺资源，如果无限制地创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一分配、调优和监控</li>
+</ol>
+<h4 id="说说几种常见线程池和适用场景"><a href="#说说几种常见线程池和适用场景" class="headerlink" title="说说几种常见线程池和适用场景"></a>说说几种常见线程池和适用场景</h4><ol>
+<li><p><strong>FixedThreadPool</strong>：可重用固定线程数的线程池（<strong>适用于负载比较重的服务器</strong>）</p>
+<p>FixedThreadPool使用无界队列LinkedBlockingQueue作为线程池的工作队列</p>
+<p>该线程池中的线程数量始终不变。当有一个新的任务提交时，线程池中若有空闲线程，则立即执行。若没有，则新的任务会被暂存在一个任务队列中，待有线程空闲时，便处理在任务队列中的任务。</p>
+</li>
+<li><p><strong>SingleThreadExecutor：</strong>只会创建一个线程执行任务。（适用于需要保证顺序执行各个任务；并且在任意时间点，<strong>没有多线程活动的场景</strong>。）</p>
+<p>SingleThreadExecutorl也使用无界队列LinkedBlockingQueue作为工作队列</p>
+<p>若多余一个任务被提交到该线程池，任务会被保存在一个任务队列中，待线程空闲，按先入先出的顺序执行队列中的任务。</p>
+</li>
+<li><p><strong>CachedThreadPool：</strong> <strong>是一个会根据需要调整线程数量的线程池</strong>。（大小无界，适用于执行很多的短期异步任务的小程序，或负载较轻的服务器）</p>
+<ul>
+<li>CachedThreadPool使用没有容量的SynchronousQueue作为线程池的工作队列，但CachedThreadPool的maximumPool是无界的。</li>
+<li>线程池的线程数量不确定，但若有空闲线程可以复用，则会优先使用可复用的线程。若所有线程均在工作，又有新的任务提交，则会创建新的线程处理任务。所有线程在当前任务执行完毕后，将返回线程池进行复用。</li>
+</ul>
+</li>
+</ol>
+<h4 id="线程池都有哪些工作队列"><a href="#线程池都有哪些工作队列" class="headerlink" title="线程池都有哪些工作队列"></a>线程池都有哪些工作队列</h4><ul>
+<li><strong>ArrayBlockingQueue</strong>：是一个<strong>基于数组结构的有界阻塞队列</strong>，此队列按FIFO（先进先出）原则对元素进行排序。</li>
+<li><strong>LinkedBlockingQueue</strong>：是一个<strong>基于链表结构的阻塞队列</strong>，此队列按FIFO排序元素，吞吐量通常要高于ArrayBlockingQueue。静态工厂方法Executors.newFixedThreadPool()使用了这个队列。</li>
+<li><strong>SynchronousQueue</strong>：是一个<strong>不存储元素的阻塞队列</strong>。每个插入操作必须等到另一个线程调用移除操作，否则插入操作一直处于阻塞状态，吞吐量通常要高于Linked-BlockingQueue，静态工厂方法Executors.newCachedThreadPool使用了这个队列。</li>
+<li><strong>PriorityBlockingQueue</strong>：一个<strong>具有优先级的无限阻塞队列</strong>。</li>
+</ul>
+<h4 id="创建线程的几种方式"><a href="#创建线程的几种方式" class="headerlink" title="创建线程的几种方式"></a>创建线程的几种方式</h4><ul>
+<li><p>继承$Thread$类</p>
+</li>
+<li><p>实现$Runnaable$接口</p>
+</li>
+</ul>
+<blockquote>
+<p>不管是继承Thread还是实现Runnable接口，多线程代码都是通过运行Thread的start()方法来运行的。</p>
+</blockquote>
+<ul>
+<li>实现$callable$接口</li>
+</ul>
+<blockquote>
+<p>与Runnable接口不同的是，Callable接口提供了一个call() 方法作为线程执行体，call()方法可以有返回值、可以声明抛出异常</p>
+</blockquote>
+<ul>
+<li>使用Executor框架来创建线程池</li>
+</ul>
+<h4 id="线程池的执行流程"><a href="#线程池的执行流程" class="headerlink" title="线程池的执行流程"></a>线程池的执行流程</h4><p>任务被提交到线程池，会先判断当前线程数量是否小于corePoolSize，如果小于则创建线程来执行提交的任务，否则将任务放入workQueue队列，如果workQueue满了，则判断当前线程数量是否小于maximumPoolSize,如果小于则创建线程执行任务，否则就会调用handler，以表示线程池拒绝接收任务。</p>
+<blockquote>
+<p>corePoolSize：线程池的基本大小</p>
+<p>maximumPoolSize:最大线程数</p>
+<p>workQueue：用于保存等待执行任务的阻塞队列</p>
+<p>handler：拒绝策略</p>
+</blockquote>
+<h3 id="TCP三次握手与四次挥手"><a href="#TCP三次握手与四次挥手" class="headerlink" title="TCP三次握手与四次挥手"></a>TCP三次握手与四次挥手</h3><h4 id="三次握手的过程"><a href="#三次握手的过程" class="headerlink" title="三次握手的过程"></a>三次握手的过程</h4><p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200409195521.jfif" alt=""></p>
+<ol>
+<li><p>TCP服务器进程先创建<code>传输控制块TCB</code>，时刻准备接受客户进程的连接请求，此时服务器进入<code>LISTEN</code>状态。</p>
+</li>
+<li><p><strong>第一次握手</strong>： TCP客户进程也是先创建<code>TCB</code>,然后向服务器发出请求报文，此时报文中的<code>同部位SYN=1</code>（SYN，同步序列编号），同时选择一个初始序列号<code>seq=x</code>，此时TCP客户端进入<code>SYN-SENT(同步已发送)</code>状态。</p>
+</li>
+<li><p><strong>第二次握手：</strong> TCP服务器收到请求后，如果同意连接，则发出确认报文。<code>确认报文中应该ACK=1，SYN=1,确认号是ack=x+1</code>,同时为自己初始化一个序列号seq=y，此时TCP服务器进程进入<code>SYN-RCVD(同步收到)</code>状态。</p>
+</li>
+<li><p><strong>第三次握手：</strong> TCP客户进程收到确认后，还要向服务器给出确认。确认报文的<code>ACK=1,确认号ack=y+1</code>，自己序列号为：seq=x+1,此时，TCP连接已经建立，<strong>客户端</strong> 进入<code>ESTABLISHED(已建立连接)</code>状态，当 <strong>服务器</strong>收到客户端的确认后也进入**<code>ESTABLISHED</code>状态，双方可以开始通信。</p>
+</li>
+</ol>
+<h4 id="为什么TCP客户端最后还要发送一次确认呢"><a href="#为什么TCP客户端最后还要发送一次确认呢" class="headerlink" title="为什么TCP客户端最后还要发送一次确认呢?"></a>为什么TCP客户端最后还要发送一次确认呢?</h4><p> 一句话，<strong>主要防止已经失效的连接请求报文突然又传送到了服务器，从而产生错误</strong>。<br> 如果使用的是两次握手建立连接，假设有这样一种场景，客户端发送了第一个请求连接并且没有丢失，只是因为在网络结点中滞留的时间太长了，由于TCP的客户端迟迟没有收到确认报文，以为服务器没有收到，此时重新向服务器发送这条报文，此后客户端和服务器经过两次握手完成连接，传输数据，然后关闭连接。此时此前滞留的那一次请求连接，网络通畅了到达了服务器，这个报文本该是失效的，但是，两次握手的机制将会让客户端和服务器再次建立连接，这将导致不必要的错误和资源的浪费。</p>
+<p> 如果采用的是三次握手，就算是那一次失效的报文传送过来了，服务端接受到了那条失效报文并且回复了确认报文，但是客户端不会再次发出确认。由于服务器收不到确认，就知道客户端并没有请求连接。</p>
+<h4 id="四次挥手的过程"><a href="#四次挥手的过程" class="headerlink" title="四次挥手的过程"></a>四次挥手的过程</h4><p>   <img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20200409212059.jfif" alt=""></p>
+<ol>
+<li><p>客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部<code>FIN=1,序列号seq=u</code>(其值为之前传过来的数据最后一个字节的序号+1)，此时，<strong>客户端</strong>进入<code>FIN-WATI=1(终止等待1)</code>状态。</p>
+</li>
+<li><p>服务器收到连接释放报文，发出确认报文，<code>ACK=1,ack=u+1</code>,并且带上自身序列号<code>seq=v</code> ,此时，<strong>服务端</strong>进入<code>CLOSE-WATI(等待关闭)</code>状态。</p>
+<blockquote>
+<p>此时处于半关闭状态,即客户端已无数据需要发送，但服务器若是发送数据，客户端依然需要接收</p>
+</blockquote>
+</li>
+<li><p>客户端收到服务器的确认请求，此时，客户端进入<code>FIN-WAIT-2(终止等待2)</code>状态，等待服务器发送连接释放报文。</p>
+</li>
+<li><p>服务器将最后的数据发送完毕之后，向客户端发送连接释放报文,<code>FIN=1,ack=u+1</code>，由于在半关闭状态，服务 器可能又发送了一些数据，因此假定此时的<code>序列号seq=w</code>,此时，服务器进入<code>LAST-ACK(最后确认)</code>状态。</p>
+</li>
+<li><p>客户端收到服务器的连接释放报文之后，必须发出确认<code>ACK=1,ack=w+1，seq=u+1</code>，此时客户端进入<code>TIME-WAIT(时间等待)</code>状态。</p>
+<p>服务器只要收到了客户端发出的确认，立即进入<code>CLOSE</code>状态，同样，撤掉TCB后结束的此次连接(<code>可见，服务器结束TCP要早于客户端</code>)。</p>
+<blockquote>
+<p>此时TCP连接还未释放，必须经过2*MSL(<em>最长报文段寿命</em>)时间，客户端撤销相应TCB后，才进入<em>CLOSED</em>状态</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="为什么建立连接是三次握手，释放连接确实四次挥手？"><a href="#为什么建立连接是三次握手，释放连接确实四次挥手？" class="headerlink" title="为什么建立连接是三次握手，释放连接确实四次挥手？"></a>为什么建立连接是三次握手，释放连接确实四次挥手？</h4><p>   建立连接时，服务器在LISTEN状态下，收到建立连接请求的 <em>SYN</em> 报文之后，把ACK和SYN放在一个报文发送给客户端。</p>
+<p>   而在关闭连接时，服务器收到 <em>FIN</em>报文时，仅仅表示客户端不在发送数据但任能接收数据，因此客户端既可以立即关闭，也可以在发送一些数据给客户端之后，此时会先发送确认报文告知客户端已经准备关闭连接，当服务器数据发送完成之后，再发送 <em>FIN报文</em>给客户端。因此，服务端的ACK和FIN会分开发送，从而导致了四次挥手。</p>
+<h4 id="三次握手过程中可以携带数据嘛"><a href="#三次握手过程中可以携带数据嘛" class="headerlink" title="三次握手过程中可以携带数据嘛"></a>三次握手过程中可以携带数据嘛</h4><p><strong>在第三次握手的时候可以携带数据</strong>，但是第一次、第二次握手不可以携带数据一个简单的原因就是会让服务器更加容易受到攻击，对于第三次的话，此时客户端已经处于ESTABLISHED 状态。对于客户端来说，他已经建立起连接了，并且也已经知道服务器的接收、发送能力是正常的了，所以能携带数据。</p>
+<blockquote>
+<p>假如第一次握手可以携带数据的话，如果有人要恶意攻击服务器，那他每次都在第一次握手中的SYN 报文中放入大量的数据。因为攻击者根本就不理服务器的接收、发送能力是否正常，然后疯狂着重复发SYN 报文的话，这会让服务器花费很多时间、内存空间来接收这些报文。</p>
+</blockquote>
+<h3 id="如果已经建立连接，但是客户端出现故障-TCP的保活机制-keapalive长连接"><a href="#如果已经建立连接，但是客户端出现故障-TCP的保活机制-keapalive长连接" class="headerlink" title="如果已经建立连接，但是客户端出现故障(TCP的保活机制)(keapalive长连接)"></a>如果已经建立连接，但是客户端出现故障(TCP的保活机制)(keapalive长连接)</h3><p>TCP有一个机制是保活机制，工作原理为：当一个TCP 连接建立之后，启用TCP Keepalive 的一端便会启动一个计时器，当这个计时器数值到达0 内（7200s)，连接没有任何动作,，一个TCP 探测包便会被发出。这个TCP 探测包是一个纯ACK 包，客户主机必须处于以下4 个状态之一：</p>
+<ol>
+<li>客户主机依然正常运行，并从服务器可达。客户的TCP 响应正常，而服务器也知道对方是正常的，服务器在两小时后将保活定时器复位。</li>
+<li>客户主机已经崩溃，并且关闭或者正在重新启动。在任何一种情况下，客户的TCP 都没有响应。服务端将不能收到对探测的响应，并在75 秒后超时。服务器总共发送9 个这样的探测，每个间隔75 秒。如果服务器没有收到一个响应，它就认为客户主机已经关闭并终止连接。</li>
+<li>客户主机崩溃并已经重新启动。服务器将收到一个对其保活探测的响应，但是由于没有该连接的有效信息，会产生一个RST报文，这样很快就发现TCP连接已经被重置。</li>
+</ol>
+<blockquote>
+<p>保活机制需要消耗额外的宽带和流量。</p>
+</blockquote>
+<h3 id="TCP的重传机制"><a href="#TCP的重传机制" class="headerlink" title="TCP的重传机制"></a>TCP的重传机制</h3><p>TCP实现可靠传输的方式之一，是通过序列号与确认应答。</p>
+<p>在 TCP 中，当发送端的数据到达接收主机时，接收端主机会返回一个确认应答消息，表示已收到消息。万一数据在传输过程中丢失了呢？所以 TCP 针对数据包丢失的情况，会用<strong>重传机制</strong>解决。</p>
+<p><strong>超时重传</strong></p>
+<p>在发送数据时，设定一个定时器，当超过指定的时间后，没有收到对方的 <code>ACK</code> 确认应答报文，就会重发该数据，也就是我们常说的<strong>超时重传</strong>。</p>
+<p><strong>超时重传时间 RTO 的值应该略大于报文往返 RTT 的值,每当遇到一次超时重传的时候，都会将下一次超时时间间隔设为先前值的两倍。两次超时，就说明网络环境差，不宜频繁反复发送。</strong></p>
+<blockquote>
+<p>TCP 会在以下两种情况发生超时重传：</p>
+<ul>
+<li>数据包丢失</li>
+<li>确认应答丢失</li>
+</ul>
+</blockquote>
+<p><strong>快速重传</strong></p>
+<p>快速重传机制<strong>不以时间为驱动，而是以数据驱动重传</strong>。快速重传的工作方式是当收到三个相同的 ACK 报文时，会在定时器过期之前，重传丢失的报文段。</p>
+<img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210909091033.png" style="zoom: 80%;" />
+
+<p>在上图，发送方发出了 1，2，3，4，5 份数据：</p>
+<ul>
+<li>第一份 Seq1 先送到了，于是就 Ack 回 2；</li>
+<li>结果 Seq2 因为某些原因没收到，Seq3 到达了，于是还是 Ack 回 2；</li>
+<li>后面的 Seq4 和 Seq5 都到了，但还是 Ack 回 2，因为 Seq2 还是没有收到；</li>
+<li><strong>发送端收到了三个 Ack = 2 的确认，知道了 Seq2 还没有收到，就会在定时器过期之前，重传丢失的 Seq2。</strong></li>
+<li>最后，收到了 Seq2，此时因为 Seq3，Seq4，Seq5 都收到了，于是 Ack 回 6 。</li>
+</ul>
+<blockquote>
+<p>因为发送端并不清楚这连续的三个 Ack 2 是谁传回来的,所以快速重传临着另外一个问题。就是<strong>重传的时候，是重传之前的一个，还是重传所有的问题。</strong></p>
+</blockquote>
+<p><strong>SACK方法(选择性确认)</strong></p>
+<p>这种方式需要在 TCP 头部「选项」字段里加一个 <code>SACK</code> 的东西，它<strong>可以将缓存的地图发送给发送方</strong>，这样发送方就可以知道哪些数据收到了，哪些数据没收到，知道了这些信息，就可以<strong>只重传丢失的数据</strong></p>
+<p>如下图，发送方收到了三次同样的 ACK 确认报文，于是就会触发快速重发机制，通过 <code>SACK</code> 信息发现只有 <code>200~299</code> 这段数据丢失，则重发时，就只选择了这个 TCP 段进行重复。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210909091602.png" alt=""></p>
+<p><strong>Duplicate SACK</strong></p>
+<p>Duplicate SACK 又称 <code>D-SACK</code>，其主要<strong>使用了 SACK 来告诉「发送方」有哪些数据被重复接收了</strong></p>
+<blockquote>
+<ol>
+<li>可以让「发送方」知道，是发出去的包丢了，还是接收方回应的 ACK 包丢了;</li>
+<li>可以知道是不是「发送方」的数据包被网络延迟了;</li>
+<li>可以知道网络中是不是把「发送方」的数据包给复制了;</li>
+</ol>
+</blockquote>
+<h3 id="TCP的流量控制"><a href="#TCP的流量控制" class="headerlink" title="TCP的流量控制"></a>TCP的流量控制</h3><p>流量控制是为了控制发送方发送速率，让「发送方」根据「接收方」的实际接收能力控制发送的数据量，这就是所谓的流量控制。<br>接收方发送的确认报文中的窗口字段可以用来控制发送方窗口大小，从而影响发送方的发送速率。将窗口字段设置为0，则发送方不能发送数据。</p>
+<h4 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h4><p><strong>为什么需要滑动窗口：</strong>按数据包进行确认应答的传输方式有一个缺点：数据包的<strong>往返时间越长，通信的效率就越低</strong>。</p>
+<p>为解决这个问题，TCP 引入了<strong>窗口</strong>这个概念。即使在往返时间较长的情况下，它也不会降低网络通信的效率。</p>
+<p>那么有了窗口，就可以指定窗口大小，窗口大小就是指<strong>无需等待确认应答，而可以继续发送数据的最大值</strong>。</p>
+<p>TCP 头里有一个字段叫 <code>Window</code>，也就是窗口大小。</p>
+<p><strong>这个字段是接收端告诉发送端自己还有多少缓冲区可以接收数据。于是发送端就可以根据这个接收端的处理能力来发送数据，而不会导致接收端处理不过来</strong></p>
+<p>发送方的滑动窗口</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210909103101.png" alt=""></p>
+<blockquote>
+<ul>
+<li>#1 是已发送并收到 ACK确认的数据：1~31 字节</li>
+<li>#2 是已发送但未收到 ACK确认的数据：32~45 字节</li>
+<li>#3 是未发送但总大小在接收方处理范围内（接收方还有空间）：46~51字节</li>
+<li>#4 是未发送但总大小超过接收方处理范围（接收方没有空间）：52字节以后</li>
+</ul>
+</blockquote>
+<p>接收方的滑动窗口</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210909103156.png" alt=""></p>
+<blockquote>
+<ul>
+<li>#1 + #2 是已成功接收并确认的数据（等待应用进程读取）；</li>
+<li>#3 是未收到数据但可以接收的数据；</li>
+<li>#4 未收到数据并不可以接收的数据</li>
+</ul>
+</blockquote>
+<h3 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h3><p>在网络出现拥堵时，如果继续发送大量数据包，可能会导致数据包时延、丢失等，这时 TCP 就会重传数据，但是一重传就会导致网络的负担更重，于是会导致更大的延迟以及更多的丢包，这个情况就会进入恶性循环被不断地放大…</p>
+<p>于是，就有了<strong>拥塞控制</strong>，控制的目的就是<strong>避免「发送方」的数据填满整个网络。</strong></p>
+<blockquote>
+<p><strong>此处引入一个拥塞窗口：</strong><br><strong>拥塞窗口 cwnd</strong>是发送方维护的一个的状态变量，它会根据<strong>网络的拥塞程度动态变化的</strong>。</p>
+<p>加入了拥塞窗口的概念后，此时发送窗口的值是swnd = min(cwnd, rwnd)，也就是拥塞窗口和接收窗口中的最小值。</p>
+</blockquote>
+<p><strong>如何判断当前网络是否出现了拥塞</strong></p>
+<p>其实只要「发送方」没有在规定时间内接收到 ACK 应答报文，也就是<strong>发生了超时重传，就会认为网络出现了用拥塞。</strong></p>
+<p><strong>拥塞控制有哪些控制算法：</strong></p>
+<ul>
+<li>慢启动</li>
+<li>拥塞避免</li>
+<li>拥塞发生</li>
+<li>快速恢复</li>
+</ul>
+<p><strong>慢启动</strong></p>
+<p>慢启动的意思就是一点一点的提高发送数据包的数量，</p>
+<p>慢启动的算法记住一个规则就行：<strong>当发送方每收到一个 ACK，拥塞窗口 cwnd 的大小就会加 1。</strong></p>
+<p>这里假定拥塞窗口 <code>cwnd</code> 和发送窗口 <code>swnd</code> 相等，下面举个栗子：</p>
+<ul>
+<li>连接建立完成后，一开始初始化 <code>cwnd = 1</code>，表示可以传一个 <code>MSS</code> 大小的数据。</li>
+<li>当收到一个 ACK 确认应答后，cwnd 增加 1，于是一次能够发送 2 个</li>
+<li>当收到 2 个的 ACK 确认应答后， cwnd 增加 2，于是就可以比之前多发2 个，所以这一次能够发送 4 个</li>
+<li>当这 4 个的 ACK 确认到来的时候，每个确认 cwnd 增加 1， 4 个确认 cwnd 增加 4，于是就可以比之前多发 4 个，所以这一次能够发送 8 个。</li>
+</ul>
+<blockquote>
+<p>慢启动算法，发包的个数是<strong>指数性的增长</strong></p>
+</blockquote>
+<p>存在一个慢启动门限(ssthresh)状态变量(一般是65535字节)</p>
+<ul>
+<li>当 <code>cwnd</code> &lt; <code>ssthresh</code> 时，使用慢启动算法。</li>
+<li>当 <code>cwnd</code> &gt;= <code>ssthresh</code> 时，就会使用「拥塞避免算法」。</li>
+</ul>
+<p><strong>拥塞避免</strong></p>
+<p>进入拥塞避免算法后，它的规则是：<strong>每当收到一个 ACK 时，cwnd 增加 1/cwnd。</strong></p>
+<blockquote>
+<ul>
+<li>当 8 个 ACK 应答确认到来时，每个确认增加 1/8，8 个 ACK 确认 cwnd 一共增加 1，于是这一次能够发送 9 个 <code>MSS</code> 大小的数据，变成了<strong>线性增长。</strong></li>
+</ul>
+</blockquote>
+<p><strong>拥塞发生</strong></p>
+<p>当网络出现拥塞，也就是会发生数据包重传，重传机制主要有两种：超时重传；快速重传</p>
+<p><strong>超时重传的拥塞发生算法：</strong>当发生了超时重传，则就会使用拥塞发生算法。</p>
+<p>这个时候，ssthresh 和 cwnd 的值会发生变化：</p>
+<ul>
+<li><code>ssthresh</code> 设为 <code>cwnd/2</code>，</li>
+<li><code>cwnd</code> 重置为 <code>1</code></li>
+</ul>
+<blockquote>
+<p>接着，就重新开始慢启动，慢启动是会突然减少数据流的。这种方式太激进了，反应也很强烈，会造成网络卡顿。</p>
+</blockquote>
+<p><strong>快速重传的拥塞发生算法：</strong>当发生快速重传的时候，则使用快速重传的拥塞发生算法</p>
+<ul>
+<li><code>cwnd = cwnd/2</code> ，也就是设置为原来的一半;</li>
+<li><code>ssthresh = cwnd</code>;</li>
+<li>进入快速恢复算法</li>
+</ul>
+<p><strong>快速恢复算法</strong></p>
+<p>快速重传和快速恢复算法一般同时使用，快速恢复算法是认为，你还能收到 3 个重复 ACK 说明网络也不那么糟糕，所以没有必要像 <code>RTO</code> 超时那么强烈。</p>
+<ul>
+<li>拥塞窗口 <code>cwnd = ssthresh + 3</code> （ 3 的意思是确认有 3 个数据包被收到了）；</li>
+<li>重传丢失的数据包；</li>
+<li>如果再收到重复的 ACK，那么 cwnd 增加 1；</li>
+<li>如果收到新数据的 ACK 后，把 cwnd 设置为第一步中的 ssthresh 的值，原因是该 ACK 确认了新的数据，说明从 duplicated ACK 时的数据都已收到，该恢复过程已经结束，可以回到恢复之前的状态了，也即再次进入拥塞避免状态；</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210909151522.png" alt=""></p>
+<h3 id="TCP的可靠性"><a href="#TCP的可靠性" class="headerlink" title="TCP的可靠性"></a>TCP的可靠性</h3><p><strong>1. 校验和</strong></p>
+<p><strong>计算方式：</strong>检验和是存在于各种报文中的一个字段，它存在的目的是验证报文在网络传输过程中的完整性。因此，在报文的发送端，会根据报文中的首部或数据来计算一个检验和，然后一旦接收端接受到相应报文，接收端也会对报文的首部或数据进行一次检验和计算，如果接收端算出来的检验和和发送端发送的不一样，那么接收端认为报文在传输过程中出了错，于是就丢掉该报文。</p>
+<blockquote>
+<p>在数据传输的过程中，将发送的数据段都当做一个16 位的整数。将这些整数加起来。并且前面的进位不能丢弃，补在后面，最后取反，得到校验和</p>
+</blockquote>
+<blockquote>
+<p>接收方和发送方校验和比对一致，数据也不一定传输成功。</p>
+</blockquote>
+<p><strong>2.序列号和确认应答</strong></p>
+<p><strong>序列号</strong>：TCP 传输时<strong>将每个字节的数据都进行了编号</strong>，这就是序列号。序列号的作用不仅仅是应答的作用，有了序列号能够将接收到的数据根据序列号排序，并且去掉重复序列号的数据。这也是TCP 传输可靠性的保证之一。</p>
+<p><strong>确认应答：</strong>TCP 传输的过程中，每次接收方收到数据后，都会对传输方进行确认应答。也就是发送ACK 报文。这个<strong>ACK 报文当中带有对应的确认序列号</strong>，告诉发送方，接收到了哪些数据，下一次的数据从哪里发。</p>
+<p><strong>3. 连接管理：</strong>即TCP建立连接时的三次握手与四次挥手</p>
+<p><strong>4. 重传机制</strong>；<strong>5. 流量控制</strong>；<strong>6.拥塞控制</strong></p>
+<h3 id="TCP和UDP的区别"><a href="#TCP和UDP的区别" class="headerlink" title="TCP和UDP的区别"></a>TCP和UDP的区别</h3><ol>
+<li>TCP 面向连接（如打电话要先拨号建立连接）;UDP 是无连接的，即发送数据之前不需要建立连接</li>
+<li>TCP 提供可靠的服务。也就是说，通过TCP 连接传送的数据，无差错，不丢失，不重复，且按序到达;UDP 尽最大努力交付，即不保证可靠交付</li>
+<li>TCP 面向字节流，实际上是TCP 把数据看成一连串无结构的字节流;UDP 是面向报文的，UDP 没有拥塞控制，因此网络出现拥塞不会使源主机的发送速率降低（对实时应用很有用，如IP 电话，实时视频会议等），并且UDP 速度更快</li>
+<li>每一条TCP 连接只能是点到点的;UDP 支持一对一，一对多，多对一和多对多的交互通信</li>
+<li>TCP 首部开销20 字节;UDP 的首部开销小，只有8 个字节</li>
+<li>TCP 的逻辑通信信道是全双工的可靠信道，UDP 则是不可靠信道</li>
+</ol>
+<h4 id="TCP和UDP的应用"><a href="#TCP和UDP的应用" class="headerlink" title="TCP和UDP的应用"></a>TCP和UDP的应用</h4><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210909152412.png" style="zoom:50%;" />
+
+<h3 id="JVM-新生代和老年代都使用什么GC算法"><a href="#JVM-新生代和老年代都使用什么GC算法" class="headerlink" title="JVM 新生代和老年代都使用什么GC算法"></a>JVM 新生代和老年代都使用什么GC算法</h3><h4 id="新生代和老年代的区别"><a href="#新生代和老年代的区别" class="headerlink" title="新生代和老年代的区别"></a>新生代和老年代的区别</h4><p><img src="https://github.com/Snailclimb/JavaGuide/raw/master/docs/java/jvm/pictures/jvm%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/01d330d8-2710-4fad-a91c-7bbbfaaefc0e.png" alt="img">新生代和老年代是针对于分代收集算法来定义的，新生代又分为Eden 和Survivor 两个区。加上老年代就这三个区。数据会首先分配到Eden 区当中（当然也有特殊情况，<strong>如果是大对象那么会直接放入到老年代</strong>（大对象是指需要大量连续内存空间的java 对象）。），<strong>当Eden没有足够空间的时候就会触发jvm 发起一次Minor GC</strong>。如果对象经过一次Minor GC 还存活，并且又能被Survivor 空间接受，那么将被移动到Survivor 空间当中。并将其年龄设为1，对象在Survivor 每熬过一次Minor GC，年龄就加1，当年龄达到一定的程度（默认为15）时，就会被晋升到老年代中了，当然晋升老年代的年龄是可以设置的。如果老年代满了就执行：Full GC 因为不经常执行，因此采用了Mark-Compact 算法清理。</p>
+<p><strong>新生代回收</strong>的判断条件是新生代内存不足时候。新生代主要是用来存放新生的对象，会频繁创建对象，所有垃圾收集会频繁进行回收。在新生代中，每次垃圾收集时都发现有大批对象死去，只有少量存活，那就选用复制算法，只需要付出少量存活对象的复制成本就可以完成收集。</p>
+<p><strong>新生代使用的算法：复制（Copy）算法</strong><br>将可用内存容量划分为大小相等的两块，每次只用其中一块。当这块内存用完了，就将还存活的对象复制到另外一块上面，然后再把已使用过的内存空间一次清理掉。(From到to；to到from)</p>
+<blockquote>
+<p>优点：不会产生大量不连续的内存空间</p>
+<p>缺点：效率也不是很高，需要占用双倍内存空间</p>
+</blockquote>
+<p><strong>老年代回收的判断条件</strong></p>
+<ol>
+<li><p><strong>System.gc()方法的调用</strong>，在代码中调用System.gc()方法会<strong>建议</strong>JVM 进行Full GC，在大多数情况下会增加Full GC的次数，导致系统性能下降，一般不建议手动进行此方法的调用。</p>
+</li>
+<li><p><strong>老年代空间不足</strong>：在Survivor 区域的对象满足晋升到老年代的条件时，晋升进入老年代的对象大小大于老年代的可用内存，这个时候会触发Full GC。</p>
+</li>
+<li><p><strong>Metaspace 区内存达到阈值：</strong>Metaspace 使用的是本地内存，而不是堆内存，也就是说在默认情况下Metaspace<br>的大小只与本地内存大小有关（约为20.8MB），超过这个值就会引发Full GC，这个值不是固定的，是会随着JVM 的运行进行动态调整的。</p>
+</li>
+<li><p><strong>堆中产生大对象超过阈值：</strong>大对象或者长期存活的对象进入老年代，典型的大对象就是很长的字符串或者数组，它们在被创建后会直接进入老年代，在要放置的时候JVM 如果发现老年代的空间不足时，会触发GC。</p>
+</li>
+<li><p><strong>老年代连续空间不足：</strong>JVM 如果判断老年代没有做足够的连续空间来放置大对象，那么就会引起Full GC</p>
+</li>
+<li><p><strong>统计得到的Minor GC 晋升到旧生代的平均大小大于老年代的剩余空间</strong></p>
+<blockquote>
+<p>新生代晋升的另外一种情况是如果JVM 发现Survivor 区域中的相同年龄的对象占到所有对象的一半以上时，就会将大于这个年龄的对象移动到老年代，在这批对象在统计后发现可以晋升到老年代，但是发现老年代没有足够的空间来放置这些对象，这就会引起Full GC</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>老年代使用的算法</strong></p>
+<p><strong>标记清除：</strong></p>
+<p>标记清除算法是最基础的回收算法，分为标记和清除两个部分：首先标记出所有需要回收的对象，这一过程<strong>在可达性分析过程中进行</strong>。在标记完之后统一回收所有被标记的对象。</p>
+<img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210909213741.png" style="zoom:80%;" />
+
+<blockquote>
+<p><strong>优点</strong>：速度较快</p>
+<p><strong>缺点：</strong>会造成内存碎片，导致在程序运行过程中需要分配较大对象的时候，无法找到足够的连续内存而不得不提前触发一次垃圾收集动作。</p>
+</blockquote>
+<p><strong>标记整理：</strong></p>
+<p>标记过程仍然与“标记-清除”算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存。</p>
+<img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20210909213810.png" style="zoom:80%;" />
+
+<blockquote>
+<p><strong>优点：</strong>没有内存碎片<br><strong>缺点：</strong>速度慢</p>
+</blockquote>
+<p><strong>分代垃圾回收：</strong>根据各个年代的特点采取最适当的收集算法</p>
+<p>在新生代中，每次垃圾收集时候都发现有大批对象死去，只有少量存活，那就选用复制算法。只需要付出少量存活对象的复制成本就可以完成收集。<br> 老年代中因为对象存活率高、没有额外空间对他进行分配担保，就必须用标记-清除或者标记-整理。</p>
+<h3 id="JVM垃圾收集器"><a href="#JVM垃圾收集器" class="headerlink" title="JVM垃圾收集器"></a>JVM垃圾收集器</h3><h4 id="CMS回收器"><a href="#CMS回收器" class="headerlink" title="CMS回收器"></a>CMS回收器</h4>]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>多线程</tag>
+        <tag>计算机网络</tag>
+        <tag>redis</tag>
+      </tags>
+  </entry>
 </search>
