@@ -1415,4 +1415,37 @@
         <tag>redis</tag>
       </tags>
   </entry>
+  <entry>
+    <title>DiskGenius磁盘划分</title>
+    <url>/2021/10/12/DiskGenius%E7%A3%81%E7%9B%98%E5%88%92%E5%88%86/</url>
+    <content><![CDATA[<h3 id="DiskGenius磁盘划分"><a href="#DiskGenius磁盘划分" class="headerlink" title="DiskGenius磁盘划分"></a>DiskGenius磁盘划分</h3><blockquote>
+<p>小锦鲤C盘抢救计划！！！</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="下载软件"><a href="#下载软件" class="headerlink" title="下载软件"></a>下载软件</h3><p><strong>磁盘划分之前注意备份重要资料</strong></p>
+<p>下载磁盘划分软件DiskGenius：<a href="https://www.diskgenius.cn/download.php" target="_blank" rel="noopener">https://www.diskgenius.cn/download.php</a></p>
+<h3 id="C盘扩容"><a href="#C盘扩容" class="headerlink" title="C盘扩容"></a>C盘扩容</h3><p>进入计算机管理中的磁盘管理功能，可以看到磁盘中的各个分区情况</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20211012164201.png" alt=""></p>
+<p>以将D盘中空间划分到C盘为例，选中D盘分区，邮件选中压缩卷，结果分别如下图所示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20211012164558.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20211012165632.png" alt=""></p>
+<p>其中输入压缩空间量为此方法下磁盘D最大可划分磁盘空间大小，如上图所示，最大压缩空间293513MB约为293513/1024=286.6GB</p>
+<p>以从D盘划分10GB至C盘为例：</p>
+<p>输入压缩空间输入10GB*1024=10240MB,点击压缩按钮，磁盘各个分区如图所示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20211012171758.png" alt=""></p>
+<p>运行DiskGenius</p>
+<p>选中要分区的磁盘C盘，右键选择扩容分区</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20211012181630.png" alt=""></p>
+<p>软件会自动选中刚刚生成的10GB空闲空间，选择确定，开启完成后重启即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AsuanPic/Pic/pic/20211012183250.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>DiskGenius</tag>
+        <tag>磁盘划分</tag>
+      </tags>
+  </entry>
 </search>
