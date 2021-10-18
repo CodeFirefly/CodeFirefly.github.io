@@ -1961,10 +1961,11 @@
         <category>面试</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>多线程</tag>
         <tag>计算机网络</tag>
         <tag>redis</tag>
+        <tag>Java</tag>
+        <tag>MySQL</tag>
       </tags>
   </entry>
 </search>
